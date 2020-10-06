@@ -14,24 +14,26 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class CategoryRegistration extends JPanel {
+	
 	private JTable table;
-	private JTextField name;
+	private JTextField tfName;
 	public CategoryRegistration() {
+		
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{30, 100, 100, 0, 50, 0, 100, 100, 0, 0};
+		gridBagLayout.columnWidths = new int[]{30, 100, 100, 40, 50, 0, 100, 100, 0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
-		Label title = new Label("Criar/editar categoria");
-		title.setFont(new Font("Dialog", Font.BOLD, 17));
-		GridBagConstraints gbc_title = new GridBagConstraints();
-		gbc_title.gridwidth = 7;
-		gbc_title.insets = new Insets(0, 0, 5, 5);
-		gbc_title.gridx = 1;
-		gbc_title.gridy = 0;
-		add(title, gbc_title);
+		Label lbTitle = new Label("Criar/editar categoria");
+		lbTitle.setFont(new Font("Tahoma", Font.BOLD, 17));
+		GridBagConstraints gbc_lbTitle = new GridBagConstraints();
+		gbc_lbTitle.gridwidth = 7;
+		gbc_lbTitle.insets = new Insets(0, 0, 5, 5);
+		gbc_lbTitle.gridx = 1;
+		gbc_lbTitle.gridy = 0;
+		add(lbTitle, gbc_lbTitle);
 		
 		JLabel lbCategories = new JLabel("Categorias");
 		lbCategories.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -50,15 +52,15 @@ public class CategoryRegistration extends JPanel {
 		gbc_lbName.gridy = 2;
 		add(lbName, gbc_lbName);
 		
-		name = new JTextField();
-		GridBagConstraints gbc_name = new GridBagConstraints();
-		gbc_name.gridwidth = 2;
-		gbc_name.insets = new Insets(0, 0, 5, 5);
-		gbc_name.fill = GridBagConstraints.HORIZONTAL;
-		gbc_name.gridx = 6;
-		gbc_name.gridy = 2;
-		add(name, gbc_name);
-		name.setColumns(10);
+		tfName = new JTextField();
+		GridBagConstraints gbc_tfName = new GridBagConstraints();
+		gbc_tfName.gridwidth = 2;
+		gbc_tfName.insets = new Insets(0, 0, 5, 5);
+		gbc_tfName.fill = GridBagConstraints.HORIZONTAL;
+		gbc_tfName.gridx = 6;
+		gbc_tfName.gridy = 2;
+		add(tfName, gbc_tfName);
+		tfName.setColumns(10);
 		
 		table = new JTable();
 		GridBagConstraints gbc_table = new GridBagConstraints();
