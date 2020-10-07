@@ -62,6 +62,12 @@ public class CategoryRegistration extends JPanel {
 		add(tfName, gbc_tfName);
 		tfName.setColumns(10);
 		
+		JButton btnNewCategorie = new JButton("Criar categoria");
+		btnNewCategorie.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		
 		table = new JTable();
 		GridBagConstraints gbc_table = new GridBagConstraints();
 		gbc_table.gridwidth = 2;
@@ -69,14 +75,8 @@ public class CategoryRegistration extends JPanel {
 		gbc_table.insets = new Insets(0, 0, 5, 5);
 		gbc_table.fill = GridBagConstraints.BOTH;
 		gbc_table.gridx = 1;
-		gbc_table.gridy = 4;
+		gbc_table.gridy = 3;
 		add(table, gbc_table);
-		
-		JButton btnNewCategorie = new JButton("Criar categoria");
-		btnNewCategorie.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		GridBagConstraints gbc_btnNewCategorie = new GridBagConstraints();
 		gbc_btnNewCategorie.insets = new Insets(0, 0, 5, 5);
 		gbc_btnNewCategorie.gridx = 6;
@@ -94,9 +94,9 @@ public class CategoryRegistration extends JPanel {
 		JButton btnDelete = new JButton("Excluir");
 		GridBagConstraints gbc_btnDelete = new GridBagConstraints();
 		gbc_btnDelete.gridwidth = 2;
-		gbc_btnDelete.insets = new Insets(0, 0, 0, 5);
+		gbc_btnDelete.insets = new Insets(0, 0, 5, 5);
 		gbc_btnDelete.gridx = 1;
-		gbc_btnDelete.gridy = 8;
+		gbc_btnDelete.gridy = 7;
 		add(btnDelete, gbc_btnDelete);
 	}
 
