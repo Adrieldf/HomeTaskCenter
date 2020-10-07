@@ -66,12 +66,21 @@ public class CreateItems extends JPanel {
 		gbc_tabCategory.gridy = 4;
 		add(tabCategory, gbc_tabCategory);
 		
-		JButton btnCreateItem = new JButton("New button");
+		JButton btnCreateItem = new JButton("Criar item");
 		GridBagConstraints gbc_btnCreateItem = new GridBagConstraints();
+		gbc_btnCreateItem.gridwidth = 2;
 		gbc_btnCreateItem.insets = new Insets(0, 0, 0, 5);
-		gbc_btnCreateItem.gridx = 3;
+		gbc_btnCreateItem.gridx = 2;
 		gbc_btnCreateItem.gridy = 8;
 		add(btnCreateItem, gbc_btnCreateItem);
+		
+		JButton btnCancel = new JButton("Cancelar");
+		GridBagConstraints gbc_btnCancel = new GridBagConstraints();
+		gbc_btnCancel.gridwidth = 3;
+		gbc_btnCancel.insets = new Insets(0, 0, 0, 5);
+		gbc_btnCancel.gridx = 4;
+		gbc_btnCancel.gridy = 8;
+		add(btnCancel, gbc_btnCancel);
 	}
 
 }
