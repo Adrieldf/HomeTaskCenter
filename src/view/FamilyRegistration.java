@@ -87,31 +87,21 @@ public class FamilyRegistration extends JPanel {
 		gbc_chckbxAdmin.gridy = 4;
 		add(chckbxAdmin, gbc_chckbxAdmin);
 		
-		JButton btnSave = new JButton("Salvar");
-		GridBagConstraints gbc_btnSave = new GridBagConstraints();
-		gbc_btnSave.gridwidth = 2;
-		gbc_btnSave.insets = new Insets(0, 0, 5, 5);
-		gbc_btnSave.gridx = 7;
-		gbc_btnSave.gridy = 6;
-		add(btnSave, gbc_btnSave);
+		JButton btnInsert = new JButton("Inserir");
+		GridBagConstraints gbc_btnInsert = new GridBagConstraints();
+		gbc_btnInsert.gridwidth = 2;
+		gbc_btnInsert.insets = new Insets(0, 0, 5, 5);
+		gbc_btnInsert.gridx = 7;
+		gbc_btnInsert.gridy = 6;
+		add(btnInsert, gbc_btnInsert);
 		
 		JButton btnDelete = new JButton("Excluir\r\n");
 		GridBagConstraints gbc_btnDelete = new GridBagConstraints();
+		gbc_btnDelete.gridwidth = 3;
 		gbc_btnDelete.insets = new Insets(0, 0, 5, 5);
 		gbc_btnDelete.gridx = 1;
 		gbc_btnDelete.gridy = 7;
 		add(btnDelete, gbc_btnDelete);
-		
-		JButton btnUpdate = new JButton("Alterar");
-		btnUpdate.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		GridBagConstraints gbc_btnUpdate = new GridBagConstraints();
-		gbc_btnUpdate.insets = new Insets(0, 0, 5, 5);
-		gbc_btnUpdate.gridx = 3;
-		gbc_btnUpdate.gridy = 7;
-		add(btnUpdate, gbc_btnUpdate);
 	}
 	
 
