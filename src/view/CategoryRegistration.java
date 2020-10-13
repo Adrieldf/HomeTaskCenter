@@ -8,8 +8,15 @@ import java.awt.Insets;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
+import model.Category;
+
 import java.awt.Font;
 import javax.swing.JButton;
+import javax.swing.JInternalFrame;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -38,7 +45,7 @@ public class CategoryRegistration extends JPanel {
 		JLabel lbCategories = new JLabel("Categorias");
 		lbCategories.setFont(new Font("Tahoma", Font.BOLD, 11));
 		GridBagConstraints gbc_lbCategories = new GridBagConstraints();
-		gbc_lbCategories.gridwidth = 2;
+		gbc_lbCategories.gridwidtnameh = 2;
 		gbc_lbCategories.insets = new Insets(0, 0, 5, 5);
 		gbc_lbCategories.gridx = 1;
 		gbc_lbCategories.gridy = 2;
@@ -68,7 +75,29 @@ public class CategoryRegistration extends JPanel {
 			}
 		});
 		
-		table = new JTable();
+		table = new JTable(new CategoryTableModel());
+		/*
+		table.getSelectionModel().addListSelectionListener{
+			new ListSelectionListener() {
+
+				@Override
+				public void valueChanged(ListSelectionEvent e) {
+					// TODO Auto-generated method stub
+					if (e.getValueIsAdjusting()) {
+		                return;
+		            }
+					CategoryTableModel categoryTableModel = (CategoryTableModel) table
+							.getModel();
+					Category category = categoryTableModel.getCategories().get(
+							e.getLastIndex());
+					System.out.println(category);
+					CadastraProduto cadastraProduto = new CadastraProduto(produto);
+				}
+				
+			}
+			
+		}
+		*/
 		GridBagConstraints gbc_table = new GridBagConstraints();
 		gbc_table.gridwidth = 2;
 		gbc_table.gridheight = 3;
@@ -84,6 +113,10 @@ public class CategoryRegistration extends JPanel {
 		add(btnNewCategorie, gbc_btnNewCategorie);
 		
 		JButton btnBack = new JButton("Voltar");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		GridBagConstraints gbc_btnBack = new GridBagConstraints();
 		gbc_btnBack.anchor = GridBagConstraints.EAST;
 		gbc_btnBack.insets = new Insets(0, 0, 5, 5);
@@ -92,6 +125,10 @@ public class CategoryRegistration extends JPanel {
 		add(btnBack, gbc_btnBack);
 		
 		JButton btnDelete = new JButton("Excluir");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		GridBagConstraints gbc_btnDelete = new GridBagConstraints();
 		gbc_btnDelete.gridwidth = 2;
 		gbc_btnDelete.insets = new Insets(0, 0, 5, 5);
@@ -100,6 +137,32 @@ public class CategoryRegistration extends JPanel {
 		add(btnDelete, gbc_btnDelete);
 	}
 
+	void actionNewCategorie(){
+		Category newCategory = new Category();
+		newCategory.setName(tfName.getText());
+		//variavel da dao para inserir categoria
+	}
 	
+	
+	void actionBack(){
+		//troca de panel para 
+		//this.getParent()dispose
+		JInternalFrame jif = (JInternalFrame) this.getParent();
+		jif.dispose();
+	}
+	
+	void actionDelete(){
+		
+		//get Selected item para list TA DANDO ERRO por enquanto
+		
+		
+		//table tem nomeDaTabela.getSelectedRow(); ou  nomeDaTabela.getValueAt(linha,coluna); 
+		
+		
+		//model tem .remove();
+		
+		//DAO para remover do banco
+		
+	}
 	
 }
