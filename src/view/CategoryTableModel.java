@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,9 +42,9 @@ public class CategoryTableModel extends AbstractTableModel {
 		}
 	}
 	public void actionPerformed(ActionEvent e) {
-		actionNewCategorie();
+		//actionNewCategorie();
 	}
-});
+
 	@Override
 	public int getColumnCount() {
 		return 1;

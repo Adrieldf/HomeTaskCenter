@@ -45,7 +45,7 @@ public class CategoryRegistration extends JPanel {
 		JLabel lbCategories = new JLabel("Categorias");
 		lbCategories.setFont(new Font("Tahoma", Font.BOLD, 11));
 		GridBagConstraints gbc_lbCategories = new GridBagConstraints();
-		gbc_lbCategories.gridwidtnameh = 2;
+		gbc_lbCategories.gridwidth = 2;
 		gbc_lbCategories.insets = new Insets(0, 0, 5, 5);
 		gbc_lbCategories.gridx = 1;
 		gbc_lbCategories.gridy = 2;
