@@ -1,14 +1,18 @@
 package view;
 
-import javax.swing.JPanel;
-import java.awt.GridBagLayout;
-import javax.swing.JLabel;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
 import java.awt.Font;
-import javax.swing.JTextField;
-import javax.swing.JTable;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+
 import javax.swing.JButton;
+import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+
+import model.Product;
 
 public class CreateItems extends JPanel {
 	private JTextField tfName;
@@ -82,5 +86,24 @@ public class CreateItems extends JPanel {
 		gbc_btnCancel.gridy = 8;
 		add(btnCancel, gbc_btnCancel);
 	}
+	
+
+	
+	void actionCriateItem() {
+		Product nItem = new Product();
+		nItem.setName(tfName.getText());
+		//Pegar categorias do combo box e passar para lista dentro de produto
+		
+		//mandar para db product
+	}
+	
+	
+	void actionCancel() {
+		//troca de panel para 
+		//this.getParent()dispose
+		JInternalFrame jif = (JInternalFrame) this.getParent();
+		jif.dispose();
+	}
+	
 
 }
