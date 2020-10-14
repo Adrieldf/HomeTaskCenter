@@ -1,15 +1,39 @@
 package model;
 
-import java.util.List;
 
 public class Product {
 	
+	private int id;
 	private String name;
+	private int idCategory;
 	
-	private List<Category> categories;
-	
+
+	public Product(int id, String name, int idCategory) {
+		this.setId(id);
+		this.setName(name);
+		this.setIdCategory(idCategory);
+	}
 	public Product() {
 		
+	}
+	
+	public int getId() {
+		return id;
+	}
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
+	public int getIdCategory() {
+		return idCategory;
+	}
+
+
+	public void setIdCategory(int idCategory) {
+		this.idCategory = idCategory;
 	}
 
 
