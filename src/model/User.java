@@ -3,14 +3,15 @@ package model;
 import java.io.Serializable;
 
 public class User implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
 	private int id;
 	private String name;
 	private String password;
-	
-	public String getId() {
-		return name;
+	private int idFamily;
+
+	public int getId() {
+		return id;
 	}
 
 	public void setId(int id) {
@@ -33,16 +34,24 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
-	
-	
-	public User(){}
-	
-	public User(int id, String name, String password) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.password = password;
+	public int getIdFamily() {
+		return idFamily;
 	}
 
-	
+	public void setIdFamily(int idFamily) {
+		this.idFamily = idFamily;
+	}
+
+	public User() {
+		super();
+	}
+
+	public User(int id, String name, String password, int idFamily) {
+		super();
+		this.setId(id);
+		this.setName(name);
+		this.setPassword(password);
+		this.setIdFamily(idFamily);
+	}
+
 }

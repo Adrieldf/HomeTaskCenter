@@ -1,12 +1,26 @@
 package model;
 
-import java.util.List;
-
 public class Family {
-	
+
+	private int id;
 	private String name;
-	private List<User> members;
-	private List<Task> tasks;
+
+	public Family() {
+
+	}
+
+	public Family(int id, String name) {
+		this.setId(id);
+		this.setName(name);
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public String getName() {
 		return name;
@@ -15,18 +29,5 @@ public class Family {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public List<User> getMembers() {
-		return members;
-	}
-
-	public void setMembers(List<User> members) {
-		this.members = members;
-	}
-	
-	
-	
-	
-	
 
 }
