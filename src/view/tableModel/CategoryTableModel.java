@@ -1,4 +1,4 @@
-package view;
+package view.tableModel;
 
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;

@@ -88,6 +88,11 @@ public class FamilyRegistration extends JPanel {
 		add(chckbxAdmin, gbc_chckbxAdmin);
 		
 		JButton btnInsert = new JButton("Inserir");
+		btnInsert.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				actionInsert();
+			}
+		});
 		GridBagConstraints gbc_btnInsert = new GridBagConstraints();
 		gbc_btnInsert.gridwidth = 2;
 		gbc_btnInsert.insets = new Insets(0, 0, 5, 5);
@@ -96,6 +101,11 @@ public class FamilyRegistration extends JPanel {
 		add(btnInsert, gbc_btnInsert);
 		
 		JButton btnDelete = new JButton("Excluir\r\n");
+		btnDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				actionDelete();
+			}
+		});
 		GridBagConstraints gbc_btnDelete = new GridBagConstraints();
 		gbc_btnDelete.gridwidth = 3;
 		gbc_btnDelete.insets = new Insets(0, 0, 5, 5);
@@ -104,5 +114,14 @@ public class FamilyRegistration extends JPanel {
 		add(btnDelete, gbc_btnDelete);
 	}
 	
+	void actionInsert() {
+		
+	}
+	
+	void actionDelete() {
+		//Pegar categorias do combo box e passar para lista dentro de produto
+		
+		//mandar para db product
+	}
 
 }

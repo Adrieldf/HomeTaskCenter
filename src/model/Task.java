@@ -11,7 +11,7 @@ public class Task {
 	
 	private List<Product> products;
 	private List<Occurrence> occurrences;
-	
+	//nao tem data e hora, mas esta sendo inserido na janela
 	
 	public Task() {
 		

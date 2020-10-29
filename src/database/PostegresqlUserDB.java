@@ -19,6 +19,10 @@ public class PostegresqlUserDB implements UserDAO {
 		this.conn = conn;
 	}
 	
+	public PostegresqlUserDB() {
+
+	}
+	
 	
 	@Override
 	public List<User> getAll() {
@@ -77,6 +81,7 @@ public class PostegresqlUserDB implements UserDAO {
 		
 		return user;
 	}
+	
 	@Override
 	public void insert(User user) {
 		if (user == null) {
@@ -151,5 +156,46 @@ public class PostegresqlUserDB implements UserDAO {
 
 		}
 
+	}
+
+
+	@Override
+	public boolean validateUser(User user) {
+		// TODO Auto-generated method stub
+			
+		PreparedStatement pstmt = null;
+		User newUser;
+		ResultSet rs = null;
+		boolean validate = false;
+		try {
+			pstmt = conn.prepareStatement("select id, name, password, from user where name = ?");
+			pstmt.setString(1, user.getName());
+			rs = pstmt.executeQuery();
+			
+			newUser = new User();
+			newUser.setId(rs.getInt("id"));
+			newUser.setName(rs.getString("name"));
+			newUser.setPassword(rs.getString("password"));
+			
+			
+			if(user.equals(newUser)) {
+				validate = true;
+			}
+			
+		}catch(SQLException ex) {
+			System.out.println("Ocorreu um erro : " + ex.getMessage());
+			ex.printStackTrace();
+		}
+		finally {
+			try {
+				rs.close();
+				pstmt.close();
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		
+		return validate;
+		
 	}
 }

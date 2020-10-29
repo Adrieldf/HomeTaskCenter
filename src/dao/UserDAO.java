@@ -16,4 +16,5 @@ public interface UserDAO {
 
 	void edit(User user);
 
+	boolean validateUser(User user);
 }

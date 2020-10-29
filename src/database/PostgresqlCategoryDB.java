@@ -18,6 +18,10 @@ public class PostgresqlCategoryDB implements CategoryDAO {
 	public PostgresqlCategoryDB(Connection conn) {
 		this.conn = conn;
 	}
+	
+	public PostgresqlCategoryDB() {
+
+	}
 
 	@Override
 	public List<Category> getAll() {

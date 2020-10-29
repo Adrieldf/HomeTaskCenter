@@ -5,6 +5,7 @@ public class Product {
 	
 	private int id;
 	private String name;
+	//sepa trocar de int para list
 	private int idCategory;
 	
 

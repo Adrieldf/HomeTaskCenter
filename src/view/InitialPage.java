@@ -49,6 +49,7 @@ public class InitialPage extends JFrame {
 	}
 	
 	protected InitialPage() {
+	
 		desktopPane = new JDesktopPane() ;
 		desktopPane.setBackground(Color.LIGHT_GRAY);
 		getContentPane().add(desktopPane, BorderLayout.CENTER);
@@ -68,7 +69,7 @@ public class InitialPage extends JFrame {
 		buildMenuOptions(menuBar_1);
 		
 		
-		showPanelFullScreen(new PendingTasks(), "Tarefas");
+		showPanelFullScreen(new PendingTasks(INSTANCE), "Tarefas");
 		
 	}
 	
@@ -88,14 +89,14 @@ public class InitialPage extends JFrame {
 	}
 	
 	private void buildMenuOptions(JMenuBar menuBar) {
-		JMenu mnOptions = new JMenu("Opções");
+		JMenu mnOptions = new JMenu("Opï¿½ï¿½es");
 		menuBar.add(mnOptions);
 		
 		JMenuItem mntmTarefas = new JMenuItem("Visualizar Tarefas Pendentes");
 		mntmTarefas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 //				showPanelFullScreen(new PendingTasks());
-				showPanel(new PendingTasks(), "Tarefas Pendentes");
+				showPanel(new PendingTasks(INSTANCE), "Tarefas Pendentes");
 			}
 		});
 		mnOptions.add(mntmTarefas);
@@ -109,6 +110,14 @@ public class InitialPage extends JFrame {
 //		});
 //		mnOptions.add(mntmTarefas2);
 	}
+	
+	//abrir janela irma, pelos filhos
+	/*
+	protected void showPanel2(JPanel panel, String title) {
+		final JInternalFrame intFrame = new JInternalFrame(title, false, false, false, false);
+		showPanel(panel, intFrame);
+	}*/
+	
 	
 	protected void showPanelFullScreen(JPanel panel, String title) {
 		final JInternalFrame intFrame = new JInternalFrame(title, false, false, false, false);

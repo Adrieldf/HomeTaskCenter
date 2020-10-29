@@ -1,17 +1,22 @@
 package view;
 
-import javax.swing.JPanel;
-import java.awt.GridBagLayout;
-import javax.swing.JLabel;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
 import java.awt.Font;
-import javax.swing.JTextField;
-import javax.swing.JTextArea;
-import javax.swing.JTable;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+
+import dao.CategoryDAO;
+import database.PostgresqlCategoryDB;
+import model.Task;
 
 public class CreateTask extends JPanel {
 	private JTextField tfTitleTask;
@@ -129,6 +134,11 @@ public class CreateTask extends JPanel {
 		tfHour.setColumns(10);
 		
 		JButton btnCreateTask = new JButton("Criar tarefa");
+		btnCreateTask.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				actionCreateTask();
+			}
+		});
 		GridBagConstraints gbc_btnCreateTask = new GridBagConstraints();
 		gbc_btnCreateTask.insets = new Insets(0, 0, 0, 5);
 		gbc_btnCreateTask.gridx = 1;
@@ -138,6 +148,7 @@ public class CreateTask extends JPanel {
 		JButton btnSearch = new JButton("Buscar");
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				actionSearch();
 			}
 		});
 		GridBagConstraints gbc_btnSearch = new GridBagConstraints();
@@ -147,6 +158,11 @@ public class CreateTask extends JPanel {
 		add(btnSearch, gbc_btnSearch);
 		
 		JButton btnUpdate = new JButton("Alterar");
+		btnUpdate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				actionUpdate();
+			}
+		});
 		GridBagConstraints gbc_btnUpdate = new GridBagConstraints();
 		gbc_btnUpdate.insets = new Insets(0, 0, 0, 5);
 		gbc_btnUpdate.gridx = 4;
@@ -154,6 +170,11 @@ public class CreateTask extends JPanel {
 		add(btnUpdate, gbc_btnUpdate);
 		
 		JButton btnDelete = new JButton("Excluir");
+		btnDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				actionDelete();
+			}
+		});
 		GridBagConstraints gbc_btnDelete = new GridBagConstraints();
 		gbc_btnDelete.insets = new Insets(0, 0, 0, 5);
 		gbc_btnDelete.gridx = 5;
@@ -161,6 +182,41 @@ public class CreateTask extends JPanel {
 		add(btnDelete, gbc_btnDelete);
 	}
 
+	void actionCreateTask() {
+		Task newTask= new Task();
+		newTask.setName(tfTitleTask.getText());
+		/*newTask.setDescription(description);
+		newTask.setCompleted(false);
+		newTask.setResponsible(responsible);
+		
+
+		private JTextField tfDate;
+		private JTextField tfHour;
+		
+		
+		trocar para task*
+		CategoryDAO catDAO = new PostgresqlCategoryDB();
+		
+		catDAO.insert(newTask);
+		
+		
+		
+		*/
+		
+	}
 	
+	void actionSearch() {
+		
+	}
+	
+	void actionUpdate() {
+		
+	}
+	
+	void actionDelete() {
+		//Pegar categorias do combo box e passar para lista dentro de produto
+		
+		//mandar para db product
+	}
 	
 }

@@ -1,17 +1,26 @@
 package view;
 
-import javax.swing.JPanel;
-import java.awt.GridBagLayout;
-import javax.swing.JLabel;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
 import java.awt.Font;
-import javax.swing.JTextField;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
+import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import dao.UserDAO;
+import database.PostegresqlUserDB;
+import model.User;
 
 public class Login extends JPanel {
 	private JTextField tfName;
 	private JTextField tfPassword;
+	private boolean valid;
 	public Login() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 30, 100, 100, 0, 0};
@@ -67,6 +76,11 @@ public class Login extends JPanel {
 		tfPassword.setColumns(10);
 		
 		JButton btnLogin = new JButton("Login");
+		btnLogin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				actionLogin();
+			}
+		});
 		GridBagConstraints gbc_btnLogin = new GridBagConstraints();
 		gbc_btnLogin.gridwidth = 2;
 		gbc_btnLogin.insets = new Insets(0, 0, 5, 5);
@@ -75,6 +89,11 @@ public class Login extends JPanel {
 		add(btnLogin, gbc_btnLogin);
 		
 		JButton btnCancel = new JButton("Cancelar");
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				actionCancel();
+			}
+		});
 		GridBagConstraints gbc_btnCancel = new GridBagConstraints();
 		gbc_btnCancel.anchor = GridBagConstraints.EAST;
 		gbc_btnCancel.insets = new Insets(0, 0, 5, 5);
@@ -83,6 +102,21 @@ public class Login extends JPanel {
 		add(btnCancel, gbc_btnCancel);
 	}
 
+	void actionLogin() {
+		
+		User newUser = new User();
+		newUser.setName(tfName.getText());
+		newUser.setName(tfPassword.getText());
+		
+		UserDAO usDAO = new PostegresqlUserDB();
+		valid = usDAO.validateUser(newUser);
+		
+		//se for valido passar ou nao
+	}
 	
+	void actionCancel() {
+		JInternalFrame jif = (JInternalFrame) this.getParent();
+		jif.dispose();
+	}
 	
 }

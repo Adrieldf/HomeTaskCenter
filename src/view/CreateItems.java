@@ -4,6 +4,8 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
@@ -12,6 +14,8 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
+import dao.ProductDAO;
+import database.PostgresqlProductDB;
 import model.Product;
 
 public class CreateItems extends JPanel {
@@ -71,6 +75,11 @@ public class CreateItems extends JPanel {
 		add(tabCategory, gbc_tabCategory);
 		
 		JButton btnCreateItem = new JButton("Criar item");
+		btnCreateItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				actionCreateItem();
+			}
+		});
 		GridBagConstraints gbc_btnCreateItem = new GridBagConstraints();
 		gbc_btnCreateItem.gridwidth = 2;
 		gbc_btnCreateItem.insets = new Insets(0, 0, 0, 5);
@@ -79,6 +88,11 @@ public class CreateItems extends JPanel {
 		add(btnCreateItem, gbc_btnCreateItem);
 		
 		JButton btnCancel = new JButton("Cancelar");
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				actionCancel();
+			}
+		});
 		GridBagConstraints gbc_btnCancel = new GridBagConstraints();
 		gbc_btnCancel.gridwidth = 3;
 		gbc_btnCancel.insets = new Insets(0, 0, 0, 5);
@@ -89,18 +103,22 @@ public class CreateItems extends JPanel {
 	
 
 	
-	void actionCriateItem() {
-		Product nItem = new Product();
-		nItem.setName(tfName.getText());
-		//Pegar categorias do combo box e passar para lista dentro de produto
+	void actionCreateItem() {
+		Product newProduct = new Product();
+		newProduct.setName(tfName.getText());
 		
+		//Pegar categorias do combo box e passar para lista dentro de produto
+		//tem troca no model pra alterar aqui LIST
 		//mandar para db product
+		ProductDAO podDAO = new PostgresqlProductDB();
+		podDAO.insert(newProduct);
 	}
 	
 	
 	void actionCancel() {
 		//troca de panel para 
 		//this.getParent()dispose
+		//sepa ta ok. TESTAR
 		JInternalFrame jif = (JInternalFrame) this.getParent();
 		jif.dispose();
 	}

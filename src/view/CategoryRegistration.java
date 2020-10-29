@@ -1,24 +1,28 @@
 package view;
 
-import javax.swing.JPanel;
-import java.awt.GridBagLayout;
-import java.awt.Label;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.Label;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import dao.CategoryDAO;
+import dao.DAOFactory;
+import database.PostgresqlCategoryDB;
 import model.Category;
-
-import java.awt.Font;
-import javax.swing.JButton;
-import javax.swing.JInternalFrame;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import view.tableModel.CategoryTableModel;
 
 public class CategoryRegistration extends JPanel {
 	
@@ -72,32 +76,21 @@ public class CategoryRegistration extends JPanel {
 		JButton btnNewCategorie = new JButton("Criar categoria");
 		btnNewCategorie.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				actionNewCategorie();
 			}
 		});
 		
 		table = new JTable(new CategoryTableModel());
-		/*
-		table.getSelectionModel().addListSelectionListener{
-			new ListSelectionListener() {
-
-				@Override
-				public void valueChanged(ListSelectionEvent e) {
-					// TODO Auto-generated method stub
-					if (e.getValueIsAdjusting()) {
-		                return;
-		            }
-					CategoryTableModel categoryTableModel = (CategoryTableModel) table
-							.getModel();
-					Category category = categoryTableModel.getCategories().get(
-							e.getLastIndex());
-					System.out.println(category);
-					CadastraProduto cadastraProduto = new CadastraProduto(produto);
-				}
-				
+		
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
+		ListSelectionModel selectionModel = table.getSelectionModel();
+		selectionModel.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e) {
+				//acao
 			}
-			
-		}
-		*/
+		});
+		
 		GridBagConstraints gbc_table = new GridBagConstraints();
 		gbc_table.gridwidth = 2;
 		gbc_table.gridheight = 3;
@@ -115,6 +108,7 @@ public class CategoryRegistration extends JPanel {
 		JButton btnBack = new JButton("Voltar");
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				actionBack();
 			}
 		});
 		GridBagConstraints gbc_btnBack = new GridBagConstraints();
@@ -127,6 +121,7 @@ public class CategoryRegistration extends JPanel {
 		JButton btnDelete = new JButton("Excluir");
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				actionDelete();
 			}
 		});
 		GridBagConstraints gbc_btnDelete = new GridBagConstraints();
@@ -140,21 +135,20 @@ public class CategoryRegistration extends JPanel {
 	void actionNewCategorie(){
 		Category newCategory = new Category();
 		newCategory.setName(tfName.getText());
-		//variavel da dao para inserir categoria
+		CategoryDAO catDAO = new PostgresqlCategoryDB();
+		catDAO.insert(newCategory);
 	}
 	
 	
 	void actionBack(){
-		//troca de panel para 
-		//this.getParent()dispose
 		JInternalFrame jif = (JInternalFrame) this.getParent();
 		jif.dispose();
 	}
 	
 	void actionDelete(){
 		
-		//get Selected item para list TA DANDO ERRO por enquanto
 		
+		//troquei mas nao sei como chamar aqui ainda
 		
 		//table tem nomeDaTabela.getSelectedRow(); ou  nomeDaTabela.getValueAt(linha,coluna); 
 		
@@ -162,6 +156,8 @@ public class CategoryRegistration extends JPanel {
 		//model tem .remove();
 		
 		//DAO para remover do banco
+		CategoryDAO catDAO = new PostgresqlCategoryDB();
+		//catDAO.remove();selecionado
 		
 	}
 	

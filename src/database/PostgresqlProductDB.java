@@ -20,6 +20,11 @@ public class PostgresqlProductDB implements ProductDAO {
 		this.conn = conn;
 	}
 
+	public PostgresqlProductDB() {
+		// TODO Auto-generated constructor stub
+	}
+
+
 	@Override
 	public List<Product> getAll() {
 		List<Product> products = new ArrayList<Product>();
