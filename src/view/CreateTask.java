@@ -26,9 +26,9 @@ public class CreateTask extends JPanel {
 	public CreateTask() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 10, 100, 100, 100, 0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gridBagLayout.rowHeights = new int[]{0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
 		JLabel lblTitle = new JLabel("Criar/editar tarefa");
@@ -69,15 +69,15 @@ public class CreateTask extends JPanel {
 		gbc_lblDescription.gridy = 4;
 		add(lblDescription, gbc_lblDescription);
 		
-		JTextArea textArea = new JTextArea();
-		GridBagConstraints gbc_textArea = new GridBagConstraints();
-		gbc_textArea.gridheight = 3;
-		gbc_textArea.gridwidth = 3;
-		gbc_textArea.insets = new Insets(0, 0, 5, 5);
-		gbc_textArea.fill = GridBagConstraints.BOTH;
-		gbc_textArea.gridx = 3;
-		gbc_textArea.gridy = 4;
-		add(textArea, gbc_textArea);
+		JTextArea taDescription = new JTextArea();
+		GridBagConstraints gbc_taDescription = new GridBagConstraints();
+		gbc_taDescription.gridheight = 3;
+		gbc_taDescription.gridwidth = 3;
+		gbc_taDescription.insets = new Insets(0, 0, 5, 5);
+		gbc_taDescription.fill = GridBagConstraints.BOTH;
+		gbc_taDescription.gridx = 3;
+		gbc_taDescription.gridy = 4;
+		add(taDescription, gbc_taDescription);
 		
 		JLabel lblResponsible = new JLabel("Respons\u00E1vel (s)");
 		lblResponsible.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -140,46 +140,58 @@ public class CreateTask extends JPanel {
 			}
 		});
 		GridBagConstraints gbc_btnCreateTask = new GridBagConstraints();
-		gbc_btnCreateTask.insets = new Insets(0, 0, 0, 5);
+		gbc_btnCreateTask.insets = new Insets(0, 0, 5, 5);
 		gbc_btnCreateTask.gridx = 1;
 		gbc_btnCreateTask.gridy = 14;
 		add(btnCreateTask, gbc_btnCreateTask);
 		
-		JButton btnSearch = new JButton("Buscar");
-		btnSearch.addActionListener(new ActionListener() {
+		JButton btnSearchTask = new JButton("Buscar");
+		btnSearchTask.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				actionSearch();
 			}
 		});
-		GridBagConstraints gbc_btnSearch = new GridBagConstraints();
-		gbc_btnSearch.insets = new Insets(0, 0, 0, 5);
-		gbc_btnSearch.gridx = 3;
-		gbc_btnSearch.gridy = 14;
-		add(btnSearch, gbc_btnSearch);
+		GridBagConstraints gbc_btnSearchTask = new GridBagConstraints();
+		gbc_btnSearchTask.insets = new Insets(0, 0, 5, 5);
+		gbc_btnSearchTask.gridx = 3;
+		gbc_btnSearchTask.gridy = 14;
+		add(btnSearchTask, gbc_btnSearchTask);
 		
-		JButton btnUpdate = new JButton("Alterar");
-		btnUpdate.addActionListener(new ActionListener() {
+		JButton btnUpdateTask = new JButton("Alterar");
+		btnUpdateTask.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				actionUpdate();
 			}
 		});
-		GridBagConstraints gbc_btnUpdate = new GridBagConstraints();
-		gbc_btnUpdate.insets = new Insets(0, 0, 0, 5);
-		gbc_btnUpdate.gridx = 4;
-		gbc_btnUpdate.gridy = 14;
-		add(btnUpdate, gbc_btnUpdate);
+		GridBagConstraints gbc_btnUpdateTask = new GridBagConstraints();
+		gbc_btnUpdateTask.insets = new Insets(0, 0, 5, 5);
+		gbc_btnUpdateTask.gridx = 4;
+		gbc_btnUpdateTask.gridy = 14;
+		add(btnUpdateTask, gbc_btnUpdateTask);
 		
-		JButton btnDelete = new JButton("Excluir");
-		btnDelete.addActionListener(new ActionListener() {
+		JButton btnDeleteTask = new JButton("Excluir");
+		btnDeleteTask.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				actionDelete();
 			}
 		});
-		GridBagConstraints gbc_btnDelete = new GridBagConstraints();
-		gbc_btnDelete.insets = new Insets(0, 0, 0, 5);
-		gbc_btnDelete.gridx = 5;
-		gbc_btnDelete.gridy = 14;
-		add(btnDelete, gbc_btnDelete);
+		GridBagConstraints gbc_btnDeleteTask = new GridBagConstraints();
+		gbc_btnDeleteTask.insets = new Insets(0, 0, 5, 5);
+		gbc_btnDeleteTask.gridx = 5;
+		gbc_btnDeleteTask.gridy = 14;
+		add(btnDeleteTask, gbc_btnDeleteTask);
+		
+		JButton btnCreateReminder = new JButton("Criar/editar lembrete");
+		btnCreateReminder.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		GridBagConstraints gbc_btnCreateReminder = new GridBagConstraints();
+		gbc_btnCreateReminder.gridwidth = 2;
+		gbc_btnCreateReminder.insets = new Insets(0, 0, 0, 5);
+		gbc_btnCreateReminder.gridx = 3;
+		gbc_btnCreateReminder.gridy = 16;
+		add(btnCreateReminder, gbc_btnCreateReminder);
 	}
 
 	void actionCreateTask() {
