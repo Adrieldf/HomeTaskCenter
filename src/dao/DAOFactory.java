@@ -15,6 +15,12 @@ public abstract class DAOFactory {
     public abstract void closeConnection();
     
     public abstract CategoryDAO getCategoryDAO();
+
+    public abstract FamilyDAO getFamilyDAO();
+    
+    public abstract ProductDAO getProductDAO();
+    
+    public abstract UserDAO getUserDAO();
   
 }
 

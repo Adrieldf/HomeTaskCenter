@@ -26,19 +26,19 @@ public class PostgresqlProductDB implements ProductDAO {
 
 
 	@Override
-	public List<Product> getAll() {
+	public List<Product> getAll(int idFamily) {
 		List<Product> products = new ArrayList<Product>();
 
-		Statement stmt = null;
+		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
 		try {
 
-			stmt = conn.createStatement();
-			rs = stmt.executeQuery("select id, name, \"idCategory\" from product");
-
+			pstmt = conn.prepareStatement("select * from product where \"idFamily\" = ?");
+			pstmt.setInt(1, idFamily);
+			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				Product p = new Product(rs.getInt("id"), rs.getString("nome"), rs.getInt("idCategory"));
+				Product p = new Product(rs.getInt("id"), rs.getString("nome"), rs.getInt("idCategory"), rs.getInt("idFamily"));
 
 				products.add(p);
 			}
@@ -48,7 +48,7 @@ public class PostgresqlProductDB implements ProductDAO {
 		} finally {
 			try {
 				rs.close();
-				stmt.close();
+				pstmt.close();
 			} catch (SQLException e) {
 				System.out.println(e.getMessage());
 			}
@@ -58,19 +58,20 @@ public class PostgresqlProductDB implements ProductDAO {
 	}
 
 	@Override
-	public List<Product> getById(int id) {
+	public List<Product> getById(int id, int idFamily) {
 		List<Product> products = new ArrayList<Product>();
 
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
 		try {
-			pstmt = conn.prepareStatement("select * from product where id = ?");
+			pstmt = conn.prepareStatement("select * from product where id = ? and \"idFamily\" = ?");
 			pstmt.setInt(1, id);
+			pstmt.setInt(2, idFamily);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				Product p = new Product(rs.getInt("id"), rs.getString("name"), rs.getInt("idCategory"));
+				Product p = new Product(rs.getInt("id"), rs.getString("name"), rs.getInt("idCategory"), rs.getInt("idFamily"));
 				products.add(p);
 			}
 
@@ -97,10 +98,11 @@ public class PostgresqlProductDB implements ProductDAO {
 		PreparedStatement pstmt = null;
 
 		try {
-			pstmt = conn.prepareStatement("insert into product (name, \"idCategory\") values (?)");
+			pstmt = conn.prepareStatement("insert into product (name, \"idCategory\", \"idFamily\") values (?,?,?)");
 
 			pstmt.setString(1, product.getName());
-			pstmt.setInt(1, product.getIdCategory());
+			pstmt.setInt(2, product.getIdCategory());
+			pstmt.setInt(3, product.getIdFamily());
 
 			pstmt.executeUpdate();
 
@@ -125,8 +127,9 @@ public class PostgresqlProductDB implements ProductDAO {
 		PreparedStatement pstmt = null;
 
 		try {
-			pstmt = conn.prepareStatement("delete from product where id = ?");
+			pstmt = conn.prepareStatement("delete from product where id = ? and \"idFamily\" = ?");
 			pstmt.setInt(1, product.getId());
+			pstmt.setInt(2, product.getIdFamily());
 			pstmt.executeUpdate();
 		} catch (SQLException se) {
 			System.out.println("Ocorreu um erro : " + se.getMessage());
@@ -149,11 +152,12 @@ public class PostgresqlProductDB implements ProductDAO {
 		PreparedStatement pstmt = null;
 
 		try {
-			pstmt = conn.prepareStatement("update category set name = ?, \"idCategory\" = ? where id = ?");
+			pstmt = conn.prepareStatement("update category set name = ?, \"idCategory\" = ? where id = ? and \"idFamily\" = ?");
 
 			pstmt.setString(1, product.getName());
 			pstmt.setInt(2, product.getIdCategory());
 			pstmt.setInt(3, product.getId());
+			pstmt.setInt(4, product.getIdFamily());
 
 			pstmt.executeUpdate();
 

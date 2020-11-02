@@ -11,15 +11,15 @@ import java.util.List;
 import dao.UserDAO;
 import model.User;
 
-public class PostegresqlUserDB implements UserDAO {
+public class PostgresqlUserDB implements UserDAO {
 	
 	private Connection conn;
 
-	public PostegresqlUserDB(Connection conn) {
+	public PostgresqlUserDB(Connection conn) {
 		this.conn = conn;
 	}
 	
-	public PostegresqlUserDB() {
+	public PostgresqlUserDB() {
 
 	}
 	

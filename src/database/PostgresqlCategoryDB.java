@@ -24,22 +24,23 @@ public class PostgresqlCategoryDB implements CategoryDAO {
 	}
 
 	@Override
-	public List<Category> getAll() {
+	public List<Category> getAll(int idFamily) {
 		List<Category> categories = new ArrayList<Category>();
 
-		Statement stmt = null;
+		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
 		try {
 
-			stmt = conn.createStatement();
-			rs = stmt.executeQuery("select id, name from category");
-
+			pstmt = conn.prepareStatement("select * from category where \"idFamily\" = ?");
+			pstmt.setInt(1, idFamily);
+			rs = pstmt.executeQuery();
+			
 			while (rs.next()) {
 				Category c = new Category();
 				c.setId(rs.getInt("id"));
 				c.setName(rs.getString("name"));
-
+				c.setIdFamily(rs.getInt("idFamily"));
 				categories.add(c);
 			}
 
@@ -48,7 +49,7 @@ public class PostgresqlCategoryDB implements CategoryDAO {
 		} finally {
 			try {
 				rs.close();
-				stmt.close();
+				pstmt.close();
 			} catch (SQLException e) {
 				System.out.println(e.getMessage());
 			}
@@ -58,7 +59,7 @@ public class PostgresqlCategoryDB implements CategoryDAO {
 	}
 
 	@Override
-	public List<Category> getById(int id) {
+	public List<Category> getById(int id, int idFamily) {
 		List<Category> categories = new ArrayList<Category>();
 
 		PreparedStatement pstmt = null;
@@ -66,15 +67,16 @@ public class PostgresqlCategoryDB implements CategoryDAO {
 
 		try {
 
-			pstmt = conn.prepareStatement("select id, name from category where id = ?");
+			pstmt = conn.prepareStatement("select * from category where id = ? and \"idFamily\" = ?");
 			pstmt.setInt(1, id);
+			pstmt.setInt(2, idFamily);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
 				Category c = new Category();
 				c.setId(rs.getInt("id"));
 				c.setName(rs.getString("name"));
-
+				c.setIdFamily(rs.getInt("idFamily"));
 				categories.add(c);
 			}
 
@@ -101,9 +103,10 @@ public class PostgresqlCategoryDB implements CategoryDAO {
 		PreparedStatement pstmt = null;
 
 		try {
-			pstmt = conn.prepareStatement("insert into category (name) values (?)");
+			pstmt = conn.prepareStatement("insert into category (name, \"idFamily\") values (?,?)");
 
 			pstmt.setString(1, category.getName());
+			pstmt.setInt(2, category.getIdFamily());
 
 			pstmt.executeUpdate();
 
@@ -127,8 +130,9 @@ public class PostgresqlCategoryDB implements CategoryDAO {
 		PreparedStatement pstmt = null;
 
 		try {
-			pstmt = conn.prepareStatement("delete from category where id = ?");
+			pstmt = conn.prepareStatement("delete from category where id = ? and \"idFamily\" = ?");
 			pstmt.setInt(1, category.getId());
+			pstmt.setInt(2, category.getIdFamily());
 			pstmt.executeUpdate();
 		} catch (SQLException se) {
 			System.out.println("Ocorreu um erro : " + se.getMessage());
@@ -151,10 +155,11 @@ public class PostgresqlCategoryDB implements CategoryDAO {
 		PreparedStatement pstmt = null;
 
 		try {
-			pstmt = conn.prepareStatement("update category set name = ? where id = ?");
+			pstmt = conn.prepareStatement("update category set name = ? where id = ? and \"idFamily\" = ?");
 
 			pstmt.setString(1, category.getName());
 			pstmt.setInt(2, category.getId());
+			pstmt.setInt(3, category.getIdFamily());
 
 			pstmt.executeUpdate();
 

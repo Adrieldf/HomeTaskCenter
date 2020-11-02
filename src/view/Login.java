@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import dao.UserDAO;
-import database.PostegresqlUserDB;
+import database.PostgresqlUserDB;
 import model.User;
 
 public class Login extends JPanel {
@@ -108,7 +108,7 @@ public class Login extends JPanel {
 		newUser.setName(tfName.getText());
 		newUser.setName(tfPassword.getText());
 		
-		UserDAO usDAO = new PostegresqlUserDB();
+		UserDAO usDAO = new PostgresqlUserDB();
 		valid = usDAO.validateUser(newUser);
 		
 		//se for valido passar ou nao

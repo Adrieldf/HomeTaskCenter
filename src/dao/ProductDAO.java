@@ -6,9 +6,9 @@ import model.Product;
 
 public interface ProductDAO {
 
-	List<Product> getAll();
+	List<Product> getAll(int idFamily);
 
-	List<Product> getById(int id);
+	List<Product> getById(int id, int idFamily);
 
 	void insert(Product product);
 

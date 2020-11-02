@@ -2,6 +2,7 @@ package model;
 
 public class Category {
 
+	private int idFamily;
 	private int id;
 	private String name;
 	
@@ -27,6 +28,14 @@ public class Category {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public int getIdFamily() {
+		return idFamily;
+	}
+
+	public void setIdFamily(int idFamily) {
+		this.idFamily = idFamily;
 	}
 	
 	
