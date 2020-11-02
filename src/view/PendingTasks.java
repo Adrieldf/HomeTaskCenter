@@ -26,16 +26,16 @@ public class PendingTasks extends JPanel{
 	private JDesktopPane desktopPane;
 	public PendingTasks(InitialPage iP) {
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 30, 30, 30, 30, 30, 30, 30, 30, 0, 0, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.columnWidths = new int[]{30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 0};
+		gridBagLayout.rowHeights = new int[]{0, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 0};
+		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
 		JLabel lbTitle = new JLabel("Tarefas Pendentes");
 		lbTitle.setFont(new Font("Tahoma", Font.BOLD, 17));
 		GridBagConstraints gbc_lbTitle = new GridBagConstraints();
-		gbc_lbTitle.gridwidth = 19;
+		gbc_lbTitle.gridwidth = 15;
 		gbc_lbTitle.insets = new Insets(0, 0, 5, 0);
 		gbc_lbTitle.gridx = 0;
 		gbc_lbTitle.gridy = 0;
@@ -47,7 +47,7 @@ public class PendingTasks extends JPanel{
 		gbc_tabTasks.gridwidth = 13;
 		gbc_tabTasks.insets = new Insets(0, 0, 5, 5);
 		gbc_tabTasks.fill = GridBagConstraints.BOTH;
-		gbc_tabTasks.gridx = 3;
+		gbc_tabTasks.gridx = 1;
 		gbc_tabTasks.gridy = 2;
 		add(tabTasks, gbc_tabTasks);
 		
@@ -60,13 +60,13 @@ public class PendingTasks extends JPanel{
 		GridBagConstraints gbc_btnCreateTask = new GridBagConstraints();
 		gbc_btnCreateTask.gridwidth = 13;
 		gbc_btnCreateTask.insets = new Insets(0, 0, 5, 5);
-		gbc_btnCreateTask.gridx = 3;
+		gbc_btnCreateTask.gridx = 1;
 		gbc_btnCreateTask.gridy = 9;
 		add(btnCreateTask, gbc_btnCreateTask);
 	}
 	
 	void actionCreateTask(InitialPage initPage) {
-		initPage.showPanel(new CreateTask(), "Criar nova tarefa");
+		initPage.createInternalFrame(new CreateTask(), "Criar nova tarefa", 800, 600);
 	}
 	
 	

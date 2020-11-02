@@ -25,10 +25,10 @@ public class CreateTask extends JPanel {
 	private JTable tbResponsible;
 	public CreateTask() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{0, 0, 10, 100, 100, 100, 0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gridBagLayout.columnWidths = new int[]{30, 30, 30, 100, 100, 100, 30, 0};
+		gridBagLayout.rowHeights = new int[]{30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
 		JLabel lblTitle = new JLabel("Criar/editar tarefa");
@@ -188,7 +188,7 @@ public class CreateTask extends JPanel {
 		});
 		GridBagConstraints gbc_btnCreateReminder = new GridBagConstraints();
 		gbc_btnCreateReminder.gridwidth = 2;
-		gbc_btnCreateReminder.insets = new Insets(0, 0, 0, 5);
+		gbc_btnCreateReminder.insets = new Insets(0, 0, 5, 5);
 		gbc_btnCreateReminder.gridx = 3;
 		gbc_btnCreateReminder.gridy = 16;
 		add(btnCreateReminder, gbc_btnCreateReminder);

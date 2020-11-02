@@ -32,9 +32,9 @@ public class CategoryRegistration extends JPanel {
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{30, 100, 100, 40, 50, 0, 100, 100, 0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gridBagLayout.rowHeights = new int[]{30, 30, 30, 30, 30, 30, 30, 30, 30, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
 		Label lbTitle = new Label("Criar/editar categoria");
@@ -100,30 +100,13 @@ public class CategoryRegistration extends JPanel {
 		gbc_table.gridy = 3;
 		add(table, gbc_table);
 		GridBagConstraints gbc_btnNewCategorie = new GridBagConstraints();
+		gbc_btnNewCategorie.gridwidth = 2;
 		gbc_btnNewCategorie.insets = new Insets(0, 0, 5, 5);
 		gbc_btnNewCategorie.gridx = 6;
 		gbc_btnNewCategorie.gridy = 4;
 		add(btnNewCategorie, gbc_btnNewCategorie);
 		
-		JButton btnBack = new JButton("Voltar");
-		btnBack.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				actionBack();
-			}
-		});
-		GridBagConstraints gbc_btnBack = new GridBagConstraints();
-		gbc_btnBack.anchor = GridBagConstraints.EAST;
-		gbc_btnBack.insets = new Insets(0, 0, 5, 5);
-		gbc_btnBack.gridx = 7;
-		gbc_btnBack.gridy = 4;
-		add(btnBack, gbc_btnBack);
-		
 		JButton btnDelete = new JButton("Excluir");
-		btnBack.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				actionDelete();
-			}
-		});
 		GridBagConstraints gbc_btnDelete = new GridBagConstraints();
 		gbc_btnDelete.gridwidth = 2;
 		gbc_btnDelete.insets = new Insets(0, 0, 5, 5);
@@ -137,12 +120,6 @@ public class CategoryRegistration extends JPanel {
 		newCategory.setName(tfName.getText());
 		CategoryDAO catDAO = new PostgresqlCategoryDB();
 		catDAO.insert(newCategory);
-	}
-	
-	
-	void actionBack(){
-		JInternalFrame jif = (JInternalFrame) this.getParent();
-		jif.dispose();
 	}
 	
 	void actionDelete(){

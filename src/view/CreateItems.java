@@ -23,18 +23,18 @@ public class CreateItems extends JPanel {
 	private JTable tabCategory;
 	public CreateItems() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{0, 0, 0, 100, 100, 0, 0, 0, 0, 0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.columnWidths = new int[]{30, 30, 30, 100, 100, 30, 0};
+		gridBagLayout.rowHeights = new int[]{30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 0};
+		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
 		JLabel lblTitle = new JLabel("Criar item");
 		lblTitle.setFont(new Font("Tahoma", Font.BOLD, 17));
 		GridBagConstraints gbc_lblTitle = new GridBagConstraints();
-		gbc_lblTitle.gridwidth = 10;
+		gbc_lblTitle.gridwidth = 5;
 		gbc_lblTitle.insets = new Insets(0, 0, 5, 0);
-		gbc_lblTitle.gridx = 0;
+		gbc_lblTitle.gridx = 1;
 		gbc_lblTitle.gridy = 0;
 		add(lblTitle, gbc_lblTitle);
 		
@@ -82,23 +82,10 @@ public class CreateItems extends JPanel {
 		});
 		GridBagConstraints gbc_btnCreateItem = new GridBagConstraints();
 		gbc_btnCreateItem.gridwidth = 2;
-		gbc_btnCreateItem.insets = new Insets(0, 0, 0, 5);
-		gbc_btnCreateItem.gridx = 2;
+		gbc_btnCreateItem.insets = new Insets(0, 0, 5, 5);
+		gbc_btnCreateItem.gridx = 3;
 		gbc_btnCreateItem.gridy = 8;
 		add(btnCreateItem, gbc_btnCreateItem);
-		
-		JButton btnCancel = new JButton("Cancelar");
-		btnCancel.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				actionCancel();
-			}
-		});
-		GridBagConstraints gbc_btnCancel = new GridBagConstraints();
-		gbc_btnCancel.gridwidth = 3;
-		gbc_btnCancel.insets = new Insets(0, 0, 0, 5);
-		gbc_btnCancel.gridx = 4;
-		gbc_btnCancel.gridy = 8;
-		add(btnCancel, gbc_btnCancel);
 	}
 	
 
@@ -112,15 +99,6 @@ public class CreateItems extends JPanel {
 		//mandar para db product
 		ProductDAO podDAO = new PostgresqlProductDB();
 		podDAO.insert(newProduct);
-	}
-	
-	
-	void actionCancel() {
-		//troca de panel para 
-		//this.getParent()dispose
-		//sepa ta ok. TESTAR
-		JInternalFrame jif = (JInternalFrame) this.getParent();
-		jif.dispose();
 	}
 	
 

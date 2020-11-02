@@ -17,14 +17,14 @@ import dao.UserDAO;
 import database.PostgresqlUserDB;
 import model.User;
 
-public class Login extends JPanel {
+public class LoginPage extends JPanel {
 	private JTextField tfName;
 	private JTextField tfPassword;
 	private boolean valid;
-	public Login() {
+	public LoginPage() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{0, 0, 30, 100, 100, 0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gridBagLayout.columnWidths = new int[]{30, 30, 30, 100, 100, 30, 0};
+		gridBagLayout.rowHeights = new int[]{30, 30, 30, 30, 30, 30, 30, 30, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
