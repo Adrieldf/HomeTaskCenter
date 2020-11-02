@@ -64,13 +64,14 @@ public class InitialPage extends JFrame {
 		
 		menuBar_1 = new JMenuBar();
 		setJMenuBar(menuBar_1);
-
+		
 		buildMenuArchive(menuBar_1);
-		buildMenuOptions(menuBar_1);
+		buildMenuOptions(menuBar_1);		
 		
+		showPanelFullScreen(new PendingTasks(INSTANCE), "Tarefas Pendentes");			
 		
-		showPanelFullScreen(new PendingTasks(INSTANCE), "Tarefas");
-		
+		// TODO: validar se o login foi realizado com sucesso para mostrar as tasks
+		createInternalFrame(new LoginPage(), "Login", 400, 300);
 	}
 	
 	private void buildMenuArchive(JMenuBar menuBar) {
@@ -89,26 +90,55 @@ public class InitialPage extends JFrame {
 	}
 	
 	private void buildMenuOptions(JMenuBar menuBar) {
-		JMenu mnOptions = new JMenu("Opï¿½ï¿½es");
+		JMenu mnOptions = new JMenu("Opções");
 		menuBar.add(mnOptions);
 		
+		// Primeira opção
 		JMenuItem mntmTarefas = new JMenuItem("Visualizar Tarefas Pendentes");
 		mntmTarefas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 //				showPanelFullScreen(new PendingTasks());
-				showPanel(new PendingTasks(INSTANCE), "Tarefas Pendentes");
+				createInternalFrame(new PendingTasks(INSTANCE), "Tarefas Pendentes", 800, 600);
 			}
 		});
 		mnOptions.add(mntmTarefas);
 		
-		// Segunda opcao
-//		JMenuItem mntmTarefas2 = new JMenuItem("Tarefas 2");
-//		mntmTarefas2.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent arg0) {
-//				showPanel(new TestePanel(), "Tarefas 2");
-//			}
-//		});
-//		mnOptions.add(mntmTarefas2);
+		// Segunda opção
+		JMenuItem mntmUserEdit = new JMenuItem("Criar/editar usuário");
+		mntmUserEdit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg1) {
+				createInternalFrame(new UserEdit(), "Criar/editar usuário", 400, 300);
+			}
+		});
+		mnOptions.add(mntmUserEdit);
+		
+		// Terceira opção
+		JMenuItem mntmCategoryRegistration = new JMenuItem("Criar/editar categoria");
+		mntmCategoryRegistration.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg2) {
+				createInternalFrame(new CategoryRegistration(), "Criar/editar categoria", 600, 600);
+			}
+		});
+		mnOptions.add(mntmCategoryRegistration);
+		
+		// Quarta opção
+		JMenuItem mntmCreateTask = new JMenuItem("Criar/editar tarefa");
+		mntmCreateTask.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg3) {
+				createInternalFrame(new CreateTask(), "Criar/editar tarefa", 500, 550);
+			}
+		});
+		mnOptions.add(mntmCreateTask);
+		
+		// Quinta opção
+		JMenuItem mntmFamilyRegistration = new JMenuItem("Criar/editar família");
+		mntmFamilyRegistration.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg4) {
+				createInternalFrame(new FamilyRegistration(), "Criar/editar família", 600, 400);
+			}
+		});
+		mnOptions.add(mntmFamilyRegistration);
+		
 	}
 	
 	//abrir janela irma, pelos filhos
@@ -121,7 +151,7 @@ public class InitialPage extends JFrame {
 	
 	protected void showPanelFullScreen(JPanel panel, String title) {
 		final JInternalFrame intFrame = new JInternalFrame(title, false, false, false, false);
-		showPanel(panel, intFrame);
+		showPanel(panel, intFrame, 800, 600);
 		if (intFrame.getSize().height != 0) {
 			try {
 				intFrame.setMaximum(true);
@@ -131,14 +161,14 @@ public class InitialPage extends JFrame {
 		}
 	}
 	
-	protected void showPanel(JPanel panel, String title) {
+	protected void createInternalFrame(JPanel panel, String title, Integer width, Integer height) {
 		final JInternalFrame intFrame = new JInternalFrame(title, true, true, true, true);
-		showPanel(panel, intFrame);
+		showPanel(panel, intFrame, width, height);
 	}
 	
-	protected void showPanel(JPanel panel, final JInternalFrame intFrame) {
-		showPanel(panel, intFrame, 800, 600);
-	}
+//	protected void showPanel(JPanel panel, final JInternalFrame intFrame) {
+//		showPanel(panel, intFrame, 800, 600);
+//	}
 	
 	protected void showPanel(JPanel panel, final JInternalFrame intFrame, Integer width, Integer height) {
 		

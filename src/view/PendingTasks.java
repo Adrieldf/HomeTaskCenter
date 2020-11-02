@@ -20,10 +20,11 @@ import dao.ProductDAO;
 import database.PostgresqlProductDB;
 import model.Task;
 
-//jpanel frame
-public class PendingTasks extends JPanel{
+//jPanel frame
+public class PendingTasks extends JPanel {
 	private JTable tabTasks;
 	private JDesktopPane desktopPane;
+	
 	public PendingTasks(InitialPage iP) {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 0};
