@@ -20,8 +20,11 @@ import javax.swing.event.ListSelectionListener;
 
 import dao.CategoryDAO;
 import dao.DAOFactory;
+import dao.UserDAO;
 import database.PostgresqlCategoryDB;
+import database.PostgresqlDBFactory;
 import model.Category;
+import model.User;
 import view.tableModel.CategoryTableModel;
 
 public class CategoryRegistration extends JPanel {
@@ -118,7 +121,8 @@ public class CategoryRegistration extends JPanel {
 	void actionNewCategorie(){
 		Category newCategory = new Category();
 		newCategory.setName(tfName.getText());
-		CategoryDAO catDAO = new PostgresqlCategoryDB();
+		DAOFactory catFact = new PostgresqlDBFactory();
+		CategoryDAO catDAO = catFact.getCategoryDAO();
 		catDAO.insert(newCategory);
 	}
 	
@@ -130,11 +134,14 @@ public class CategoryRegistration extends JPanel {
 		//table tem nomeDaTabela.getSelectedRow(); ou  nomeDaTabela.getValueAt(linha,coluna); 
 		
 		
-		//model tem .remove();
 		
-		//DAO para remover do banco
-		CategoryDAO catDAO = new PostgresqlCategoryDB();
-		//catDAO.remove();selecionado
+		
+		DAOFactory catFact = new PostgresqlDBFactory();
+		CategoryDAO catDAO = catFact.getCategoryDAO();
+		//catDAO.remove();
+		
+		
+		//model tem .remove();
 		
 	}
 	

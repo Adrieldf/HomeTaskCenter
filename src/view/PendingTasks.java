@@ -1,29 +1,24 @@
 package view;
 
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.beans.PropertyVetoException;
 
 import javax.swing.JButton;
 import javax.swing.JDesktopPane;
-import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 
-import dao.ProductDAO;
-import database.PostgresqlProductDB;
-import model.Task;
-
 //jPanel frame
-public class PendingTasks extends JPanel {
+public class PendingTasks extends JPanel implements ActionListener{
 	private JTable tabTasks;
 	private JDesktopPane desktopPane;
+	
+	private JButton btnCreateTask;
 	
 	public PendingTasks(InitialPage iP) {
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -52,12 +47,8 @@ public class PendingTasks extends JPanel {
 		gbc_tabTasks.gridy = 2;
 		add(tabTasks, gbc_tabTasks);
 		
-		JButton btnCreateTask = new JButton("Criar Tarefa");
-		btnCreateTask.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				actionCreateTask(iP);
-			}
-		});
+		btnCreateTask = new JButton("Criar Tarefa");
+		btnCreateTask.addActionListener(this);
 		GridBagConstraints gbc_btnCreateTask = new GridBagConstraints();
 		gbc_btnCreateTask.gridwidth = 13;
 		gbc_btnCreateTask.insets = new Insets(0, 0, 5, 5);
@@ -65,11 +56,17 @@ public class PendingTasks extends JPanel {
 		gbc_btnCreateTask.gridy = 9;
 		add(btnCreateTask, gbc_btnCreateTask);
 	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		if(arg0.getSource()==btnCreateTask) {
+			actionCreateTask(InitialPage.getInstance());
+		}
+	}
 	
 	void actionCreateTask(InitialPage initPage) {
 		initPage.createInternalFrame(new CreateTask(), "Criar nova tarefa", 800, 600);
 	}
-	
-	
 
 }

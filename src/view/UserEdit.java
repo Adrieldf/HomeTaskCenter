@@ -1,29 +1,22 @@
 package view;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import java.awt.BorderLayout;
-import javax.swing.JButton;
-import javax.swing.SwingConstants;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-
-import controller.UserController;
-
-import com.jgoodies.forms.layout.FormSpecs;
-import java.awt.GridBagLayout;
-import java.awt.Label;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import java.awt.Font;
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import dao.DAOFactory;
+import dao.UserDAO;
+import database.PostgresqlDBFactory;
+import model.User;
 
 public class UserEdit extends JPanel {
 	private JTextField textField;
@@ -87,6 +80,7 @@ public class UserEdit extends JPanel {
 		btnCreateUser.setForeground(Color.BLACK);
 		btnCreateUser.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				actionCreateUser();
 			}
 		});
 		GridBagConstraints gbc_btnCreateUser = new GridBagConstraints();
@@ -96,6 +90,11 @@ public class UserEdit extends JPanel {
 		add(btnCreateUser, gbc_btnCreateUser);
 		
 		JButton btnSearch = new JButton("Buscar");
+		btnSearch.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				actionSearch();
+			}
+		});
 		GridBagConstraints gbc_btnSearch = new GridBagConstraints();
 		gbc_btnSearch.anchor = GridBagConstraints.EAST;
 		gbc_btnSearch.insets = new Insets(0, 0, 5, 5);
@@ -104,6 +103,11 @@ public class UserEdit extends JPanel {
 		add(btnSearch, gbc_btnSearch);
 		
 		JButton btnUpdate = new JButton("Alterar");
+		btnUpdate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				actionUpdate();
+			}
+		});
 		GridBagConstraints gbc_btnUpdate = new GridBagConstraints();
 		gbc_btnUpdate.insets = new Insets(0, 0, 5, 5);
 		gbc_btnUpdate.gridx = 5;
@@ -113,93 +117,29 @@ public class UserEdit extends JPanel {
 	}
 	
 	
+	void actionCreateUser() {
+		User newUser = new User();
+		newUser.setName(textField.getText());
+		newUser.setPassword(textField_1.getText());
+		DAOFactory userFact = new PostgresqlDBFactory();
+		UserDAO userDB = userFact.getUserDAO();
+		userDB.insert(newUser);
+	}
+	
+	void actionSearch() {
+		DAOFactory userFact = new PostgresqlDBFactory();
+		UserDAO userDB = userFact.getUserDAO();
+		User user1 = userDB.getByName(textField.getText());
+		textField.setText(user1.getName());
+		textField_1.setText(user1.getPassword());
+	}
 
-//	private JFrame frame;
-//	private JTextField txtName;
-//	private JTextField txtPassword;
-//	
-//	UserController controller = new UserController();
-//	
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					UserEdit window = new UserEdit();
-//					window.frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
-//
-//	public UserEdit() {
-//		initialize();
-//	}
-//
-//	private void initialize() {
-//		frame = new JFrame();
-//		frame.setBounds(100, 100, 450, 300);
-//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		frame.getContentPane().setLayout(new BorderLayout(0, 0));
-//		
-//		JPanel pnlCenter = new JPanel();
-//		frame.getContentPane().add(pnlCenter, BorderLayout.CENTER);
-//		pnlCenter.setLayout(new FormLayout(new ColumnSpec[] {
-//				ColumnSpec.decode("109dlu"),
-//				ColumnSpec.decode("60dlu"),
-//				ColumnSpec.decode("123dlu:grow"),},
-//			new RowSpec[] {
-//				RowSpec.decode("fill:default:grow"),
-//				FormSpecs.MIN_ROWSPEC,
-//				FormSpecs.LINE_GAP_ROWSPEC,
-//				FormSpecs.DEFAULT_ROWSPEC,
-//				FormSpecs.LINE_GAP_ROWSPEC,
-//				FormSpecs.DEFAULT_ROWSPEC,
-//				RowSpec.decode("fill:min:grow"),}));
-//		
-//		JLabel lblName = new JLabel("Nome ");
-//		lblName.setHorizontalAlignment(SwingConstants.TRAILING);
-//		pnlCenter.add(lblName, "2, 2, fill, fill");
-//		
-//		txtName = new JTextField();
-//		pnlCenter.add(txtName, "3, 2, default, center");
-//		txtName.setColumns(10);
-//		
-//		JLabel lblPassword = new JLabel("Senha ");
-//		lblPassword.setHorizontalAlignment(SwingConstants.TRAILING);
-//		pnlCenter.add(lblPassword, "2, 4, right, default");
-//		
-//		txtPassword = new JTextField();
-//		pnlCenter.add(txtPassword, "3, 4, fill, default");
-//		txtPassword.setColumns(10);
-//		
-//		JLabel lblId = new JLabel("Id ");
-//		lblId.setHorizontalAlignment(SwingConstants.TRAILING);
-//		pnlCenter.add(lblId, "2, 6");
-//		
-//		JLabel lblIdValue = new JLabel("0000");
-//		pnlCenter.add(lblIdValue, "3, 6");
-//		
-//		JPanel pnlSouth = new JPanel();
-//		frame.getContentPane().add(pnlSouth, BorderLayout.SOUTH);
-//		pnlSouth.setLayout(new BorderLayout(0, 0));
-//		
-//		JButton btnCancel = new JButton("Cancelar");
-//		btnCancel.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent arg0) {
-//				//voltar para a tela anterior
-//			}
-//		});
-//		pnlSouth.add(btnCancel, BorderLayout.WEST);
-//		
-//		JButton btnConfirm = new JButton("Confimar");
-//		btnConfirm.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				controller.CreateOrUpdateUser(Integer.parseInt(lblIdValue.getText()) , txtName.getText(), txtPassword.getText());
-//			}
-//		});
-//		pnlSouth.add(btnConfirm, BorderLayout.EAST);
-//	}
-
+	void actionUpdate() {
+		User newUser = new User();
+		DAOFactory userFact = new PostgresqlDBFactory();
+		UserDAO userDB = userFact.getUserDAO();
+		newUser.setName(textField.getText());
+		newUser.setPassword(textField_1.getText());
+		userDB.edit(newUser);
+	}
 }

@@ -20,7 +20,7 @@ public class PostgresqlDBFactory extends DAOFactory{
 	        return instance;
 	    }
 
-	    private PostgresqlDBFactory() {
+	    public PostgresqlDBFactory() {
 	        this.openConnection();
 	    }
 	    
@@ -39,9 +39,9 @@ public class PostgresqlDBFactory extends DAOFactory{
 	            //updateProduct(conn, 100, "produtonovo", "produto massa");
 	            //getProducts(conn);
 	        } catch (ClassNotFoundException cnfe) {
-	            System.out.println("Não foi possível encontrar o driver JDBC");
+	            System.out.println("Nï¿½o foi possï¿½vel encontrar o driver JDBC");
 	        } catch (SQLException se) {
-	            System.out.println("Não foi possível conectar ao Banco de Dados");
+	            System.out.println("Nï¿½o foi possï¿½vel conectar ao Banco de Dados");
 	        }
 	    }  
 	    

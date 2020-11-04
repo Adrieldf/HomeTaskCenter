@@ -8,13 +8,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
+import dao.DAOFactory;
 import dao.ProductDAO;
+import database.PostgresqlDBFactory;
 import database.PostgresqlProductDB;
 import model.Product;
 
@@ -95,9 +96,10 @@ public class CreateItems extends JPanel {
 		newProduct.setName(tfName.getText());
 		
 		//Pegar categorias do combo box e passar para lista dentro de produto
+		//get selected index ******************************
+		//https://www.javatpoint.com/java-jcheckbox
 		//tem troca no model pra alterar aqui LIST
-		//mandar para db product
-		ProductDAO podDAO = new PostgresqlProductDB();
+		ProductDAO podDAO = InitialPage.getInstance().getDaoFactory().getProductDAO();
 		podDAO.insert(newProduct);
 	}
 	

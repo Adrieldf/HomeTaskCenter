@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.beans.PropertyVetoException;
 
 import javax.swing.JButton;
@@ -20,16 +22,21 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import dao.DAOFactory;
+import database.PostgresqlDBFactory;
+
 //import view.InitialPage;
 //import test.TestePanel;
 
-public class InitialPage extends JFrame {
+public class InitialPage extends JFrame{
 
 	protected static InitialPage INSTANCE;
 	
 	private JDesktopPane desktopPane;
 	
 	private JMenuBar menuBar_1;
+	
+	private DAOFactory daoFact;
 
 	public static void main(String[] args) {
 		
@@ -41,14 +48,15 @@ public class InitialPage extends JFrame {
 		});
 	}
 
-	public static synchronized InitialPage getInstance(){
+	public static InitialPage getInstance(){
 		if(INSTANCE==null) {
 			INSTANCE = new InitialPage();
+			INSTANCE.daoFact = new PostgresqlDBFactory();
 		}
-		return (InitialPage)INSTANCE;
+		return INSTANCE;
 	}
 	
-	protected InitialPage() {
+	private InitialPage() {
 	
 		desktopPane = new JDesktopPane() ;
 		desktopPane.setBackground(Color.LIGHT_GRAY);
@@ -68,10 +76,25 @@ public class InitialPage extends JFrame {
 		buildMenuArchive(menuBar_1);
 		buildMenuOptions(menuBar_1);		
 		
-		showPanelFullScreen(new PendingTasks(INSTANCE), "Tarefas Pendentes");			
+		this.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowActivated(WindowEvent e) {
+				// TODO Auto-generated method stub
+				super.windowActivated(e);
+				inicial();
+			}
+		});
+	}
+	
+	private void inicial() {
+		showPanelFullScreen(new PendingTasks(null), "Tarefas Pendentes");			
 		
 		// TODO: validar se o login foi realizado com sucesso para mostrar as tasks
 		createInternalFrame(new LoginPage(), "Login", 400, 300);
+	}
+	
+	public DAOFactory getDaoFactory() {
+		return this.daoFact;
 	}
 	
 	private void buildMenuArchive(JMenuBar menuBar) {
@@ -90,10 +113,10 @@ public class InitialPage extends JFrame {
 	}
 	
 	private void buildMenuOptions(JMenuBar menuBar) {
-		JMenu mnOptions = new JMenu("Opções");
+		JMenu mnOptions = new JMenu("Opï¿½ï¿½es");
 		menuBar.add(mnOptions);
 		
-		// Primeira opção
+		// Primeira opï¿½ï¿½o
 		JMenuItem mntmTarefas = new JMenuItem("Visualizar Tarefas Pendentes");
 		mntmTarefas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -103,16 +126,16 @@ public class InitialPage extends JFrame {
 		});
 		mnOptions.add(mntmTarefas);
 		
-		// Segunda opção
-		JMenuItem mntmUserEdit = new JMenuItem("Criar/editar usuário");
+		// Segunda opï¿½ï¿½o
+		JMenuItem mntmUserEdit = new JMenuItem("Criar/editar usuï¿½rio");
 		mntmUserEdit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg1) {
-				createInternalFrame(new UserEdit(), "Criar/editar usuário", 400, 300);
+				createInternalFrame(new UserEdit(), "Criar/editar usuï¿½rio", 400, 300);
 			}
 		});
 		mnOptions.add(mntmUserEdit);
 		
-		// Terceira opção
+		// Terceira opï¿½ï¿½o
 		JMenuItem mntmCategoryRegistration = new JMenuItem("Criar/editar categoria");
 		mntmCategoryRegistration.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg2) {
@@ -121,7 +144,7 @@ public class InitialPage extends JFrame {
 		});
 		mnOptions.add(mntmCategoryRegistration);
 		
-		// Quarta opção
+		// Quarta opï¿½ï¿½o
 		JMenuItem mntmCreateTask = new JMenuItem("Criar/editar tarefa");
 		mntmCreateTask.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg3) {
@@ -130,11 +153,11 @@ public class InitialPage extends JFrame {
 		});
 		mnOptions.add(mntmCreateTask);
 		
-		// Quinta opção
-		JMenuItem mntmFamilyRegistration = new JMenuItem("Criar/editar família");
+		// Quinta opï¿½ï¿½o
+		JMenuItem mntmFamilyRegistration = new JMenuItem("Criar/editar famï¿½lia");
 		mntmFamilyRegistration.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg4) {
-				createInternalFrame(new FamilyRegistration(), "Criar/editar família", 600, 400);
+				createInternalFrame(new FamilyRegistration(), "Criar/editar famï¿½lia", 600, 400);
 			}
 		});
 		mnOptions.add(mntmFamilyRegistration);

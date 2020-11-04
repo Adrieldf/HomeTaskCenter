@@ -13,7 +13,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import dao.DAOFactory;
 import dao.UserDAO;
+import database.PostgresqlDBFactory;
 import database.PostgresqlUserDB;
 import model.User;
 
@@ -108,10 +110,16 @@ public class LoginPage extends JPanel {
 		newUser.setName(tfName.getText());
 		newUser.setName(tfPassword.getText());
 		
-		UserDAO usDAO = new PostgresqlUserDB();
+		DAOFactory userFact = new PostgresqlDBFactory();
+		UserDAO usDAO = userFact.getUserDAO();
 		valid = usDAO.validateUser(newUser);
 		
-		//se for valido passar ou nao
+		if(valid) {
+			System.out.println("Usuario Validado");
+		} else {
+			System.out.println("Usuario Invalidado");
+		}
+		
 	}
 	
 	void actionCancel() {

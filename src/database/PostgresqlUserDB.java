@@ -198,4 +198,33 @@ public class PostgresqlUserDB implements UserDAO {
 		return validate;
 		
 	}
+
+	@Override
+	public User getByName(String name) {
+		// TODO Auto-generated method stub
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		User user = new User();
+		try {
+			pstmt = conn.prepareStatement("select id, name, password, \"idFamily\" from user where name = ? and \"idFamily\" = ? order by id");
+			pstmt.setString(1, name);
+			rs = pstmt.executeQuery();
+			
+			user = new User(rs.getInt("id"),rs.getString("name"),rs.getString("password"),rs.getInt("idFamily"));
+		
+			
+		}catch(SQLException ex) {
+			System.out.println("Ocorreu um erro : " + ex.getMessage());
+			ex.printStackTrace();
+		}
+		finally {
+			try {
+				rs.close();
+				pstmt.close();
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		return user;
+	}
 }
