@@ -9,7 +9,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
@@ -20,17 +19,15 @@ import javax.swing.event.ListSelectionListener;
 
 import dao.CategoryDAO;
 import dao.DAOFactory;
-import dao.UserDAO;
-import database.PostgresqlCategoryDB;
 import database.PostgresqlDBFactory;
 import model.Category;
-import model.User;
 import view.tableModel.CategoryTableModel;
 
-public class CategoryRegistration extends JPanel {
+public class CategoryRegistration extends JPanel implements ActionListener{
 	
 	private JTable table;
 	private JTextField tfName;
+	private JButton btnNewCategorie,btnDelete;
 	public CategoryRegistration() {
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -76,12 +73,8 @@ public class CategoryRegistration extends JPanel {
 		add(tfName, gbc_tfName);
 		tfName.setColumns(10);
 		
-		JButton btnNewCategorie = new JButton("Criar categoria");
-		btnNewCategorie.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				actionNewCategorie();
-			}
-		});
+		btnNewCategorie = new JButton("Criar categoria");
+		btnNewCategorie.addActionListener(this);
 		
 		table = new JTable(new CategoryTableModel());
 		
@@ -109,7 +102,8 @@ public class CategoryRegistration extends JPanel {
 		gbc_btnNewCategorie.gridy = 4;
 		add(btnNewCategorie, gbc_btnNewCategorie);
 		
-		JButton btnDelete = new JButton("Excluir");
+		btnDelete = new JButton("Excluir");
+		btnDelete.addActionListener(this);
 		GridBagConstraints gbc_btnDelete = new GridBagConstraints();
 		gbc_btnDelete.gridwidth = 2;
 		gbc_btnDelete.insets = new Insets(0, 0, 5, 5);
@@ -143,6 +137,18 @@ public class CategoryRegistration extends JPanel {
 		
 		//model tem .remove();
 		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		if(arg0.getSource()==btnNewCategorie) {
+			actionNewCategorie();
+		}else {
+			if(arg0.getSource()==btnDelete) {
+				actionDelete();
+			}
+		}
 	}
 	
 }

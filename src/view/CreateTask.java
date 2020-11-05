@@ -14,15 +14,15 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import dao.CategoryDAO;
-import database.PostgresqlCategoryDB;
 import model.Task;
 
-public class CreateTask extends JPanel {
+public class CreateTask extends JPanel implements ActionListener {
 	private JTextField tfTitleTask;
 	private JTextField tfDate;
 	private JTextField tfHour;
 	private JTable tbResponsible;
+	private JButton btnCreateTask,btnSearchTask,btnUpdateTask,btnDeleteTask,btnCreateReminder;
+	
 	public CreateTask() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{30, 30, 30, 100, 100, 100, 30, 0};
@@ -134,11 +134,7 @@ public class CreateTask extends JPanel {
 		tfHour.setColumns(10);
 		
 		JButton btnCreateTask = new JButton("Criar tarefa");
-		btnCreateTask.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				actionCreateTask();
-			}
-		});
+		btnCreateTask.addActionListener(this);
 		GridBagConstraints gbc_btnCreateTask = new GridBagConstraints();
 		gbc_btnCreateTask.insets = new Insets(0, 0, 5, 5);
 		gbc_btnCreateTask.gridx = 1;
@@ -146,11 +142,7 @@ public class CreateTask extends JPanel {
 		add(btnCreateTask, gbc_btnCreateTask);
 		
 		JButton btnSearchTask = new JButton("Buscar");
-		btnSearchTask.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				actionSearch();
-			}
-		});
+		btnSearchTask.addActionListener(this);
 		GridBagConstraints gbc_btnSearchTask = new GridBagConstraints();
 		gbc_btnSearchTask.insets = new Insets(0, 0, 5, 5);
 		gbc_btnSearchTask.gridx = 3;
@@ -158,11 +150,7 @@ public class CreateTask extends JPanel {
 		add(btnSearchTask, gbc_btnSearchTask);
 		
 		JButton btnUpdateTask = new JButton("Alterar");
-		btnUpdateTask.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				actionUpdate();
-			}
-		});
+		btnUpdateTask.addActionListener(this);
 		GridBagConstraints gbc_btnUpdateTask = new GridBagConstraints();
 		gbc_btnUpdateTask.insets = new Insets(0, 0, 5, 5);
 		gbc_btnUpdateTask.gridx = 4;
@@ -170,11 +158,7 @@ public class CreateTask extends JPanel {
 		add(btnUpdateTask, gbc_btnUpdateTask);
 		
 		JButton btnDeleteTask = new JButton("Excluir");
-		btnDeleteTask.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				actionDelete();
-			}
-		});
+		btnDeleteTask.addActionListener(this);
 		GridBagConstraints gbc_btnDeleteTask = new GridBagConstraints();
 		gbc_btnDeleteTask.insets = new Insets(0, 0, 5, 5);
 		gbc_btnDeleteTask.gridx = 5;
@@ -182,10 +166,7 @@ public class CreateTask extends JPanel {
 		add(btnDeleteTask, gbc_btnDeleteTask);
 		
 		JButton btnCreateReminder = new JButton("Criar/editar lembrete");
-		btnCreateReminder.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
+		btnCreateReminder.addActionListener(this);
 		GridBagConstraints gbc_btnCreateReminder = new GridBagConstraints();
 		gbc_btnCreateReminder.gridwidth = 2;
 		gbc_btnCreateReminder.insets = new Insets(0, 0, 5, 5);
@@ -229,6 +210,34 @@ public class CreateTask extends JPanel {
 		//Pegar categorias do combo box e passar para lista dentro de produto
 		
 		//mandar para db product
+	}
+	
+	void actionCreateReminder() {
+		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		if(arg0.getSource()==btnCreateTask) {
+			actionCreateTask();
+		}else {
+			if(arg0.getSource()==btnSearchTask) {
+				actionSearch();
+			}else {
+				if(arg0.getSource()==btnUpdateTask) {
+					actionUpdate();
+				}else {
+					if(arg0.getSource()==btnDeleteTask) {
+						actionDelete();
+					}else {
+						if(arg0.getSource()==btnCreateReminder) {
+							actionCreateReminder();
+						}
+					}
+				}
+			}
+		}
 	}
 	
 }

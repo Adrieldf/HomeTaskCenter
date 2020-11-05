@@ -1,21 +1,23 @@
 package view;
 
-import javax.swing.JPanel;
-import java.awt.GridBagLayout;
-import javax.swing.JLabel;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
 import java.awt.Font;
-import javax.swing.JTable;
-import javax.swing.JButton;
-import javax.swing.JTextField;
-import javax.swing.JCheckBox;
-import java.awt.event.ActionListener;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class FamilyRegistration extends JPanel {
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+
+public class FamilyRegistration extends JPanel implements ActionListener {
 	private JTable tabFamily;
 	private JTextField tfName;
+	private JButton btnInsert,btnDelete;
 	public FamilyRegistration() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{30, 100, 100, 30, 30, 30, 100, 100, 30, 0};
@@ -87,12 +89,8 @@ public class FamilyRegistration extends JPanel {
 		gbc_chckbxAdmin.gridy = 4;
 		add(chckbxAdmin, gbc_chckbxAdmin);
 		
-		JButton btnInsert = new JButton("Inserir");
-		btnInsert.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				actionInsert();
-			}
-		});
+		btnInsert = new JButton("Inserir");
+		btnInsert.addActionListener(this);
 		GridBagConstraints gbc_btnInsert = new GridBagConstraints();
 		gbc_btnInsert.gridwidth = 2;
 		gbc_btnInsert.insets = new Insets(0, 0, 5, 5);
@@ -100,12 +98,8 @@ public class FamilyRegistration extends JPanel {
 		gbc_btnInsert.gridy = 6;
 		add(btnInsert, gbc_btnInsert);
 		
-		JButton btnDelete = new JButton("Excluir\r\n");
-		btnDelete.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				actionDelete();
-			}
-		});
+		btnDelete = new JButton("Excluir\r\n");
+		btnDelete.addActionListener(this);
 		GridBagConstraints gbc_btnDelete = new GridBagConstraints();
 		gbc_btnDelete.gridwidth = 2;
 		gbc_btnDelete.insets = new Insets(0, 0, 5, 5);
@@ -122,6 +116,19 @@ public class FamilyRegistration extends JPanel {
 		//Pegar categorias do combo box e passar para lista dentro de produto
 		
 		//mandar para db product
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		if(arg0.getSource()==btnInsert) {
+			actionInsert();
+		}else {
+			if(arg0.getSource()==btnDelete) {
+				actionDelete();
+			}
+		}
+		
 	}
 
 }
