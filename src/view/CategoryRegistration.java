@@ -4,9 +4,9 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -18,8 +18,6 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import dao.CategoryDAO;
-import dao.DAOFactory;
-import database.PostgresqlDBFactory;
 import model.Category;
 import view.tableModel.CategoryTableModel;
 
@@ -28,6 +26,10 @@ public class CategoryRegistration extends JPanel implements ActionListener{
 	private JTable table;
 	private JTextField tfName;
 	private JButton btnNewCategorie,btnDelete;
+	private JLabel lbTitle,lbCategories,lbName;
+	
+	private Integer selected;
+	
 	public CategoryRegistration() {
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -37,7 +39,7 @@ public class CategoryRegistration extends JPanel implements ActionListener{
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
-		Label lbTitle = new Label("Criar/editar categoria");
+		lbTitle = new JLabel("Criar/editar categoria");
 		lbTitle.setFont(new Font("Tahoma", Font.BOLD, 17));
 		GridBagConstraints gbc_lbTitle = new GridBagConstraints();
 		gbc_lbTitle.gridwidth = 7;
@@ -46,7 +48,7 @@ public class CategoryRegistration extends JPanel implements ActionListener{
 		gbc_lbTitle.gridy = 0;
 		add(lbTitle, gbc_lbTitle);
 		
-		JLabel lbCategories = new JLabel("Categorias");
+		lbCategories = new JLabel("Categorias");
 		lbCategories.setFont(new Font("Tahoma", Font.BOLD, 11));
 		GridBagConstraints gbc_lbCategories = new GridBagConstraints();
 		gbc_lbCategories.gridwidth = 2;
@@ -55,7 +57,7 @@ public class CategoryRegistration extends JPanel implements ActionListener{
 		gbc_lbCategories.gridy = 2;
 		add(lbCategories, gbc_lbCategories);
 		
-		JLabel lbName = new JLabel("Nome");
+		lbName = new JLabel("Nome");
 		lbName.setFont(new Font("Tahoma", Font.BOLD, 11));
 		GridBagConstraints gbc_lbName = new GridBagConstraints();
 		gbc_lbName.insets = new Insets(0, 0, 5, 5);
@@ -83,7 +85,7 @@ public class CategoryRegistration extends JPanel implements ActionListener{
 		ListSelectionModel selectionModel = table.getSelectionModel();
 		selectionModel.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
-				//acao
+				actionKeepSelected();
 			}
 		});
 		
@@ -111,29 +113,23 @@ public class CategoryRegistration extends JPanel implements ActionListener{
 		gbc_btnDelete.gridy = 7;
 		add(btnDelete, gbc_btnDelete);
 	}
+	
+	void actionKeepSelected() {
+		selected = table.getSelectedRow();
+		//System.out.println(selected); //teste
+	}
 
 	void actionNewCategorie(){
 		Category newCategory = new Category();
 		newCategory.setName(tfName.getText());
-		DAOFactory catFact = new PostgresqlDBFactory();
-		CategoryDAO catDAO = catFact.getCategoryDAO();
+		CategoryDAO catDAO = InitialPage.getInstance().getDaoFactory().getCategoryDAO();
 		catDAO.insert(newCategory);
 	}
 	
 	void actionDelete(){
-		
-		
-		//troquei mas nao sei como chamar aqui ainda
-		
-		//table tem nomeDaTabela.getSelectedRow(); ou  nomeDaTabela.getValueAt(linha,coluna); 
-		
-		
-		
-		
-		DAOFactory catFact = new PostgresqlDBFactory();
-		CategoryDAO catDAO = catFact.getCategoryDAO();
+		CategoryDAO catDAO = InitialPage.getInstance().getDaoFactory().getCategoryDAO();
 		//catDAO.remove();
-		
+		//agora tem o selected.........
 		
 		//model tem .remove();
 		

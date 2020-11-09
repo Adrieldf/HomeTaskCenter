@@ -13,16 +13,15 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import dao.DAOFactory;
 import dao.UserDAO;
-import database.PostgresqlDBFactory;
-import database.PostgresqlUserDB;
 import model.User;
 
-public class LoginPage extends JPanel {
-	private JTextField tfName;
-	private JTextField tfPassword;
+public class LoginPage extends JPanel implements ActionListener{
+	private JTextField tfName, tfPassword;
 	private boolean valid;
+	private JLabel lbTitle,lbName,lbPassword;
+	private JButton btnLogin, btnCancel;
+	
 	public LoginPage() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{30, 30, 30, 100, 100, 30, 0};
@@ -31,7 +30,7 @@ public class LoginPage extends JPanel {
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
-		JLabel lbTitle = new JLabel("Login");
+		lbTitle = new JLabel("Login");
 		lbTitle.setFont(new Font("Tahoma", Font.BOLD, 17));
 		GridBagConstraints gbc_lbTitle = new GridBagConstraints();
 		gbc_lbTitle.gridwidth = 6;
@@ -40,7 +39,7 @@ public class LoginPage extends JPanel {
 		gbc_lbTitle.gridy = 0;
 		add(lbTitle, gbc_lbTitle);
 		
-		JLabel lbName = new JLabel("Nome");
+		lbName = new JLabel("Nome");
 		lbName.setFont(new Font("Tahoma", Font.BOLD, 11));
 		GridBagConstraints gbc_lbName = new GridBagConstraints();
 		gbc_lbName.insets = new Insets(0, 0, 5, 5);
@@ -58,7 +57,7 @@ public class LoginPage extends JPanel {
 		add(tfName, gbc_tfName);
 		tfName.setColumns(10);
 		
-		JLabel lbPassword = new JLabel("Senha");
+		lbPassword = new JLabel("Senha");
 		lbPassword.setFont(new Font("Tahoma", Font.BOLD, 11));
 		GridBagConstraints gbc_lbPassword = new GridBagConstraints();
 		gbc_lbPassword.insets = new Insets(0, 0, 5, 5);
@@ -77,12 +76,8 @@ public class LoginPage extends JPanel {
 		add(tfPassword, gbc_tfPassword);
 		tfPassword.setColumns(10);
 		
-		JButton btnLogin = new JButton("Login");
-		btnLogin.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				actionLogin();
-			}
-		});
+		btnLogin = new JButton("Login");
+		btnLogin.addActionListener(this);
 		GridBagConstraints gbc_btnLogin = new GridBagConstraints();
 		gbc_btnLogin.gridwidth = 2;
 		gbc_btnLogin.insets = new Insets(0, 0, 5, 5);
@@ -90,12 +85,8 @@ public class LoginPage extends JPanel {
 		gbc_btnLogin.gridy = 6;
 		add(btnLogin, gbc_btnLogin);
 		
-		JButton btnCancel = new JButton("Cancelar");
-		btnCancel.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				actionCancel();
-			}
-		});
+		btnCancel = new JButton("Cancelar");
+		btnCancel.addActionListener(this);
 		GridBagConstraints gbc_btnCancel = new GridBagConstraints();
 		gbc_btnCancel.anchor = GridBagConstraints.EAST;
 		gbc_btnCancel.insets = new Insets(0, 0, 5, 5);
@@ -105,15 +96,11 @@ public class LoginPage extends JPanel {
 	}
 
 	void actionLogin() {
-		
 		User newUser = new User();
 		newUser.setName(tfName.getText());
 		newUser.setName(tfPassword.getText());
-		
-		DAOFactory userFact = new PostgresqlDBFactory();
-		UserDAO usDAO = userFact.getUserDAO();
+		UserDAO usDAO = InitialPage.getInstance().getDaoFactory().getUserDAO();
 		valid = usDAO.validateUser(newUser);
-		
 		if(valid) {
 			System.out.println("Usuario Validado");
 		} else {
@@ -125,6 +112,19 @@ public class LoginPage extends JPanel {
 	void actionCancel() {
 		JInternalFrame jif = (JInternalFrame) this.getParent();
 		jif.dispose();
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		if(arg0.getSource()==btnLogin) {
+			actionLogin();
+		}else {
+			if(arg0.getSource()==btnCancel){
+				actionCancel();
+			}
+		}
+			
 	}
 	
 }

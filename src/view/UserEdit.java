@@ -13,15 +13,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import dao.DAOFactory;
 import dao.UserDAO;
-import database.PostgresqlDBFactory;
 import model.User;
 
-public class UserEdit extends JPanel {
+public class UserEdit extends JPanel implements ActionListener {
 	private JTextField textField;
 	private JTextField textField_1;
-	
+	private JLabel lblTitle,lblName,lblPassword;
+	private JButton btnCreateUser,btnSearch,btnUpdate;
 	public UserEdit() {
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -31,7 +30,7 @@ public class UserEdit extends JPanel {
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
-		JLabel lblTitle = new JLabel("Criar/editar usu\u00E1rio");
+		lblTitle = new JLabel("Criar/editar usu\u00E1rio");
 		lblTitle.setFont(new Font("Tahoma", Font.BOLD, 17));
 		GridBagConstraints gbc_lblTitle = new GridBagConstraints();
 		gbc_lblTitle.gridwidth = 7;
@@ -40,7 +39,7 @@ public class UserEdit extends JPanel {
 		gbc_lblTitle.gridy = 0;
 		add(lblTitle, gbc_lblTitle);
 		
-		JLabel lblName = new JLabel("Nome");
+		lblName = new JLabel("Nome");
 		lblName.setFont(new Font("Tahoma", Font.BOLD, 11));
 		GridBagConstraints gbc_lblName = new GridBagConstraints();
 		gbc_lblName.insets = new Insets(0, 0, 5, 5);
@@ -58,7 +57,7 @@ public class UserEdit extends JPanel {
 		add(textField, gbc_textField);
 		textField.setColumns(10);
 		
-		JLabel lblPassword = new JLabel("Senha");
+		lblPassword = new JLabel("Senha");
 		lblPassword.setFont(new Font("Tahoma", Font.BOLD, 11));
 		GridBagConstraints gbc_lblPassword = new GridBagConstraints();
 		gbc_lblPassword.insets = new Insets(0, 0, 5, 5);
@@ -76,25 +75,17 @@ public class UserEdit extends JPanel {
 		add(textField_1, gbc_textField_1);
 		textField_1.setColumns(10);
 		
-		JButton btnCreateUser = new JButton("Criar usu\u00E1rio");
+		btnCreateUser = new JButton("Criar usu\u00E1rio");
 		btnCreateUser.setForeground(Color.BLACK);
-		btnCreateUser.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				actionCreateUser();
-			}
-		});
+		btnCreateUser.addActionListener(this);
 		GridBagConstraints gbc_btnCreateUser = new GridBagConstraints();
 		gbc_btnCreateUser.insets = new Insets(0, 0, 5, 5);
 		gbc_btnCreateUser.gridx = 3;
 		gbc_btnCreateUser.gridy = 6;
 		add(btnCreateUser, gbc_btnCreateUser);
 		
-		JButton btnSearch = new JButton("Buscar");
-		btnSearch.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				actionSearch();
-			}
-		});
+		btnSearch = new JButton("Buscar");
+		btnSearch.addActionListener(this);
 		GridBagConstraints gbc_btnSearch = new GridBagConstraints();
 		gbc_btnSearch.anchor = GridBagConstraints.EAST;
 		gbc_btnSearch.insets = new Insets(0, 0, 5, 5);
@@ -102,12 +93,8 @@ public class UserEdit extends JPanel {
 		gbc_btnSearch.gridy = 6;
 		add(btnSearch, gbc_btnSearch);
 		
-		JButton btnUpdate = new JButton("Alterar");
-		btnUpdate.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				actionUpdate();
-			}
-		});
+		btnUpdate = new JButton("Alterar");
+		btnUpdate.addActionListener(this);
 		GridBagConstraints gbc_btnUpdate = new GridBagConstraints();
 		gbc_btnUpdate.insets = new Insets(0, 0, 5, 5);
 		gbc_btnUpdate.gridx = 5;
@@ -121,14 +108,12 @@ public class UserEdit extends JPanel {
 		User newUser = new User();
 		newUser.setName(textField.getText());
 		newUser.setPassword(textField_1.getText());
-		DAOFactory userFact = new PostgresqlDBFactory();
-		UserDAO userDB = userFact.getUserDAO();
+		UserDAO userDB = InitialPage.getInstance().getDaoFactory().getUserDAO();
 		userDB.insert(newUser);
 	}
 	
 	void actionSearch() {
-		DAOFactory userFact = new PostgresqlDBFactory();
-		UserDAO userDB = userFact.getUserDAO();
+		UserDAO userDB = InitialPage.getInstance().getDaoFactory().getUserDAO();
 		User user1 = userDB.getByName(textField.getText());
 		textField.setText(user1.getName());
 		textField_1.setText(user1.getPassword());
@@ -136,10 +121,26 @@ public class UserEdit extends JPanel {
 
 	void actionUpdate() {
 		User newUser = new User();
-		DAOFactory userFact = new PostgresqlDBFactory();
-		UserDAO userDB = userFact.getUserDAO();
+		UserDAO userDB = InitialPage.getInstance().getDaoFactory().getUserDAO();
 		newUser.setName(textField.getText());
 		newUser.setPassword(textField_1.getText());
 		userDB.edit(newUser);
+	}
+
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		if(arg0.getSource()==btnCreateUser) {
+			actionCreateUser();
+		} else {
+			if(arg0.getSource()==btnSearch) {
+				actionSearch();
+			} else {
+				if(arg0.getSource()==btnUpdate) {
+					actionUpdate();
+				}
+			}
+		}
 	}
 }

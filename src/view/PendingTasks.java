@@ -19,6 +19,7 @@ public class PendingTasks extends JPanel implements ActionListener{
 	private JDesktopPane desktopPane;
 	
 	private JButton btnCreateTask;
+	private JLabel lbTitle;
 	
 	public PendingTasks(InitialPage iP) {
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -28,7 +29,7 @@ public class PendingTasks extends JPanel implements ActionListener{
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
-		JLabel lbTitle = new JLabel("Tarefas Pendentes");
+		lbTitle = new JLabel("Tarefas Pendentes");
 		lbTitle.setFont(new Font("Tahoma", Font.BOLD, 17));
 		GridBagConstraints gbc_lbTitle = new GridBagConstraints();
 		gbc_lbTitle.gridwidth = 15;

@@ -18,6 +18,8 @@ public class FamilyRegistration extends JPanel implements ActionListener {
 	private JTable tabFamily;
 	private JTextField tfName;
 	private JButton btnInsert,btnDelete;
+	private JLabel lbTitle,lbFamily,lblName,lblAdmin;
+	private JCheckBox chckbxAdmin;
 	public FamilyRegistration() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{30, 100, 100, 30, 30, 30, 100, 100, 30, 0};
@@ -26,7 +28,7 @@ public class FamilyRegistration extends JPanel implements ActionListener {
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
-		JLabel lbTitle = new JLabel("Criar/editar fam\u00EDlia");
+		lbTitle = new JLabel("Criar/editar fam\u00EDlia");
 		lbTitle.setFont(new Font("Tahoma", Font.BOLD, 17));
 		GridBagConstraints gbc_lbTitle = new GridBagConstraints();
 		gbc_lbTitle.gridwidth = 9;
@@ -35,7 +37,7 @@ public class FamilyRegistration extends JPanel implements ActionListener {
 		gbc_lbTitle.gridy = 0;
 		add(lbTitle, gbc_lbTitle);
 		
-		JLabel lbFamily = new JLabel("Fam\u00EDlia");
+		lbFamily = new JLabel("Fam\u00EDlia");
 		lbFamily.setFont(new Font("Tahoma", Font.BOLD, 11));
 		GridBagConstraints gbc_lbFamily = new GridBagConstraints();
 		gbc_lbFamily.gridwidth = 2;
@@ -44,7 +46,7 @@ public class FamilyRegistration extends JPanel implements ActionListener {
 		gbc_lbFamily.gridy = 2;
 		add(lbFamily, gbc_lbFamily);
 		
-		JLabel lblName = new JLabel("Nome");
+		lblName = new JLabel("Nome");
 		lblName.setFont(new Font("Tahoma", Font.BOLD, 11));
 		GridBagConstraints gbc_lblName = new GridBagConstraints();
 		gbc_lblName.anchor = GridBagConstraints.WEST;
@@ -73,7 +75,7 @@ public class FamilyRegistration extends JPanel implements ActionListener {
 		gbc_tabFamily.gridy = 3;
 		add(tabFamily, gbc_tabFamily);
 		
-		JLabel lblAdmin = new JLabel("Administrador");
+		lblAdmin = new JLabel("Administrador");
 		lblAdmin.setFont(new Font("Tahoma", Font.BOLD, 11));
 		GridBagConstraints gbc_lblAdmin = new GridBagConstraints();
 		gbc_lblAdmin.insets = new Insets(0, 0, 5, 5);
@@ -81,7 +83,7 @@ public class FamilyRegistration extends JPanel implements ActionListener {
 		gbc_lblAdmin.gridy = 4;
 		add(lblAdmin, gbc_lblAdmin);
 		
-		JCheckBox chckbxAdmin = new JCheckBox("");
+		chckbxAdmin = new JCheckBox("");
 		GridBagConstraints gbc_chckbxAdmin = new GridBagConstraints();
 		gbc_chckbxAdmin.anchor = GridBagConstraints.WEST;
 		gbc_chckbxAdmin.insets = new Insets(0, 0, 5, 5);

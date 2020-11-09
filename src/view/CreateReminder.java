@@ -1,18 +1,26 @@
 package view;
 
-import javax.swing.JPanel;
-import java.awt.GridBagLayout;
-import javax.swing.JLabel;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
 import java.awt.Font;
-import javax.swing.JTextField;
-import javax.swing.JTextArea;
-import javax.swing.JButton;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class CreateReminder extends JPanel {
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+
+import model.Reminder;
+
+public class CreateReminder extends JPanel implements ActionListener {
 	private JTextField tfTask;
 	private JTextField tfTitleReminder;
+	private JTextArea taDescription;
+	private JButton btnCreateReminder, btnUpdateReminder, btnDeleteReminder;
+	private JLabel lblDescription,lblTitleReminder,lblTitle,lblTask;
 	
 	public CreateReminder() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -22,7 +30,7 @@ public class CreateReminder extends JPanel {
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
-		JLabel lblTitle = new JLabel("Criar/editar lembrete");
+		lblTitle = new JLabel("Criar/editar lembrete");
 		lblTitle.setFont(new Font("Tahoma", Font.BOLD, 17));
 		GridBagConstraints gbc_lblTitle = new GridBagConstraints();
 		gbc_lblTitle.gridwidth = 6;
@@ -31,7 +39,7 @@ public class CreateReminder extends JPanel {
 		gbc_lblTitle.gridy = 0;
 		add(lblTitle, gbc_lblTitle);
 		
-		JLabel lblTask = new JLabel("Tarefa vinculada");
+		lblTask = new JLabel("Tarefa vinculada");
 		lblTask.setFont(new Font("Tahoma", Font.BOLD, 11));
 		GridBagConstraints gbc_lblTask = new GridBagConstraints();
 		gbc_lblTask.anchor = GridBagConstraints.WEST;
@@ -52,7 +60,7 @@ public class CreateReminder extends JPanel {
 		add(tfTask, gbc_tfTask);
 		tfTask.setColumns(10);
 		
-		JLabel lblTitleReminder = new JLabel("Nome");
+		lblTitleReminder = new JLabel("Nome");
 		lblTitleReminder.setFont(new Font("Tahoma", Font.BOLD, 11));
 		GridBagConstraints gbc_lblTitleReminder = new GridBagConstraints();
 		gbc_lblTitleReminder.anchor = GridBagConstraints.WEST;
@@ -71,7 +79,7 @@ public class CreateReminder extends JPanel {
 		add(tfTitleReminder, gbc_tfTitleReminder);
 		tfTitleReminder.setColumns(10);
 		
-		JLabel lblDescription = new JLabel("Descri\u00E7\u00E3o");
+		lblDescription = new JLabel("Descri\u00E7\u00E3o");
 		lblDescription.setFont(new Font("Tahoma", Font.BOLD, 11));
 		GridBagConstraints gbc_lblDescription = new GridBagConstraints();
 		gbc_lblDescription.anchor = GridBagConstraints.WEST;
@@ -80,7 +88,7 @@ public class CreateReminder extends JPanel {
 		gbc_lblDescription.gridy = 6;
 		add(lblDescription, gbc_lblDescription);
 		
-		JTextArea taDescription = new JTextArea();
+		taDescription = new JTextArea();
 		GridBagConstraints gbc_taDescription = new GridBagConstraints();
 		gbc_taDescription.gridheight = 3;
 		gbc_taDescription.gridwidth = 3;
@@ -90,14 +98,16 @@ public class CreateReminder extends JPanel {
 		gbc_taDescription.gridy = 6;
 		add(taDescription, gbc_taDescription);
 		
-		JButton btnCreateReminder = new JButton("Criar lembrete");
+		btnCreateReminder = new JButton("Criar lembrete");
+		btnCreateReminder.addActionListener(this);
 		GridBagConstraints gbc_btnCreateReminder = new GridBagConstraints();
 		gbc_btnCreateReminder.insets = new Insets(0, 0, 0, 5);
 		gbc_btnCreateReminder.gridx = 3;
 		gbc_btnCreateReminder.gridy = 10;
 		add(btnCreateReminder, gbc_btnCreateReminder);
 		
-		JButton btnUpdateReminder = new JButton("Alterar");
+		btnUpdateReminder = new JButton("Alterar");
+		btnUpdateReminder.addActionListener(this);
 		GridBagConstraints gbc_btnUpdateReminder = new GridBagConstraints();
 		gbc_btnUpdateReminder.anchor = GridBagConstraints.EAST;
 		gbc_btnUpdateReminder.insets = new Insets(0, 0, 0, 5);
@@ -105,7 +115,8 @@ public class CreateReminder extends JPanel {
 		gbc_btnUpdateReminder.gridy = 10;
 		add(btnUpdateReminder, gbc_btnUpdateReminder);
 		
-		JButton btnDeleteReminder = new JButton("Excluir\r\n");
+		btnDeleteReminder = new JButton("Excluir\r\n");
+		btnDeleteReminder.addActionListener(this);
 		GridBagConstraints gbc_btnDeleteReminder = new GridBagConstraints();
 		gbc_btnDeleteReminder.insets = new Insets(0, 0, 0, 5);
 		gbc_btnDeleteReminder.anchor = GridBagConstraints.EAST;
@@ -113,7 +124,36 @@ public class CreateReminder extends JPanel {
 		gbc_btnDeleteReminder.gridy = 10;
 		add(btnDeleteReminder, gbc_btnDeleteReminder);
 	}
-	
-	
 
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		if(arg0.getSource()==btnCreateReminder) {
+			actionCreateReminder();
+		} else {
+			if(arg0.getSource()==btnUpdateReminder) {
+				actionUpdateReminder();
+			} else {
+				if(arg0.getSource()==btnDeleteReminder) {
+					actionDeleteReminder();
+				}
+			}
+		}
+	}
+	
+	private void actionCreateReminder() {
+		Reminder newReminder = new Reminder();
+		newReminder.setTitle(tfTitleReminder.getText());
+		newReminder.setDescription(taDescription.getText());
+		//newReminder.setDate(t); faltando?
+	}
+
+	private void actionUpdateReminder() {
+		
+	}
+
+	private void actionDeleteReminder() {
+		
+	}
+	
 }

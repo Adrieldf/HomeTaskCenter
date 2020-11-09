@@ -22,7 +22,8 @@ public class CreateTask extends JPanel implements ActionListener {
 	private JTextField tfHour;
 	private JTable tbResponsible;
 	private JButton btnCreateTask,btnSearchTask,btnUpdateTask,btnDeleteTask,btnCreateReminder;
-	
+	private JLabel lblTitle,lblTitleTask,lblDescription,lblResponsible,lblDate,lblHour;
+	private JTextArea taDescription;
 	public CreateTask() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{30, 30, 30, 100, 100, 100, 30, 0};
@@ -31,7 +32,7 @@ public class CreateTask extends JPanel implements ActionListener {
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
-		JLabel lblTitle = new JLabel("Criar/editar tarefa");
+		lblTitle = new JLabel("Criar/editar tarefa");
 		lblTitle.setFont(new Font("Tahoma", Font.BOLD, 17));
 		GridBagConstraints gbc_lblTitle = new GridBagConstraints();
 		gbc_lblTitle.gridwidth = 7;
@@ -40,7 +41,7 @@ public class CreateTask extends JPanel implements ActionListener {
 		gbc_lblTitle.gridy = 0;
 		add(lblTitle, gbc_lblTitle);
 		
-		JLabel lblTitleTask = new JLabel("T\u00EDtulo\r\n");
+		lblTitleTask = new JLabel("T\u00EDtulo\r\n");
 		lblTitleTask.setFont(new Font("Tahoma", Font.BOLD, 11));
 		GridBagConstraints gbc_lblTitleTask = new GridBagConstraints();
 		gbc_lblTitleTask.anchor = GridBagConstraints.WEST;
@@ -59,7 +60,7 @@ public class CreateTask extends JPanel implements ActionListener {
 		add(tfTitleTask, gbc_tfTitleTask);
 		tfTitleTask.setColumns(10);
 		
-		JLabel lblDescription = new JLabel("Descri\u00E7\u00E3o\r\n");
+		lblDescription = new JLabel("Descri\u00E7\u00E3o\r\n");
 		lblDescription.setFont(new Font("Tahoma", Font.BOLD, 11));
 		GridBagConstraints gbc_lblDescription = new GridBagConstraints();
 		gbc_lblDescription.gridheight = 3;
@@ -69,7 +70,7 @@ public class CreateTask extends JPanel implements ActionListener {
 		gbc_lblDescription.gridy = 4;
 		add(lblDescription, gbc_lblDescription);
 		
-		JTextArea taDescription = new JTextArea();
+		taDescription = new JTextArea();
 		GridBagConstraints gbc_taDescription = new GridBagConstraints();
 		gbc_taDescription.gridheight = 3;
 		gbc_taDescription.gridwidth = 3;
@@ -79,7 +80,7 @@ public class CreateTask extends JPanel implements ActionListener {
 		gbc_taDescription.gridy = 4;
 		add(taDescription, gbc_taDescription);
 		
-		JLabel lblResponsible = new JLabel("Respons\u00E1vel (s)");
+		lblResponsible = new JLabel("Respons\u00E1vel (s)");
 		lblResponsible.setFont(new Font("Tahoma", Font.BOLD, 11));
 		GridBagConstraints gbc_lblResponsible = new GridBagConstraints();
 		gbc_lblResponsible.gridheight = 2;
@@ -98,7 +99,7 @@ public class CreateTask extends JPanel implements ActionListener {
 		gbc_tbResponsible.gridy = 8;
 		add(tbResponsible, gbc_tbResponsible);
 		
-		JLabel lblDate = new JLabel("Data");
+		lblDate = new JLabel("Data");
 		lblDate.setFont(new Font("Tahoma", Font.BOLD, 11));
 		GridBagConstraints gbc_lblDate = new GridBagConstraints();
 		gbc_lblDate.anchor = GridBagConstraints.WEST;
@@ -116,7 +117,7 @@ public class CreateTask extends JPanel implements ActionListener {
 		add(tfDate, gbc_tfDate);
 		tfDate.setColumns(10);
 		
-		JLabel lblHour = new JLabel("Hora");
+		lblHour = new JLabel("Hora");
 		lblHour.setFont(new Font("Tahoma", Font.BOLD, 11));
 		GridBagConstraints gbc_lblHour = new GridBagConstraints();
 		gbc_lblHour.insets = new Insets(0, 0, 5, 5);
@@ -133,7 +134,7 @@ public class CreateTask extends JPanel implements ActionListener {
 		add(tfHour, gbc_tfHour);
 		tfHour.setColumns(10);
 		
-		JButton btnCreateTask = new JButton("Criar tarefa");
+		btnCreateTask = new JButton("Criar tarefa");
 		btnCreateTask.addActionListener(this);
 		GridBagConstraints gbc_btnCreateTask = new GridBagConstraints();
 		gbc_btnCreateTask.insets = new Insets(0, 0, 5, 5);
@@ -141,7 +142,7 @@ public class CreateTask extends JPanel implements ActionListener {
 		gbc_btnCreateTask.gridy = 14;
 		add(btnCreateTask, gbc_btnCreateTask);
 		
-		JButton btnSearchTask = new JButton("Buscar");
+		btnSearchTask = new JButton("Buscar");
 		btnSearchTask.addActionListener(this);
 		GridBagConstraints gbc_btnSearchTask = new GridBagConstraints();
 		gbc_btnSearchTask.insets = new Insets(0, 0, 5, 5);
@@ -149,7 +150,7 @@ public class CreateTask extends JPanel implements ActionListener {
 		gbc_btnSearchTask.gridy = 14;
 		add(btnSearchTask, gbc_btnSearchTask);
 		
-		JButton btnUpdateTask = new JButton("Alterar");
+		btnUpdateTask = new JButton("Alterar");
 		btnUpdateTask.addActionListener(this);
 		GridBagConstraints gbc_btnUpdateTask = new GridBagConstraints();
 		gbc_btnUpdateTask.insets = new Insets(0, 0, 5, 5);
@@ -157,7 +158,7 @@ public class CreateTask extends JPanel implements ActionListener {
 		gbc_btnUpdateTask.gridy = 14;
 		add(btnUpdateTask, gbc_btnUpdateTask);
 		
-		JButton btnDeleteTask = new JButton("Excluir");
+		btnDeleteTask = new JButton("Excluir");
 		btnDeleteTask.addActionListener(this);
 		GridBagConstraints gbc_btnDeleteTask = new GridBagConstraints();
 		gbc_btnDeleteTask.insets = new Insets(0, 0, 5, 5);
@@ -165,7 +166,7 @@ public class CreateTask extends JPanel implements ActionListener {
 		gbc_btnDeleteTask.gridy = 14;
 		add(btnDeleteTask, gbc_btnDeleteTask);
 		
-		JButton btnCreateReminder = new JButton("Criar/editar lembrete");
+		btnCreateReminder = new JButton("Criar/editar lembrete");
 		btnCreateReminder.addActionListener(this);
 		GridBagConstraints gbc_btnCreateReminder = new GridBagConstraints();
 		gbc_btnCreateReminder.gridwidth = 2;
@@ -178,15 +179,11 @@ public class CreateTask extends JPanel implements ActionListener {
 	void actionCreateTask() {
 		Task newTask= new Task();
 		newTask.setName(tfTitleTask.getText());
-		/*newTask.setDescription(description);
+		newTask.setDescription(taDescription.getText());
 		newTask.setCompleted(false);
-		newTask.setResponsible(responsible);
-		
-
-		private JTextField tfDate;
-		private JTextField tfHour;
-		
-		
+		newTask.setResponsible(tbResponsible.get);
+		newTask.
+		/*
 		trocar para task*
 		CategoryDAO catDAO = new PostgresqlCategoryDB();
 		

@@ -22,6 +22,9 @@ import model.Product;
 public class CreateItems extends JPanel {
 	private JTextField tfName;
 	private JTable tabCategory;
+	private JLabel lblTitle, lbName, lblCategorie;
+	private JButton btnCreateItem;
+	
 	public CreateItems() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{30, 30, 30, 100, 100, 30, 0};
@@ -30,7 +33,7 @@ public class CreateItems extends JPanel {
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
-		JLabel lblTitle = new JLabel("Criar item");
+		lblTitle = new JLabel("Criar item");
 		lblTitle.setFont(new Font("Tahoma", Font.BOLD, 17));
 		GridBagConstraints gbc_lblTitle = new GridBagConstraints();
 		gbc_lblTitle.gridwidth = 5;
@@ -39,7 +42,7 @@ public class CreateItems extends JPanel {
 		gbc_lblTitle.gridy = 0;
 		add(lblTitle, gbc_lblTitle);
 		
-		JLabel lbName = new JLabel("Nome");
+		lbName = new JLabel("Nome");
 		lbName.setFont(new Font("Tahoma", Font.BOLD, 11));
 		GridBagConstraints gbc_lbName = new GridBagConstraints();
 		gbc_lbName.insets = new Insets(0, 0, 5, 5);
@@ -57,7 +60,7 @@ public class CreateItems extends JPanel {
 		add(tfName, gbc_tfName);
 		tfName.setColumns(10);
 		
-		JLabel lblCategorie = new JLabel("Categoria");
+		lblCategorie = new JLabel("Categoria");
 		lblCategorie.setFont(new Font("Tahoma", Font.BOLD, 11));
 		GridBagConstraints gbc_lblCategorie = new GridBagConstraints();
 		gbc_lblCategorie.insets = new Insets(0, 0, 5, 5);
@@ -75,7 +78,7 @@ public class CreateItems extends JPanel {
 		gbc_tabCategory.gridy = 4;
 		add(tabCategory, gbc_tabCategory);
 		
-		JButton btnCreateItem = new JButton("Criar item");
+		btnCreateItem = new JButton("Criar item");
 		btnCreateItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				actionCreateItem();
