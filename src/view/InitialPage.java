@@ -81,13 +81,13 @@ public class InitialPage extends JFrame{
 			public void windowActivated(WindowEvent e) {
 				// TODO Auto-generated method stub
 				super.windowActivated(e);
-				inicial();
+				initial();
 			}
 		});
 	}
 	
-	private void inicial() {
-		showPanelFullScreen(new PendingTasks(null), "Tarefas Pendentes");			
+	private void initial() {
+		showPanelFullScreen(new PendingTasks(), "Tarefas Pendentes");			
 		
 		// TODO: validar se o login foi realizado com sucesso para mostrar as tasks
 		createInternalFrame(new LoginPage(), "Login", 400, 300);
@@ -121,7 +121,7 @@ public class InitialPage extends JFrame{
 		mntmTarefas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 //				showPanelFullScreen(new PendingTasks());
-				createInternalFrame(new PendingTasks(INSTANCE), "Tarefas Pendentes", 800, 600);
+				createInternalFrame(new PendingTasks(), "Tarefas Pendentes", 800, 600);
 			}
 		});
 		mnOptions.add(mntmTarefas);

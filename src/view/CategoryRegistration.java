@@ -124,6 +124,8 @@ public class CategoryRegistration extends JPanel implements ActionListener{
 		newCategory.setName(tfName.getText());
 		CategoryDAO catDAO = InitialPage.getInstance().getDaoFactory().getCategoryDAO();
 		catDAO.insert(newCategory);
+		//table.addCategory(newCategory);
+		//temos um problema
 	}
 	
 	void actionDelete(){
@@ -132,7 +134,6 @@ public class CategoryRegistration extends JPanel implements ActionListener{
 		//agora tem o selected.........
 		
 		//model tem .remove();
-		
 	}
 
 	@Override

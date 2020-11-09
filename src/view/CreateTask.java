@@ -13,6 +13,9 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import model.Task;
 
@@ -24,6 +27,8 @@ public class CreateTask extends JPanel implements ActionListener {
 	private JButton btnCreateTask,btnSearchTask,btnUpdateTask,btnDeleteTask,btnCreateReminder;
 	private JLabel lblTitle,lblTitleTask,lblDescription,lblResponsible,lblDate,lblHour;
 	private JTextArea taDescription;
+	private Integer selected;
+	
 	public CreateTask() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{30, 30, 30, 100, 100, 100, 30, 0};
@@ -90,6 +95,14 @@ public class CreateTask extends JPanel implements ActionListener {
 		add(lblResponsible, gbc_lblResponsible);
 		
 		tbResponsible = new JTable();
+		tbResponsible.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
+		ListSelectionModel selectionModel = tbResponsible.getSelectionModel();
+		selectionModel.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e) {
+				actionKeepSelected();
+			}
+		});
 		GridBagConstraints gbc_tbResponsible = new GridBagConstraints();
 		gbc_tbResponsible.gridheight = 3;
 		gbc_tbResponsible.gridwidth = 3;
@@ -176,23 +189,21 @@ public class CreateTask extends JPanel implements ActionListener {
 		add(btnCreateReminder, gbc_btnCreateReminder);
 	}
 
+	void actionKeepSelected() {
+		selected = tbResponsible.getSelectedRow();
+		//System.out.println(selected); //teste
+	}
 	void actionCreateTask() {
 		Task newTask= new Task();
 		newTask.setName(tfTitleTask.getText());
 		newTask.setDescription(taDescription.getText());
 		newTask.setCompleted(false);
-		newTask.setResponsible(tbResponsible.get);
-		newTask.
+		//newTask.setResponsible();
 		/*
-		trocar para task*
-		CategoryDAO catDAO = new PostgresqlCategoryDB();
-		
+		trocar para task
+		CategoryDAO catDAO = InitialPage.getInstance().getDaoFactory().getCategoryDAO();
 		catDAO.insert(newTask);
-		
-		
-		
 		*/
-		
 	}
 	
 	void actionSearch() {
@@ -210,7 +221,7 @@ public class CreateTask extends JPanel implements ActionListener {
 	}
 	
 	void actionCreateReminder() {
-		
+		InitialPage.getInstance().createInternalFrame(new CreateReminder(), "Criar novo lembrete", 800, 600);
 	}
 
 	@Override

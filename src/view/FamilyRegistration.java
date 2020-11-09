@@ -13,6 +13,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
+import dao.FamilyDAO;
+import model.Family;
 
 public class FamilyRegistration extends JPanel implements ActionListener {
 	private JTable tabFamily;
@@ -20,6 +26,7 @@ public class FamilyRegistration extends JPanel implements ActionListener {
 	private JButton btnInsert,btnDelete;
 	private JLabel lbTitle,lbFamily,lblName,lblAdmin;
 	private JCheckBox chckbxAdmin;
+	private Integer selected;
 	public FamilyRegistration() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{30, 100, 100, 30, 30, 30, 100, 100, 30, 0};
@@ -66,6 +73,15 @@ public class FamilyRegistration extends JPanel implements ActionListener {
 		tfName.setColumns(10);
 		
 		tabFamily = new JTable();
+		tabFamily.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
+		ListSelectionModel selectionModel = tabFamily.getSelectionModel();
+		selectionModel.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e) {
+				actionKeepSelected();
+			}
+		});
+		
 		GridBagConstraints gbc_tabFamily = new GridBagConstraints();
 		gbc_tabFamily.gridheight = 3;
 		gbc_tabFamily.gridwidth = 2;
@@ -84,6 +100,12 @@ public class FamilyRegistration extends JPanel implements ActionListener {
 		add(lblAdmin, gbc_lblAdmin);
 		
 		chckbxAdmin = new JCheckBox("");
+		/*chckbxAdmin.addItemListener(new ItemListener() {    
+             public void itemStateChanged(ItemEvent e) {                 
+                label.setText("C++ Checkbox: "     
+                + (e.getStateChange()==1?"checked":"unchecked"));    
+             }    
+          }); */   
 		GridBagConstraints gbc_chckbxAdmin = new GridBagConstraints();
 		gbc_chckbxAdmin.anchor = GridBagConstraints.WEST;
 		gbc_chckbxAdmin.insets = new Insets(0, 0, 5, 5);
@@ -110,8 +132,19 @@ public class FamilyRegistration extends JPanel implements ActionListener {
 		add(btnDelete, gbc_btnDelete);
 	}
 	
+	void actionKeepSelected() {
+		selected = tabFamily.getSelectedRow();
+		//System.out.println(selected); //teste
+	}
+	
 	void actionInsert() {
+		Family newFamily = new Family();
+		newFamily.setName(tfName.getText());
+		//id acho que é incremental
 		
+		
+		FamilyDAO famDAO = InitialPage.getInstance().getDaoFactory().getFamilyDAO();
+		famDAO.insert(newFamily);
 	}
 	
 	void actionDelete() {
@@ -130,7 +163,25 @@ public class FamilyRegistration extends JPanel implements ActionListener {
 				actionDelete();
 			}
 		}
-		
 	}
-
+/*
+	public void checker(){  //ferrou nao é fixo
+	    float amount=0;  
+	    String msg="";  
+	    if(cb1.isSelected()){  
+	        amount+=100;  
+	        msg="Pizza: 100\n";  
+	    }  
+	    if(cb2.isSelected()){  
+	    	amount+=30;  
+	        msg+="Burger: 30\n";  
+	    }  
+	    if(cb3.isSelected()){  
+	    	amount+=10;  
+	        msg+="Tea: 10\n";  
+	    }  
+	    msg+="-----------------\n";  
+	    JOptionPane.showMessageDialog(this,msg+"Total: "+amount);  
+	}
+	*/
 }

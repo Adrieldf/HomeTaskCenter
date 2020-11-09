@@ -8,20 +8,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
-import dao.DAOFactory;
 import dao.ProductDAO;
-import database.PostgresqlDBFactory;
-import database.PostgresqlProductDB;
 import model.Product;
 
 public class CreateItems extends JPanel {
 	private JTextField tfName;
-	private JTable tabCategory;
+	private JCheckBox chckbxCategory;
 	private JLabel lblTitle, lbName, lblCategorie;
 	private JButton btnCreateItem;
 	
@@ -68,15 +66,21 @@ public class CreateItems extends JPanel {
 		gbc_lblCategorie.gridy = 4;
 		add(lblCategorie, gbc_lblCategorie);
 		
-		tabCategory = new JTable();
-		GridBagConstraints gbc_tabCategory = new GridBagConstraints();
-		gbc_tabCategory.gridwidth = 2;
-		gbc_tabCategory.gridheight = 3;
-		gbc_tabCategory.insets = new Insets(0, 0, 5, 5);
-		gbc_tabCategory.fill = GridBagConstraints.BOTH;
-		gbc_tabCategory.gridx = 3;
-		gbc_tabCategory.gridy = 4;
-		add(tabCategory, gbc_tabCategory);
+		chckbxCategory = new JCheckBox("");
+		/*chckbxAdmin.addItemListener(new ItemListener() {    
+        public void itemStateChanged(ItemEvent e) {                 
+           label.setText("C++ Checkbox: "     
+           + (e.getStateChange()==1?"checked":"unchecked"));    
+        	}    
+     	}); */
+		GridBagConstraints gbc_chckbxCategory = new GridBagConstraints();
+		gbc_chckbxCategory.gridwidth = 2;
+		gbc_chckbxCategory.gridheight = 3;
+		gbc_chckbxCategory.insets = new Insets(0, 0, 5, 5);
+		gbc_chckbxCategory.fill = GridBagConstraints.BOTH;
+		gbc_chckbxCategory.gridx = 3;
+		gbc_chckbxCategory.gridy = 4;
+		add(chckbxCategory, gbc_chckbxCategory);
 		
 		btnCreateItem = new JButton("Criar item");
 		btnCreateItem.addActionListener(new ActionListener() {

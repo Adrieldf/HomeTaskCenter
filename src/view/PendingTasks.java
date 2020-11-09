@@ -21,7 +21,7 @@ public class PendingTasks extends JPanel implements ActionListener{
 	private JButton btnCreateTask;
 	private JLabel lbTitle;
 	
-	public PendingTasks(InitialPage iP) {
+	public PendingTasks() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 0};
 		gridBagLayout.rowHeights = new int[]{0, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 0};
@@ -62,12 +62,12 @@ public class PendingTasks extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
 		if(arg0.getSource()==btnCreateTask) {
-			actionCreateTask(InitialPage.getInstance());
+			actionCreateTask();
 		}
 	}
 	
-	void actionCreateTask(InitialPage initPage) {
-		initPage.createInternalFrame(new CreateTask(), "Criar nova tarefa", 800, 600);
+	void actionCreateTask() {
+		InitialPage.getInstance().createInternalFrame(new CreateTask(), "Criar nova tarefa", 800, 600);
 	}
 
 }
