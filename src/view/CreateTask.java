@@ -248,4 +248,7 @@ public class CreateTask extends JPanel implements ActionListener {
 		}
 	}
 	
+	
+	//tela por enquanto ta checkbox, mas acho que tem q mudar para combobox, pois nao tem limite e varia
+	//e mais um check box
 }

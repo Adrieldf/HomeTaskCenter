@@ -124,7 +124,6 @@ public class LoginPage extends JPanel implements ActionListener{
 				actionCancel();
 			}
 		}
-			
 	}
 	
 }

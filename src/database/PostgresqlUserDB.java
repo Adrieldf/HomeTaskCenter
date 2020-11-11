@@ -168,7 +168,7 @@ public class PostgresqlUserDB implements UserDAO {
 		ResultSet rs = null;
 		boolean validate = false;
 		try {
-			pstmt = conn.prepareStatement("select id, name, password, from user where name = ?");
+			pstmt = conn.prepareStatement("select id, name, password from user where name = ?");
 			pstmt.setString(1, user.getName());
 			rs = pstmt.executeQuery();
 			

@@ -111,4 +111,6 @@ public class CreateItems extends JPanel {
 	}
 	
 
+		///tela ta check box, mas acho que tem mudar pra combobox
+		//e talvez multiplo?
 }

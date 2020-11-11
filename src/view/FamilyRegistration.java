@@ -184,4 +184,8 @@ public class FamilyRegistration extends JPanel implements ActionListener {
 	    JOptionPane.showMessageDialog(this,msg+"Total: "+amount);  
 	}
 	*/
+	
+	
+	//tela da familia uma lista, 1 por vez, e 1 checkbox
+	
 }

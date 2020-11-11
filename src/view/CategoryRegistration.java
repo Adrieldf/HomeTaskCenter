@@ -148,4 +148,8 @@ public class CategoryRegistration extends JPanel implements ActionListener{
 		}
 	}
 	
+	///tela categoria uma lista, seleciona 1 ou mais por vez
+	
+	//outra coisa, agora usa listselectionmodel, que nao ta batendo com tablemodel, oq mudar?
+	
 }
