@@ -20,6 +20,7 @@ import javax.swing.event.ListSelectionListener;
 import dao.CategoryDAO;
 import model.Category;
 import view.tableModel.CategoryTableModel;
+import view.tableModel.SharedListSelectionHandler;
 
 public class CategoryRegistration extends JPanel implements ActionListener{
 	
@@ -78,17 +79,22 @@ public class CategoryRegistration extends JPanel implements ActionListener{
 		btnNewCategorie = new JButton("Criar categoria");
 		btnNewCategorie.addActionListener(this);
 		
+		
 		table = new JTable(new CategoryTableModel());
 		
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
 		ListSelectionModel selectionModel = table.getSelectionModel();
+		//opcao 1, seria direto
 		selectionModel.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
 				actionKeepSelected();
 			}
 		});
-		
+		//opcao 2, por uma classe?
+		//https://docs.oracle.com/javase/tutorial/uiswing/events/listselectionlistener.html
+		selectionModel.addListSelectionListener(new SharedListSelectionHandler());
+	    
 		GridBagConstraints gbc_table = new GridBagConstraints();
 		gbc_table.gridwidth = 2;
 		gbc_table.gridheight = 3;
@@ -116,7 +122,7 @@ public class CategoryRegistration extends JPanel implements ActionListener{
 	
 	void actionKeepSelected() {
 		selected = table.getSelectedRow();
-		//System.out.println(selected); //teste
+		System.out.println(selected);
 	}
 
 	void actionNewCategorie(){
@@ -124,13 +130,15 @@ public class CategoryRegistration extends JPanel implements ActionListener{
 		newCategory.setName(tfName.getText());
 		CategoryDAO catDAO = InitialPage.getInstance().getDaoFactory().getCategoryDAO();
 		catDAO.insert(newCategory);
+		
 		//table.addCategory(newCategory);
 		//temos um problema
 	}
 	
 	void actionDelete(){
 		CategoryDAO catDAO = InitialPage.getInstance().getDaoFactory().getCategoryDAO();
-		//catDAO.remove();
+		table.getComponent(selected);
+		//catDAO.remove(selected);
 		//agora tem o selected.........
 		
 		//model tem .remove();
