@@ -6,6 +6,8 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -17,8 +19,14 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import dao.CategoryDAO;
 import dao.FamilyDAO;
+import dao.UserDAO;
+import model.Category;
 import model.Family;
+import model.User;
+import view.tableModel.CategoryTableModel;
+import view.tableModel.FamilyRegistrationTableModel;
 
 public class FamilyRegistration extends JPanel implements ActionListener {
 	private JTable tabFamily;
@@ -100,12 +108,13 @@ public class FamilyRegistration extends JPanel implements ActionListener {
 		add(lblAdmin, gbc_lblAdmin);
 		
 		chckbxAdmin = new JCheckBox("");
-		/*chckbxAdmin.addItemListener(new ItemListener() {    
-             public void itemStateChanged(ItemEvent e) {                 
-                label.setText("C++ Checkbox: "     
-                + (e.getStateChange()==1?"checked":"unchecked"));    
-             }    
-          }); */   
+		chckbxAdmin.addItemListener(new ItemListener() {    
+			@Override
+			public void itemStateChanged(ItemEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}    
+        });   
 		GridBagConstraints gbc_chckbxAdmin = new GridBagConstraints();
 		gbc_chckbxAdmin.anchor = GridBagConstraints.WEST;
 		gbc_chckbxAdmin.insets = new Insets(0, 0, 5, 5);
@@ -138,19 +147,24 @@ public class FamilyRegistration extends JPanel implements ActionListener {
 	}
 	
 	void actionInsert() {
+		UserDAO userDAO = InitialPage.getInstance().getDaoFactory().getUserDAO();
 		Family newFamily = new Family();
-		newFamily.setName(tfName.getText());
-		//id acho que é incremental
-		
-		
+		User newUser = userDAO.getByName(tfName.getText());
+		FamilyRegistrationTableModel model = (FamilyRegistrationTableModel) tabFamily.getModel();
+		model.addMember(newUser);
 		FamilyDAO famDAO = InitialPage.getInstance().getDaoFactory().getFamilyDAO();
+		newFamily.setMermber(model.getMembers());
 		famDAO.insert(newFamily);
+		model.fireTableDataChanged();
 	}
 	
 	void actionDelete() {
-		//Pegar categorias do combo box e passar para lista dentro de produto
-		
-		//mandar para db product
+		FamilyRegistrationTableModel model = (FamilyRegistrationTableModel) tabFamily.getModel();
+		Family killCategory = (Family)model.getValueAt(selected, 0);
+		FamilyDAO famDAO = InitialPage.getInstance().getDaoFactory().getFamilyDAO();
+		famDAO.remove(killCategory);
+		model.removeMember(selected);
+		model.fireTableDataChanged();
 	}
 
 	@Override
@@ -164,28 +178,7 @@ public class FamilyRegistration extends JPanel implements ActionListener {
 			}
 		}
 	}
-/*
-	public void checker(){  //ferrou nao é fixo
-	    float amount=0;  
-	    String msg="";  
-	    if(cb1.isSelected()){  
-	        amount+=100;  
-	        msg="Pizza: 100\n";  
-	    }  
-	    if(cb2.isSelected()){  
-	    	amount+=30;  
-	        msg+="Burger: 30\n";  
-	    }  
-	    if(cb3.isSelected()){  
-	    	amount+=10;  
-	        msg+="Tea: 10\n";  
-	    }  
-	    msg+="-----------------\n";  
-	    JOptionPane.showMessageDialog(this,msg+"Total: "+amount);  
-	}
-	*/
 	
-	
-	//tela da familia uma lista, 1 por vez, e 1 checkbox
+	//t1 checkbox
 	
 }
