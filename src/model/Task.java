@@ -4,11 +4,14 @@ import java.util.List;
 
 public class Task {
 
+	private int id;
 	private String name;
 	private	String description;
-	private List<User> responsible;
+	private int idFamily;
+	private int idUser;
 	private boolean completed;
 	
+	private List<User> responsible;
 	private List<Product> products;
 	private List<Occurrence> occurrences;
 	//nao tem data e hora, mas esta sendo inserido na janela
@@ -47,6 +50,30 @@ public class Task {
 
 	public void setCompleted(boolean completed) {
 		this.completed = completed;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public int getIdFamily() {
+		return idFamily;
+	}
+
+	public void setIdFamily(int idFamily) {
+		this.idFamily = idFamily;
+	}
+
+	public int getIdUser() {
+		return idUser;
+	}
+
+	public void setIdUser(int idUser) {
+		this.idUser = idUser;
 	}
 	
 	
