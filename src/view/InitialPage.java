@@ -145,7 +145,7 @@ public class InitialPage extends JFrame{
 		JMenuItem mntmUserEdit = new JMenuItem("Cadastro de Usuários");
 		mntmUserEdit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg1) {
-				createInternalFrame(new UserEdit(), "Criar/editar usuário", 400, 300);
+				createInternalFrame(new UserEdit(), "Criar/editar usuário", 450, 350);
 			}
 		});
 		mnUsers.add(mntmUserEdit);

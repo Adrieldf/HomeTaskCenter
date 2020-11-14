@@ -21,13 +21,15 @@ public class UserEdit extends JPanel implements ActionListener {
 	private JTextField textField_1;
 	private JLabel lblTitle,lblName,lblPassword;
 	private JButton btnCreateUser,btnSearch,btnUpdate;
+	private JLabel lblMail;
+	private JTextField textField_2;
 	public UserEdit() {
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{30, 30, 30, 100, 100, 100, 30, 0};
-		gridBagLayout.rowHeights = new int[]{30, 30, 30, 30, 30, 30, 30, 30, 0};
+		gridBagLayout.rowHeights = new int[]{30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
 		lblTitle = new JLabel("Criar/editar usu\u00E1rio");
@@ -57,12 +59,30 @@ public class UserEdit extends JPanel implements ActionListener {
 		add(textField, gbc_textField);
 		textField.setColumns(10);
 		
+		lblMail = new JLabel("E-mail");
+		lblMail.setFont(new Font("Tahoma", Font.BOLD, 11));
+		GridBagConstraints gbc_lblMail = new GridBagConstraints();
+		gbc_lblMail.insets = new Insets(0, 0, 5, 5);
+		gbc_lblMail.gridx = 1;
+		gbc_lblMail.gridy = 4;
+		add(lblMail, gbc_lblMail);
+		
+		textField_2 = new JTextField();
+		GridBagConstraints gbc_textField_2 = new GridBagConstraints();
+		gbc_textField_2.gridwidth = 3;
+		gbc_textField_2.insets = new Insets(0, 0, 5, 5);
+		gbc_textField_2.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textField_2.gridx = 3;
+		gbc_textField_2.gridy = 4;
+		add(textField_2, gbc_textField_2);
+		textField_2.setColumns(10);
+		
 		lblPassword = new JLabel("Senha");
 		lblPassword.setFont(new Font("Tahoma", Font.BOLD, 11));
 		GridBagConstraints gbc_lblPassword = new GridBagConstraints();
 		gbc_lblPassword.insets = new Insets(0, 0, 5, 5);
 		gbc_lblPassword.gridx = 1;
-		gbc_lblPassword.gridy = 4;
+		gbc_lblPassword.gridy = 6;
 		add(lblPassword, gbc_lblPassword);
 		
 		textField_1 = new JTextField();
@@ -71,7 +91,7 @@ public class UserEdit extends JPanel implements ActionListener {
 		gbc_textField_1.insets = new Insets(0, 0, 5, 5);
 		gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textField_1.gridx = 3;
-		gbc_textField_1.gridy = 4;
+		gbc_textField_1.gridy = 6;
 		add(textField_1, gbc_textField_1);
 		textField_1.setColumns(10);
 		
@@ -81,7 +101,7 @@ public class UserEdit extends JPanel implements ActionListener {
 		GridBagConstraints gbc_btnCreateUser = new GridBagConstraints();
 		gbc_btnCreateUser.insets = new Insets(0, 0, 5, 5);
 		gbc_btnCreateUser.gridx = 3;
-		gbc_btnCreateUser.gridy = 6;
+		gbc_btnCreateUser.gridy = 8;
 		add(btnCreateUser, gbc_btnCreateUser);
 		
 		btnSearch = new JButton("Buscar");
@@ -90,7 +110,7 @@ public class UserEdit extends JPanel implements ActionListener {
 		gbc_btnSearch.anchor = GridBagConstraints.EAST;
 		gbc_btnSearch.insets = new Insets(0, 0, 5, 5);
 		gbc_btnSearch.gridx = 4;
-		gbc_btnSearch.gridy = 6;
+		gbc_btnSearch.gridy = 8;
 		add(btnSearch, gbc_btnSearch);
 		
 		btnUpdate = new JButton("Alterar");
@@ -98,7 +118,7 @@ public class UserEdit extends JPanel implements ActionListener {
 		GridBagConstraints gbc_btnUpdate = new GridBagConstraints();
 		gbc_btnUpdate.insets = new Insets(0, 0, 5, 5);
 		gbc_btnUpdate.gridx = 5;
-		gbc_btnUpdate.gridy = 6;
+		gbc_btnUpdate.gridy = 8;
 		add(btnUpdate, gbc_btnUpdate);
 		
 	}

@@ -1,5 +1,6 @@
 package test;
 
+import model.SendMail;
 import java.util.Properties;
 import javax.mail.Address;
 import javax.mail.Message;
@@ -10,8 +11,10 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-public class TestEmail {
+public class TestMail {
 	
+	
+	// Código correto
 	public static void main(String[] args) {
 		
 	    Properties props = new Properties();
@@ -24,15 +27,14 @@ public class TestEmail {
 	    props.put("mail.smtp.port", "465");
 
 	    Session session = Session.getDefaultInstance(props,
-	      new javax.mail.Authenticator() {
-	           protected PasswordAuthentication getPasswordAuthentication()
-	           {
-	        	   
-	        	   	// TODO mudar e-mail e senha aqui 
-	                 return new PasswordAuthentication("seuemail@gmail.com",
-	                 "suasenha");
-	           }
-	      });
+    		
+    		new javax.mail.Authenticator() {
+	    	
+	    		protected PasswordAuthentication getPasswordAuthentication() {
+	    			return new PasswordAuthentication("hometaskcenter@gmail.com", "hometask123");
+	    		}
+	      	}
+	    );
 	    
 	    /** Ativa Debug para sessão */
 	    session.setDebug(true);
@@ -41,7 +43,7 @@ public class TestEmail {
 
 	        Message message = new MimeMessage(session);
 	        // TODO mudar e-mail aqui
-	        message.setFrom(new InternetAddress("seuemail@gmail.com"));
+	        message.setFrom(new InternetAddress("hometaskcenter@gmail.com"));
 	        //Remetente
 
 	        Address[] toUser = InternetAddress //Destinatário(s)
@@ -61,5 +63,30 @@ public class TestEmail {
 	          throw new RuntimeException(e);
 	      }
 	    }
+	
+	
+	
+	// Ignorar esse trecho de código 
+//	private static String recipientOne = "emersonajahn@gmail.com";
+//	private static String recipientTwo = "emersonajahn@hotmail.com";
+//	private static String subject = "TestMail";
+//	private static String text = "Testing mail";
+//	private static SendMail mail = new SendMail();
+//	
+//	
+//	
+//	public static void main(String [] args) {
+//		
+//		Test();
+//		System.out.println("chegou aqui");
+//		
+//	}
+//	
+//	private static void Test() {
+//		mail.setRecipients(0, recipientOne);
+//		mail.setRecipients(0, recipientTwo);
+//		mail.setSubject(subject);
+//		mail.setText(text);
+//	}
 
 }
