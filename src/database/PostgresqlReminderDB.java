@@ -105,6 +105,42 @@ public class PostgresqlReminderDB implements ReminderDAO {
 	}
 
 	@Override
+	public int getMaxId(int idFamily, int idTask, int idOccurrence) {
+		int maxId = 0;
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			pstmt = conn.prepareStatement("select MAX (id) from reminder where \"idFamily\" = ? and \"idTask\" = ? and \"idOccurrence\" = ?");
+		
+			pstmt.setInt(1, idFamily);
+			pstmt.setInt(2, idTask);
+			pstmt.setInt(3, idOccurrence);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				maxId = rs.getInt("max");
+				
+			}
+
+		} catch (SQLException se) {
+			System.out.println("Ocorreu um erro : " + se.getMessage());
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+
+		return maxId;
+		
+	}
+	
+	@Override
 	public void insert(Reminder reminder) {
 		if (reminder == null) {
 			return;

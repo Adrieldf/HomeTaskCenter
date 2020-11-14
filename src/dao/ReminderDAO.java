@@ -10,4 +10,5 @@ public interface ReminderDAO {
     void insert(Reminder reminder);
     void remove(Reminder reminder);
     void edit(Reminder reminder);
+	int getMaxId(int idFamily, int idTask, int idOccurrence);
 }

@@ -10,4 +10,5 @@ public interface TaskDAO {
     void insert(Task task);
     void remove(Task task);
     void edit(Task task);
+    int getMaxId(int idFamily);
 }

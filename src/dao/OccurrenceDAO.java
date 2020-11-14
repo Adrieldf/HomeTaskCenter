@@ -11,4 +11,5 @@ public interface OccurrenceDAO {
     void insert(Occurrence occurrence);
     void remove(Occurrence occurrence);
     void edit(Occurrence occurrence);
+	int getMaxId(int idFamily, int idTask);
 }
