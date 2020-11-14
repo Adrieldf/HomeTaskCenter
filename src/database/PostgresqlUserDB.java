@@ -31,10 +31,10 @@ public class PostgresqlUserDB implements UserDAO {
 		List<User> users = new ArrayList<User>();
 		try {
 			stmt = conn.createStatement();
-			rs = stmt.executeQuery("select id, name, password, \"idFamily\" from user order by id");
+			rs = stmt.executeQuery("select id, name, password, \"idFamily\", email from user order by id");
 			
 			while (rs.next()) {
-				users.add(new User(rs.getInt("id"),rs.getString("name"),rs.getString("password"),rs.getInt("idFamily")));
+				users.add(new User(rs.getInt("id"),rs.getString("name"),rs.getString("password"),rs.getInt("idFamily"), rs.getString("email")));
 			}
 			
 		}catch(SQLException ex) {
@@ -58,12 +58,12 @@ public class PostgresqlUserDB implements UserDAO {
 		ResultSet rs = null;
 		User user = new User();
 		try {
-			pstmt = conn.prepareStatement("select id, name, password, \"idFamily\" from user where id = ? and \"idFamily\" = ? order by id");
+			pstmt = conn.prepareStatement("select id, name, password, \"idFamily\", email from user where id = ? and \"idFamily\" = ? order by id");
 			pstmt.setInt(1, id);
 			pstmt.setInt(2, idFamily);
 			rs = pstmt.executeQuery();
 			
-			user = new User(rs.getInt("id"),rs.getString("name"),rs.getString("password"),rs.getInt("idFamily"));
+			user = new User(rs.getInt("id"),rs.getString("name"),rs.getString("password"),rs.getInt("idFamily"), rs.getString("email"));
 		
 			
 		}catch(SQLException ex) {
@@ -89,10 +89,11 @@ public class PostgresqlUserDB implements UserDAO {
 		}
 		PreparedStatement pstmt = null;
 		try {
-			pstmt = conn.prepareStatement("insert into user(name, password) values ( ? , ? )");
+			pstmt = conn.prepareStatement("insert into user(name, password, email) values ( ? , ?, ? )");
 		
 			pstmt.setString(1, user.getName());
 			pstmt.setString(2, user.getPassword());
+			pstmt.setString(3, user.getEmail());
 			pstmt.executeUpdate();
 		}
 		catch(SQLException ex) {
@@ -138,11 +139,12 @@ public class PostgresqlUserDB implements UserDAO {
 		}
 		PreparedStatement pstmt = null;
 		try {
-			pstmt = conn.prepareStatement("update user set name = ?, password = ? where id = ? and \"idFamily\" = ? ");
+			pstmt = conn.prepareStatement("update user set name = ?, password = ?, email = ? where id = ? and \"idFamily\" = ? ");
 			pstmt.setString(1, user.getName());
 			pstmt.setString(2, user.getPassword());
-			pstmt.setInt(3, user.getId());
-			pstmt.setInt(4, user.getIdFamily());
+			pstmt.setString(3, user.getEmail());
+			pstmt.setInt(4, user.getId());
+			pstmt.setInt(5, user.getIdFamily());
 			pstmt.executeUpdate();
 		} catch (SQLException ex) {
 			System.out.println("Ocorreu um erro : " + ex.getMessage());
@@ -168,7 +170,7 @@ public class PostgresqlUserDB implements UserDAO {
 		ResultSet rs = null;
 		boolean validate = false;
 		try {
-			pstmt = conn.prepareStatement("select id, name, password from user where name = ?");
+			pstmt = conn.prepareStatement("select id, name, password, email from user where name = ?");
 			pstmt.setString(1, user.getName());
 			rs = pstmt.executeQuery();
 			
@@ -176,6 +178,7 @@ public class PostgresqlUserDB implements UserDAO {
 			newUser.setId(rs.getInt("id"));
 			newUser.setName(rs.getString("name"));
 			newUser.setPassword(rs.getString("password"));
+			newUser.setEmail(rs.getString("email"));
 			
 			
 			if(user.equals(newUser)) {
@@ -206,11 +209,11 @@ public class PostgresqlUserDB implements UserDAO {
 		ResultSet rs = null;
 		User user = new User();
 		try {
-			pstmt = conn.prepareStatement("select id, name, password, \"idFamily\" from user where name = ? and \"idFamily\" = ? order by id");
+			pstmt = conn.prepareStatement("select id, name, password, \"idFamily\", email from user where name = ? and \"idFamily\" = ? order by id");
 			pstmt.setString(1, name);
 			rs = pstmt.executeQuery();
 			
-			user = new User(rs.getInt("id"),rs.getString("name"),rs.getString("password"),rs.getInt("idFamily"));
+			user = new User(rs.getInt("id"),rs.getString("name"),rs.getString("password"),rs.getInt("idFamily"), rs.getString("email"));
 		
 			
 		}catch(SQLException ex) {
