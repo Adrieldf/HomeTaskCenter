@@ -113,55 +113,59 @@ public class InitialPage extends JFrame{
 	}
 	
 	private void buildMenuOptions(JMenuBar menuBar) {
-		JMenu mnOptions = new JMenu("Op��es");
-		menuBar.add(mnOptions);
 		
-		// Primeira op��o
+		JMenu mnTasks      = new JMenu("Tarefas");
+		JMenu mnUsers      = new JMenu("Usuários");
+		JMenu mnCategories = new JMenu("Categorias");
+//		JMenu mnOptions = new JMenu("Opções");
+		
+		menuBar.add(mnTasks);
+		menuBar.add(mnUsers);
+		menuBar.add(mnCategories);
+//		menuBar.add(mnOptions);
+		
+		// Tarefas
 		JMenuItem mntmTarefas = new JMenuItem("Visualizar Tarefas Pendentes");
 		mntmTarefas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-//				showPanelFullScreen(new PendingTasks());
 				createInternalFrame(new PendingTasks(), "Tarefas Pendentes", 800, 600);
 			}
 		});
-		mnOptions.add(mntmTarefas);
+		mnTasks.add(mntmTarefas);
 		
-		// Segunda op��o
-		JMenuItem mntmUserEdit = new JMenuItem("Criar/editar usu�rio");
-		mntmUserEdit.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg1) {
-				createInternalFrame(new UserEdit(), "Criar/editar usu�rio", 400, 300);
-			}
-		});
-		mnOptions.add(mntmUserEdit);
-		
-		// Terceira op��o
-		JMenuItem mntmCategoryRegistration = new JMenuItem("Criar/editar categoria");
-		mntmCategoryRegistration.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg2) {
-				createInternalFrame(new CategoryRegistration(), "Criar/editar categoria", 600, 600);
-			}
-		});
-		mnOptions.add(mntmCategoryRegistration);
-		
-		// Quarta op��o
-		JMenuItem mntmCreateTask = new JMenuItem("Criar/editar tarefa");
+		JMenuItem mntmCreateTask = new JMenuItem("Cadastro de Tarefas");
 		mntmCreateTask.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg3) {
 				createInternalFrame(new CreateTask(), "Criar/editar tarefa", 500, 550);
 			}
 		});
-		mnOptions.add(mntmCreateTask);
-		
-		// Quinta op��o
-		JMenuItem mntmFamilyRegistration = new JMenuItem("Criar/editar fam�lia");
-		mntmFamilyRegistration.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg4) {
-				createInternalFrame(new FamilyRegistration(), "Criar/editar fam�lia", 600, 400);
+		mnTasks.add(mntmCreateTask);
+
+		// Usuários
+		JMenuItem mntmUserEdit = new JMenuItem("Cadastro de Usuários");
+		mntmUserEdit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg1) {
+				createInternalFrame(new UserEdit(), "Criar/editar usuário", 400, 300);
 			}
 		});
-		mnOptions.add(mntmFamilyRegistration);
+		mnUsers.add(mntmUserEdit);
 		
+		JMenuItem mntmFamilyRegistration = new JMenuItem("Cadastro de Famílias");
+		mntmFamilyRegistration.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg4) {
+				createInternalFrame(new FamilyRegistration(), "Criar/editar família", 600, 400);
+			}
+		});
+		mnUsers.add(mntmFamilyRegistration);
+		
+		// Categorias
+		JMenuItem mntmCategoryRegistration = new JMenuItem("Cadastro de Categorias");
+		mntmCategoryRegistration.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg2) {
+				createInternalFrame(new CategoryRegistration(), "Criar/editar categoria", 600, 600);
+			}
+		});
+		mnCategories.add(mntmCategoryRegistration);		
 	}
 	
 	//abrir janela irma, pelos filhos
@@ -170,7 +174,6 @@ public class InitialPage extends JFrame{
 		final JInternalFrame intFrame = new JInternalFrame(title, false, false, false, false);
 		showPanel(panel, intFrame);
 	}*/
-	
 	
 	protected void showPanelFullScreen(JPanel panel, String title) {
 		final JInternalFrame intFrame = new JInternalFrame(title, false, false, false, false);
