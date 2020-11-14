@@ -107,7 +107,7 @@ public class PostgresqlOccurrenceDB implements OccurrenceDAO {
 		PreparedStatement pstmt = null;
 
 		try {
-			pstmt = conn.prepareStatement("insert into ocurrence (date, hour, \"idFamily\", \"idTask\") values ( ?, ?, ?, ?)");
+			pstmt = conn.prepareStatement("insert into occurrence (date, hour, \"idFamily\", \"idTask\") values ( ?, ?, ?, ?)");
 
 			pstmt.setInt(1, occurrence.getDate());
 			pstmt.setInt(2, occurrence.getHour());
@@ -136,7 +136,7 @@ public class PostgresqlOccurrenceDB implements OccurrenceDAO {
 		PreparedStatement pstmt = null;
 
 		try {
-			pstmt = conn.prepareStatement("delete from ocurrence where id = ? and \"idTask\" = ? and \"idFamily\" = ?");
+			pstmt = conn.prepareStatement("delete from occurrence where id = ? and \"idTask\" = ? and \"idFamily\" = ?");
 			pstmt.setInt(1, occurrence.getId());
 			pstmt.setInt(2, occurrence.getIdTask());
 			pstmt.setInt(3, occurrence.getIdFamily());
@@ -162,7 +162,7 @@ public class PostgresqlOccurrenceDB implements OccurrenceDAO {
 		PreparedStatement pstmt = null;
 
 		try {
-			pstmt = conn.prepareStatement("update ocurrence set date = ?, hour = ? where id = ? and \"idTask\" = ? and \"idFamily\" = ?");
+			pstmt = conn.prepareStatement("update occurrence set date = ?, hour = ? where id = ? and \"idTask\" = ? and \"idFamily\" = ?");
 
 			pstmt.setInt(1, occurrence.getDate());
 			pstmt.setInt(2, occurrence.getHour());
