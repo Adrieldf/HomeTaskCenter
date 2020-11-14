@@ -20,7 +20,7 @@ public class PostgresqlOccurrenceDB implements OccurrenceDAO {
 	}
 	
 	@Override
-	public List<Occurrence> getAll(int idFamily) {
+	public List<Occurrence> getAll( int idTask,int idFamily) {
 		List<Occurrence> occurrences = new ArrayList<Occurrence>();
 
 		PreparedStatement pstmt = null;
@@ -28,8 +28,9 @@ public class PostgresqlOccurrenceDB implements OccurrenceDAO {
 
 		try {
 
-			pstmt = conn.prepareStatement("select * from occurrence where \"idFamily\" = ?");
-			pstmt.setInt(1, idFamily);
+			pstmt = conn.prepareStatement("select * from occurrence where \"idTask\" = ? and \"idFamily\" = ?");
+			pstmt.setInt(1, idTask);
+			pstmt.setInt(2, idFamily);
 			rs = pstmt.executeQuery();
 			
 			while (rs.next()) {
@@ -58,7 +59,7 @@ public class PostgresqlOccurrenceDB implements OccurrenceDAO {
 	}
 
 	@Override
-	public Occurrence getById(int id, int idFamily) {
+	public Occurrence getById(int id, int idTask, int idFamily) {
 		List<Occurrence> occurrences = new ArrayList<Occurrence>();
 
 		PreparedStatement pstmt = null;
@@ -66,9 +67,10 @@ public class PostgresqlOccurrenceDB implements OccurrenceDAO {
 
 		try {
 
-			pstmt = conn.prepareStatement("select * from occurrence where id = ? and \"idFamily\" = ?");
+			pstmt = conn.prepareStatement("select * from occurrence where id = ? and \"idTask\" = ? and \"idFamily\" = ?");
 			pstmt.setInt(1, id);
-			pstmt.setInt(2, idFamily);
+			pstmt.setInt(2, idTask);
+			pstmt.setInt(3, idFamily);
 			rs = pstmt.executeQuery();
 			
 			while (rs.next()) {
@@ -97,8 +99,8 @@ public class PostgresqlOccurrenceDB implements OccurrenceDAO {
 	}
 
 	@Override
-	public void insert(Occurrence ocurrence) {
-		if (ocurrence == null) {
+	public void insert(Occurrence occurrence) {
+		if (occurrence == null) {
 			return;
 		}
 
@@ -107,10 +109,10 @@ public class PostgresqlOccurrenceDB implements OccurrenceDAO {
 		try {
 			pstmt = conn.prepareStatement("insert into ocurrence (date, hour, \"idFamily\", \"idTask\") values ( ?, ?, ?, ?)");
 
-			pstmt.setInt(1, ocurrence.getDate());
-			pstmt.setInt(2, ocurrence.getHour());
-			pstmt.setInt(3, ocurrence.getIdFamily());
-			pstmt.setInt(4, ocurrence.getIdTask());
+			pstmt.setInt(1, occurrence.getDate());
+			pstmt.setInt(2, occurrence.getHour());
+			pstmt.setInt(3, occurrence.getIdFamily());
+			pstmt.setInt(4, occurrence.getIdTask());
 
 			pstmt.executeUpdate();
 
@@ -126,17 +128,18 @@ public class PostgresqlOccurrenceDB implements OccurrenceDAO {
 	}
 
 	@Override
-	public void remove(Occurrence ocurrence) {
-		if (ocurrence == null) {
+	public void remove(Occurrence occurrence) {
+		if (occurrence == null) {
 			return;
 		}
 
 		PreparedStatement pstmt = null;
 
 		try {
-			pstmt = conn.prepareStatement("delete from ocurrence where id = ? and \"idFamily\" = ?");
-			pstmt.setInt(1, ocurrence.getId());
-			pstmt.setInt(2, ocurrence.getIdFamily());
+			pstmt = conn.prepareStatement("delete from ocurrence where id = ? and \"idTask\" = ? and \"idFamily\" = ?");
+			pstmt.setInt(1, occurrence.getId());
+			pstmt.setInt(2, occurrence.getIdTask());
+			pstmt.setInt(3, occurrence.getIdFamily());
 			pstmt.executeUpdate();
 		} catch (SQLException se) {
 			System.out.println("Ocorreu um erro : " + se.getMessage());
@@ -151,20 +154,21 @@ public class PostgresqlOccurrenceDB implements OccurrenceDAO {
 	}
 
 	@Override
-	public void edit(Occurrence ocurrence) {
-		if (ocurrence == null) {
+	public void edit(Occurrence occurrence) {
+		if (occurrence == null) {
 			return;
 		}
 
 		PreparedStatement pstmt = null;
 
 		try {
-			pstmt = conn.prepareStatement("update ocurrence set date = ?, hour = ? where id = ? and \"idFamily\" = ?");
+			pstmt = conn.prepareStatement("update ocurrence set date = ?, hour = ? where id = ? and \"idTask\" = ? and \"idFamily\" = ?");
 
-			pstmt.setInt(1, ocurrence.getDate());
-			pstmt.setInt(2, ocurrence.getHour());
-			pstmt.setInt(3, ocurrence.getId());
-			pstmt.setInt(4, ocurrence.getIdFamily());
+			pstmt.setInt(1, occurrence.getDate());
+			pstmt.setInt(2, occurrence.getHour());
+			pstmt.setInt(3, occurrence.getId());
+			pstmt.setInt(4, occurrence.getIdTask());
+			pstmt.setInt(5, occurrence.getIdFamily());
 
 			pstmt.executeUpdate();
 

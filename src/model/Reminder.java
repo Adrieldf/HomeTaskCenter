@@ -2,17 +2,50 @@ package model;
 
 public class Reminder {
 	
+	private int id;
 	private String title;
 	private String description;
-	private int date;
-	private int hour;
-	
-	private Message message;
+	private int idOccurrence;
+	private int idTask;
+	private int idFamily;
+
 	
 	public Reminder() {
 		
 	}
 		
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public int getIdOccurrence() {
+		return idOccurrence;
+	}
+
+	public void setIdOccurrence(int idOccurrence) {
+		this.idOccurrence = idOccurrence;
+	}
+
+	public int getIdTask() {
+		return idTask;
+	}
+
+	public void setIdTask(int idTask) {
+		this.idTask = idTask;
+	}
+
+	public int getIdFamily() {
+		return idFamily;
+	}
+
+	public void setIdFamily(int idFamily) {
+		this.idFamily = idFamily;
+	}
+
 	public String getTitle() {
 		return title;
 	}
@@ -25,18 +58,7 @@ public class Reminder {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public int getDate() {
-		return date;
-	}
-	public void setDate(int date) {
-		this.date = date;
-	}
-	public int getHour() {
-		return hour;
-	}
-	public void setHour(int hour) {
-		this.hour = hour;
-	}
+	
 	
 	
 	
