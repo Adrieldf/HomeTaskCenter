@@ -3,6 +3,7 @@ package view;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,8 +11,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JTable;
 import javax.swing.JTextField;
 
 import dao.ProductDAO;
@@ -22,9 +23,22 @@ public class CreateItems extends JPanel {
 	private JCheckBox chckbxCategory;
 	private JLabel lblTitle, lbName, lblCategorie;
 	private JButton btnCreateItem;
+	private GridBagLayout gridBagLayout;
+	private GridBagConstraints gbc_chckbxCategory,gbc_btnCreateItem;
+	
+	
+	private GridLayout gridExterno;
+	private JList listAllCategories,listCategories;
+	private JButton btnAdd,btnRemove;
+	private JPanel panelSwitchList;
 	
 	public CreateItems() {
-		GridBagLayout gridBagLayout = new GridBagLayout();
+		
+		
+		
+		
+		
+		gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{30, 30, 30, 100, 100, 30, 0};
 		gridBagLayout.rowHeights = new int[]{30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
@@ -66,14 +80,16 @@ public class CreateItems extends JPanel {
 		gbc_lblCategorie.gridy = 4;
 		add(lblCategorie, gbc_lblCategorie);
 		
+		//substituir
 		chckbxCategory = new JCheckBox("");
-		/*chckbxAdmin.addItemListener(new ItemListener() {    
+		/*
+		chckbxCategory.addItemListener(new ItemListener() {    
         public void itemStateChanged(ItemEvent e) {                 
            label.setText("C++ Checkbox: "     
            + (e.getStateChange()==1?"checked":"unchecked"));    
         	}    
-     	}); */
-		GridBagConstraints gbc_chckbxCategory = new GridBagConstraints();
+     	});*/
+		gbc_chckbxCategory = new GridBagConstraints();
 		gbc_chckbxCategory.gridwidth = 2;
 		gbc_chckbxCategory.gridheight = 3;
 		gbc_chckbxCategory.insets = new Insets(0, 0, 5, 5);
@@ -88,7 +104,7 @@ public class CreateItems extends JPanel {
 				actionCreateItem();
 			}
 		});
-		GridBagConstraints gbc_btnCreateItem = new GridBagConstraints();
+		gbc_btnCreateItem = new GridBagConstraints();
 		gbc_btnCreateItem.gridwidth = 2;
 		gbc_btnCreateItem.insets = new Insets(0, 0, 5, 5);
 		gbc_btnCreateItem.gridx = 3;
@@ -110,7 +126,4 @@ public class CreateItems extends JPanel {
 		podDAO.insert(newProduct);
 	}
 	
-
-		///tela ta check box, mas acho que tem mudar pra combobox
-		//e talvez multiplo?
 }

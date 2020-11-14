@@ -15,7 +15,7 @@ public class FamilyRegistrationTableModel extends AbstractTableModel {
 	
 	//nao lembro pra que serve
 	//vetor de nomes de colunas
-	private static final String names[] = {"Category"};
+	private static final String names[] = {"Family"};
 
 	public FamilyRegistrationTableModel() {
 		this.members = new ArrayList<User>();
@@ -36,6 +36,11 @@ public class FamilyRegistrationTableModel extends AbstractTableModel {
 	public String getColumnName(int number) {
 		return names[number];
 	}
+	
+	public void removeMember(int position) {
+		this.members.remove(position);
+		return;
+	}
 
 	@Override
 	public int getRowCount() {
@@ -45,9 +50,6 @@ public class FamilyRegistrationTableModel extends AbstractTableModel {
 			return 0;
 		}
 	}
-	public void actionPerformed(ActionEvent e) {
-		//actionNewCategorie();
-	}
 
 	@Override
 	public int getColumnCount() {
@@ -56,7 +58,6 @@ public class FamilyRegistrationTableModel extends AbstractTableModel {
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-
 		User member = members.get(rowIndex);
 		return member.getName();
 	}

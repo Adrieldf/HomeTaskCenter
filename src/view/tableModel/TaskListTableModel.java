@@ -35,6 +35,11 @@ public class TaskListTableModel extends AbstractTableModel {
 	public String getColumnName(int number) {
 		return names[number];
 	}
+	
+	public void removeTask(int position) {
+		this.tasks.remove(position);
+		return;
+	}
 
 	@Override
 	public int getRowCount() {
@@ -43,9 +48,6 @@ public class TaskListTableModel extends AbstractTableModel {
 		} else {
 			return 0;
 		}
-	}
-	public void actionPerformed(ActionEvent e) {
-		//actionNewCategorie();
 	}
 
 	@Override

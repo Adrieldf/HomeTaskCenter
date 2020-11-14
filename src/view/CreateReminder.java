@@ -146,6 +146,8 @@ public class CreateReminder extends JPanel implements ActionListener {
 		newReminder.setTitle(tfTitleReminder.getText());
 		newReminder.setDescription(taDescription.getText());
 		//newReminder.setDate(t); faltando?
+		
+		//ReminderDAO faltando
 	}
 
 	private void actionUpdateReminder() {

@@ -20,7 +20,6 @@ import javax.swing.event.ListSelectionListener;
 import dao.CategoryDAO;
 import model.Category;
 import view.tableModel.CategoryTableModel;
-import view.tableModel.SharedListSelectionHandler;
 
 public class CategoryRegistration extends JPanel implements ActionListener{
 	
@@ -83,18 +82,12 @@ public class CategoryRegistration extends JPanel implements ActionListener{
 		table = new JTable(new CategoryTableModel());
 		
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		
 		ListSelectionModel selectionModel = table.getSelectionModel();
-		//opcao 1, seria direto
 		selectionModel.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
 				actionKeepSelected();
 			}
 		});
-		//opcao 2, por uma classe?
-		//https://docs.oracle.com/javase/tutorial/uiswing/events/listselectionlistener.html
-		selectionModel.addListSelectionListener(new SharedListSelectionHandler());
-	    
 		GridBagConstraints gbc_table = new GridBagConstraints();
 		gbc_table.gridwidth = 2;
 		gbc_table.gridheight = 3;
@@ -126,22 +119,22 @@ public class CategoryRegistration extends JPanel implements ActionListener{
 	}
 
 	void actionNewCategorie(){
+		CategoryTableModel model = (CategoryTableModel) table.getModel();
+		CategoryDAO catDAO = InitialPage.getInstance().getDaoFactory().getCategoryDAO();
 		Category newCategory = new Category();
 		newCategory.setName(tfName.getText());
-		CategoryDAO catDAO = InitialPage.getInstance().getDaoFactory().getCategoryDAO();
 		catDAO.insert(newCategory);
-		
-		//table.addCategory(newCategory);
-		//temos um problema
+		model.addCategory(newCategory);
+		model.fireTableDataChanged();
 	}
 	
 	void actionDelete(){
+		CategoryTableModel model = (CategoryTableModel) table.getModel();
+		Category killCategory = (Category)model.getValueAt(selected, 0);
 		CategoryDAO catDAO = InitialPage.getInstance().getDaoFactory().getCategoryDAO();
-		table.getComponent(selected);
-		//catDAO.remove(selected);
-		//agora tem o selected.........
-		
-		//model tem .remove();
+		catDAO.remove(killCategory);
+		model.removeCategory(selected);
+		model.fireTableDataChanged();
 	}
 
 	@Override
@@ -155,9 +148,4 @@ public class CategoryRegistration extends JPanel implements ActionListener{
 			}
 		}
 	}
-	
-	///tela categoria uma lista, seleciona 1 ou mais por vez
-	
-	//outra coisa, agora usa listselectionmodel, que nao ta batendo com tablemodel, oq mudar?
-	
 }

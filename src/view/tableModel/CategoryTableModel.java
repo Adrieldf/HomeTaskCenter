@@ -32,6 +32,11 @@ public class CategoryTableModel extends AbstractTableModel {
 	public String getColumnName(int number) {
 		return names[number];
 	}
+	
+	public void removeCategory(int position) {
+		this.categories.remove(position);
+		return;
+	}
 
 	@Override
 	public int getRowCount() {
@@ -40,9 +45,6 @@ public class CategoryTableModel extends AbstractTableModel {
 		} else {
 			return 0;
 		}
-	}
-	public void actionPerformed(ActionEvent e) {
-		//actionNewCategorie();
 	}
 
 	@Override
@@ -66,4 +68,5 @@ public class CategoryTableModel extends AbstractTableModel {
 		this.fireTableDataChanged();
 	}
 
+	
 }
