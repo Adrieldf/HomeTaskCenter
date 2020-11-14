@@ -1,16 +1,42 @@
 package model;
 
 public class Occurrence {
+	private int id;
+	private int idTask;
+	private int idFamily;
 	//talvez mudar o tipo
 	private int date;
 	private int hour;
 	
-	private Reminder reminder;
 	
 	public Occurrence() {
 		
 	}
 	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public int getIdTask() {
+		return idTask;
+	}
+
+	public void setIdTask(int idTask) {
+		this.idTask = idTask;
+	}
+
+	public int getIdFamily() {
+		return idFamily;
+	}
+
+	public void setIdFamily(int idFamily) {
+		this.idFamily = idFamily;
+	}
+
 	public int getDate() {
 		return date;
 	}
