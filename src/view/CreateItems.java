@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -32,12 +33,22 @@ public class CreateItems extends JPanel {
 	private JButton btnAdd,btnRemove;
 	private JPanel panelSwitchList;
 	
+	private SwitchList switchList;
+	
 	public CreateItems() {
 		
 		
+//		tem que fazer algo assim
+//		this.fundo = new JPanel(new BorderLayout());
+//		
+//		this.listaSelecao = new SwitchList();
+//		this.fundo.add(this.listaSelecao);
+//		
+//		this.getContentPane().add(this.fundo);	
+//		
 		
 		
-		
+
 		gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{30, 30, 30, 100, 100, 30, 0};
 		gridBagLayout.rowHeights = new int[]{30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 0};
@@ -80,7 +91,7 @@ public class CreateItems extends JPanel {
 		gbc_lblCategorie.gridy = 4;
 		add(lblCategorie, gbc_lblCategorie);
 		
-		//substituir
+		//trocar para switchlist
 		chckbxCategory = new JCheckBox("");
 		/*
 		chckbxCategory.addItemListener(new ItemListener() {    
@@ -118,10 +129,7 @@ public class CreateItems extends JPanel {
 		Product newProduct = new Product();
 		newProduct.setName(tfName.getText());
 		
-		//Pegar categorias do combo box e passar para lista dentro de produto
-		//get selected index ******************************
-		//https://www.javatpoint.com/java-jcheckbox
-		//tem troca no model pra alterar aqui LIST
+		
 		ProductDAO podDAO = InitialPage.getInstance().getDaoFactory().getProductDAO();
 		podDAO.insert(newProduct);
 	}

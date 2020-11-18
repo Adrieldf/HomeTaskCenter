@@ -35,6 +35,7 @@ public class FamilyRegistration extends JPanel implements ActionListener {
 	private JLabel lbTitle,lbFamily,lblName,lblAdmin;
 	private JCheckBox chckbxAdmin;
 	private Integer selected;
+	private boolean isTrue = false;
 	public FamilyRegistration() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{30, 100, 100, 30, 30, 30, 100, 100, 30, 0};
@@ -112,7 +113,7 @@ public class FamilyRegistration extends JPanel implements ActionListener {
 			@Override
 			public void itemStateChanged(ItemEvent arg0) {
 				// TODO Auto-generated method stub
-				
+				isTrue = !isTrue;
 			}    
         });   
 		GridBagConstraints gbc_chckbxAdmin = new GridBagConstraints();
@@ -150,6 +151,11 @@ public class FamilyRegistration extends JPanel implements ActionListener {
 		UserDAO userDAO = InitialPage.getInstance().getDaoFactory().getUserDAO();
 		Family newFamily = new Family();
 		User newUser = userDAO.getByName(tfName.getText());
+		//verifica se é admin
+		if(isTrue) {
+			//menmbro é admin
+			
+		}
 		FamilyRegistrationTableModel model = (FamilyRegistrationTableModel) tabFamily.getModel();
 		model.addMember(newUser);
 		FamilyDAO famDAO = InitialPage.getInstance().getDaoFactory().getFamilyDAO();
@@ -178,7 +184,5 @@ public class FamilyRegistration extends JPanel implements ActionListener {
 			}
 		}
 	}
-	
-	//t1 checkbox
 	
 }

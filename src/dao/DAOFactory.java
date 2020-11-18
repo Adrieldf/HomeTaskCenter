@@ -21,6 +21,13 @@ public abstract class DAOFactory {
     public abstract ProductDAO getProductDAO();
     
     public abstract UserDAO getUserDAO();
-  
+    
+    public abstract TaskDAO getTaskDAO();
+    
+    public abstract ReminderDAO getReminderDAO();
+    
+    public abstract MessageDAO getMessageDAO();
+
+    public abstract OccurrenceDAO getOcurrenceDAO();
 }
 

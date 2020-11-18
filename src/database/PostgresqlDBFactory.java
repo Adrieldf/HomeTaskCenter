@@ -6,7 +6,11 @@ import java.sql.SQLException;
 import dao.CategoryDAO;
 import dao.DAOFactory;
 import dao.FamilyDAO;
+import dao.MessageDAO;
+import dao.OccurrenceDAO;
 import dao.ProductDAO;
+import dao.ReminderDAO;
+import dao.TaskDAO;
 import dao.UserDAO;
 
 public class PostgresqlDBFactory extends DAOFactory{
@@ -74,6 +78,26 @@ public class PostgresqlDBFactory extends DAOFactory{
 	@Override
 	public UserDAO getUserDAO() {
 		return new PostgresqlUserDB(conn);
+	}
+
+	@Override
+	public TaskDAO getTaskDAO() {
+		return new PostgresqlTaskDB(conn);
+	}
+
+	@Override
+	public ReminderDAO getReminderDAO() {
+		return new PostgresqlReminderDB(conn);
+	}
+
+	@Override
+	public MessageDAO getMessageDAO() {
+		return new PostgresqlMessageDB(conn);
+	}
+
+	@Override
+	public OccurrenceDAO getOcurrenceDAO() {
+		return new PostgresqlOccurrenceDB(conn);
 	}
 
 }

@@ -17,6 +17,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import dao.TaskDAO;
 import model.Task;
 
 public class CreateTask extends JPanel implements ActionListener {
@@ -28,7 +29,7 @@ public class CreateTask extends JPanel implements ActionListener {
 	private JLabel lblTitle,lblTitleTask,lblDescription,lblResponsible,lblDate,lblHour;
 	private JTextArea taDescription;
 	private Integer selected;
-	
+	private boolean isTrue = false;
 	public CreateTask() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{30, 30, 30, 100, 100, 100, 30, 0};
@@ -198,26 +199,44 @@ public class CreateTask extends JPanel implements ActionListener {
 		newTask.setName(tfTitleTask.getText());
 		newTask.setDescription(taDescription.getText());
 		newTask.setCompleted(false);
-		//newTask.setResponsible();
-		/*
-		trocar para task
-		CategoryDAO catDAO = InitialPage.getInstance().getDaoFactory().getCategoryDAO();
-		catDAO.insert(newTask);
-		*/
+		//newTask.setResponsible(); faltou checkbox
+		TaskDAO taskDAO = InitialPage.getInstance().getDaoFactory().getTaskDAO();
+		taskDAO.insert(newTask);
+		
+		//pegar id de insert e usar pra inserir os outros
 	}
 	
 	void actionSearch() {
 		
+		TaskDAO taskDAO = InitialPage.getInstance().getDaoFactory().getTaskDAO();
+		//taskDAO.getById(id, idFamily)
+		Task newTask = new Task();
+		
 	}
 	
 	void actionUpdate() {
-		
+		Task newTask = new Task();
+		newTask.setName(tfTitleTask.getText());
+		newTask.setDescription(taDescription.getText());
+		newTask.setCompleted(isTrue);
+		//sobrou listas para ligacoes
+		TaskDAO taskDAO = InitialPage.getInstance().getDaoFactory().getTaskDAO();
+		taskDAO.edit(newTask);
 	}
 	
 	void actionDelete() {
-		//Pegar categorias do combo box e passar para lista dentro de produto
+		Task newTask = new Task();
+		newTask.setName(tfTitleTask.getText());
+		newTask.setDescription(taDescription.getText());
+		newTask.setCompleted(isTrue);
+		//sobrou listas para ligacoes
 		
-		//mandar para db product
+		
+		
+		
+		TaskDAO taskDAO = InitialPage.getInstance().getDaoFactory().getTaskDAO();
+		taskDAO.remove(newTask);
+		
 	}
 	
 	void actionCreateReminder() {
@@ -248,7 +267,5 @@ public class CreateTask extends JPanel implements ActionListener {
 		}
 	}
 	
-	
-	//tela por enquanto ta checkbox, mas acho que tem q mudar para combobox, pois nao tem limite e varia
-	//e mais um check box
+
 }

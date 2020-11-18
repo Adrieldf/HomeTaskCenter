@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import dao.ReminderDAO;
 import model.Reminder;
 
 public class CreateReminder extends JPanel implements ActionListener {
@@ -147,15 +148,29 @@ public class CreateReminder extends JPanel implements ActionListener {
 		newReminder.setDescription(taDescription.getText());
 		//newReminder.setDate(t); faltando?
 		
-		//ReminderDAO faltando
+		ReminderDAO remDAO = InitialPage.getInstance().getDaoFactory().getReminderDAO();
+		remDAO.insert(newReminder);
 	}
 
 	private void actionUpdateReminder() {
+		Reminder newReminder = new Reminder();
+		newReminder.setTitle(tfTitleReminder.getText());
+		newReminder.setDescription(taDescription.getText());
+		//newReminder.setDate(t); faltando?
+		
+		ReminderDAO remDAO = InitialPage.getInstance().getDaoFactory().getReminderDAO();
+		remDAO.edit(newReminder);
 		
 	}
 
 	private void actionDeleteReminder() {
+		Reminder newReminder = new Reminder();
+		newReminder.setTitle(tfTitleReminder.getText());
+		newReminder.setDescription(taDescription.getText());
+		//newReminder.setDate(t); faltando?
 		
+		ReminderDAO remDAO = InitialPage.getInstance().getDaoFactory().getReminderDAO();
+		remDAO.remove(newReminder);
 	}
 	
 }

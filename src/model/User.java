@@ -10,6 +10,7 @@ public class User implements Serializable {
 	private String password;
 	private int idFamily;
 	private String email;
+	private boolean admin;
 	
 	public int getId() {
 		return id;
@@ -84,6 +85,14 @@ public class User implements Serializable {
 		if (id != other.id)
 			return false;
 		return true;
+	}
+
+	public boolean isAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
 	}
 	
 	
