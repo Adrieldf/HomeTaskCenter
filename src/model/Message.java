@@ -2,11 +2,11 @@ package model;
 
 public class Message {
 	
-	private int id;
-	private int idTask;
-	private int idOccurrence;
-	private int idReminder;
-	private int idFamily;
+	private Integer id;
+	private Integer idTask;
+	private Integer idOccurrence;
+	private Integer idReminder;
+	private Integer idFamily;
 	private String sender;
 	private String receiver;
 	private String message;
@@ -16,43 +16,43 @@ public class Message {
 		
 	}
 	
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public int getIdTask() {
+	public Integer getIdTask() {
 		return idTask;
 	}
 
-	public void setIdTask(int idTask) {
+	public void setIdTask(Integer idTask) {
 		this.idTask = idTask;
 	}
 
-	public int getIdOccurrence() {
+	public Integer getIdOccurrence() {
 		return idOccurrence;
 	}
 
-	public void setIdOccurrence(int idOccurrence) {
+	public void setIdOccurrence(Integer idOccurrence) {
 		this.idOccurrence = idOccurrence;
 	}
 
-	public int getIdReminder() {
+	public Integer getIdReminder() {
 		return idReminder;
 	}
 
-	public void setIdReminder(int idReminder) {
+	public void setIdReminder(Integer idReminder) {
 		this.idReminder = idReminder;
 	}
 
-	public int getIdFamily() {
+	public Integer getIdFamily() {
 		return idFamily;
 	}
 
-	public void setIdFamily(int idFamily) {
+	public void setIdFamily(Integer idFamily) {
 		this.idFamily = idFamily;
 	}
 

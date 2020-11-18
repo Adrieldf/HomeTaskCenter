@@ -93,13 +93,7 @@ public class CreateItems extends JPanel {
 		
 		//trocar para switchlist
 		chckbxCategory = new JCheckBox("");
-		/*
-		chckbxCategory.addItemListener(new ItemListener() {    
-        public void itemStateChanged(ItemEvent e) {                 
-           label.setText("C++ Checkbox: "     
-           + (e.getStateChange()==1?"checked":"unchecked"));    
-        	}    
-     	});*/
+		
 		gbc_chckbxCategory = new GridBagConstraints();
 		gbc_chckbxCategory.gridwidth = 2;
 		gbc_chckbxCategory.gridheight = 3;

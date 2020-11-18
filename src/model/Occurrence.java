@@ -7,6 +7,8 @@ public class Occurrence {
 	//talvez mudar o tipo
 	private int date;
 	private int hour;
+	//tipo date
+	//simpledateformat
 	
 	
 	public Occurrence() {

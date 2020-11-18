@@ -4,11 +4,11 @@ import java.util.List;
 
 public class Task {
 
-	private int id;
+	private Integer id;
 	private String name;
 	private	String description;
-	private int idFamily;
-	private int idUser;
+	private Integer idFamily;
+	private Integer idUser;
 	private boolean completed;
 	
 	private List<User> responsible;

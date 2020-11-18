@@ -2,47 +2,47 @@ package model;
 
 public class Reminder {
 	
-	private int id;
+	private Integer id;
 	private String title;
 	private String description;
-	private int idOccurrence;
-	private int idTask;
-	private int idFamily;
+	private Integer idOccurrence;
+	private Integer idTask;
+	private Integer idFamily;
 
 	
 	public Reminder() {
 		
 	}
 		
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public int getIdOccurrence() {
+	public Integer getIdOccurrence() {
 		return idOccurrence;
 	}
 
-	public void setIdOccurrence(int idOccurrence) {
+	public void setIdOccurrence(Integer idOccurrence) {
 		this.idOccurrence = idOccurrence;
 	}
 
-	public int getIdTask() {
+	public Integer getIdTask() {
 		return idTask;
 	}
 
-	public void setIdTask(int idTask) {
+	public void setIdTask(Integer idTask) {
 		this.idTask = idTask;
 	}
 
-	public int getIdFamily() {
+	public Integer getIdFamily() {
 		return idFamily;
 	}
 
-	public void setIdFamily(int idFamily) {
+	public void setIdFamily(Integer idFamily) {
 		this.idFamily = idFamily;
 	}
 

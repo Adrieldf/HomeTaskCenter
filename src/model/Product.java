@@ -3,14 +3,14 @@ package model;
 
 public class Product {
 	
-	private int idFamily;
-	private int id;
+	private Integer idFamily;
+	private Integer id;
 	private String name;
 	//sepa trocar de int para list
-	private int idCategory;
+	private Integer idCategory;
 	//checkbox aqui
 
-	public Product(int id, String name, int idCategory, int idFamily) {
+	public Product(Integer id, String name, Integer idCategory, Integer idFamily) {
 		this.setId(id);
 		this.setName(name);
 		this.setIdCategory(idCategory);
@@ -35,7 +35,7 @@ public class Product {
 	}
 
 
-	public void setIdCategory(int idCategory) {
+	public void setIdCategory(Integer idCategory) {
 		this.idCategory = idCategory;
 	}
 
@@ -51,7 +51,7 @@ public class Product {
 	public int getIdFamily() {
 		return idFamily;
 	}
-	public void setIdFamily(int idFamily) {
+	public void setIdFamily(Integer idFamily) {
 		this.idFamily = idFamily;
 	}
 

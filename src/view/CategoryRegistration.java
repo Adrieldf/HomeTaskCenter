@@ -130,7 +130,7 @@ public class CategoryRegistration extends JPanel implements ActionListener{
 	
 	void actionDelete(){
 		CategoryTableModel model = (CategoryTableModel) table.getModel();
-		Category killCategory = (Category)model.getValueAt(selected, 0);
+		Category killCategory = model.getCategory(selected);
 		CategoryDAO catDAO = InitialPage.getInstance().getDaoFactory().getCategoryDAO();
 		catDAO.remove(killCategory);
 		model.removeCategory(selected);

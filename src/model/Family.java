@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Family {
 
-	private int id;
+	private Integer id;
 	private String name;
 	
 	private List<User> members;
@@ -20,11 +20,11 @@ public class Family {
 		this.setName(name);
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 		return;
 	}

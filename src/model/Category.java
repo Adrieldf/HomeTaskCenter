@@ -2,8 +2,8 @@ package model;
 
 public class Category {
 
-	private int idFamily;
-	private int id;
+	private Integer idFamily;
+	private Integer id;
 	private String name;
 	
 	
@@ -12,12 +12,12 @@ public class Category {
 		
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -30,11 +30,11 @@ public class Category {
 		this.name = name;
 	}
 
-	public int getIdFamily() {
+	public Integer getIdFamily() {
 		return idFamily;
 	}
 
-	public void setIdFamily(int idFamily) {
+	public void setIdFamily(Integer idFamily) {
 		this.idFamily = idFamily;
 	}
 	
