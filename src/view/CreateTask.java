@@ -30,6 +30,7 @@ public class CreateTask extends JPanel implements ActionListener {
 	private JTextArea taDescription;
 	private Integer selected;
 	private boolean isTrue = false;
+	
 	public CreateTask() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{30, 30, 30, 100, 100, 100, 30, 0};

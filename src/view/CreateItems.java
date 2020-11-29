@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -19,7 +18,7 @@ import javax.swing.JTextField;
 import dao.ProductDAO;
 import model.Product;
 
-public class CreateItems extends JPanel {
+public class CreateItems extends JPanel implements ActionListener{
 	private JTextField tfName;
 	private JCheckBox chckbxCategory;
 	private JLabel lblTitle, lbName, lblCategorie;
@@ -35,6 +34,9 @@ public class CreateItems extends JPanel {
 	
 	private SwitchList switchList;
 	
+	private GridLayout gl = new GridLayout(1,2);
+	private JPanel p1,p2;
+	
 	public CreateItems() {
 		
 		
@@ -46,17 +48,26 @@ public class CreateItems extends JPanel {
 //		
 //		this.getContentPane().add(this.fundo);	
 //		
-		
-		
+//		p1 = new JPanel();
+//		switchList = new SwitchList();
+//		p1.add(switchList);
+//		
 
 		gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{30, 30, 30, 100, 100, 30, 0};
 		gridBagLayout.rowHeights = new int[]{30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		setLayout(gridBagLayout);
 		
-		lblTitle = new JLabel("Criar item");
+//		p2 = new JPanel(gridBagLayout);
+//		
+//		setLayout(gl);
+//		this.add(p1);
+//		this.add(p2);
+		
+		setLayout(gridBagLayout);
+	
+		lblTitle = new JLabel("teste");//mudei label
 		lblTitle.setFont(new Font("Tahoma", Font.BOLD, 17));
 		GridBagConstraints gbc_lblTitle = new GridBagConstraints();
 		gbc_lblTitle.gridwidth = 5;
@@ -104,11 +115,7 @@ public class CreateItems extends JPanel {
 		add(chckbxCategory, gbc_chckbxCategory);
 		
 		btnCreateItem = new JButton("Criar item");
-		btnCreateItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				actionCreateItem();
-			}
-		});
+		btnCreateItem.addActionListener(this);
 		gbc_btnCreateItem = new GridBagConstraints();
 		gbc_btnCreateItem.gridwidth = 2;
 		gbc_btnCreateItem.insets = new Insets(0, 0, 5, 5);
@@ -126,6 +133,16 @@ public class CreateItems extends JPanel {
 		
 		ProductDAO podDAO = InitialPage.getInstance().getDaoFactory().getProductDAO();
 		podDAO.insert(newProduct);
+	}
+
+
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		if(arg0.getSource()==btnCreateItem) {
+			actionCreateItem();		
+		}
 	}
 	
 }

@@ -117,12 +117,12 @@ public class InitialPage extends JFrame{
 		JMenu mnTasks      = new JMenu("Tarefas");
 		JMenu mnUsers      = new JMenu("Usuários");
 		JMenu mnCategories = new JMenu("Categorias");
-//		JMenu mnOptions = new JMenu("Opções");
+		JMenu mnOptions = new JMenu("Opções");
 		
 		menuBar.add(mnTasks);
 		menuBar.add(mnUsers);
 		menuBar.add(mnCategories);
-//		menuBar.add(mnOptions);
+		menuBar.add(mnOptions);
 		
 		// Tarefas
 		JMenuItem mntmTarefas = new JMenuItem("Visualizar Tarefas Pendentes");
@@ -165,7 +165,17 @@ public class InitialPage extends JFrame{
 				createInternalFrame(new CategoryRegistration(), "Criar/editar categoria", 600, 600);
 			}
 		});
-		mnCategories.add(mntmCategoryRegistration);		
+		mnCategories.add(mntmCategoryRegistration);
+		
+		// Criar Itens
+		JMenuItem mntmCreateItems = new JMenuItem("Criar Itens");
+		mntmCreateItems.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg5) {
+				createInternalFrame(new CreateItems(), "Criar Itens", 800, 600);
+				//createIntFrame();
+			}
+		});
+		mnOptions.add(mntmCreateItems);
 	}
 	
 	//abrir janela irma, pelos filhos
@@ -185,6 +195,10 @@ public class InitialPage extends JFrame{
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	protected void createIntFrame() {
+		new CreateItem();
 	}
 	
 	protected void createInternalFrame(JPanel panel, String title, Integer width, Integer height) {
