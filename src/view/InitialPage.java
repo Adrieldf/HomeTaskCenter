@@ -116,13 +116,13 @@ public class InitialPage extends JFrame{
 		
 		JMenu mnTasks      = new JMenu("Tarefas");
 		JMenu mnUsers      = new JMenu("Usuários");
+		JMenu mnItems      = new JMenu("Itens");
 		JMenu mnCategories = new JMenu("Categorias");
-		JMenu mnOptions = new JMenu("Opções");
 		
 		menuBar.add(mnTasks);
 		menuBar.add(mnUsers);
 		menuBar.add(mnCategories);
-		menuBar.add(mnOptions);
+		menuBar.add(mnItems);
 		
 		// Tarefas
 		JMenuItem mntmTarefas = new JMenuItem("Visualizar Tarefas Pendentes");
@@ -136,7 +136,7 @@ public class InitialPage extends JFrame{
 		JMenuItem mntmCreateTask = new JMenuItem("Cadastro de Tarefas");
 		mntmCreateTask.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg3) {
-				createInternalFrame(new CreateTask(), "Criar/editar tarefa", 500, 550);
+				createInternalFrame(new CreateTask(), "Cadastro de Tarefas", 500, 550);
 			}
 		});
 		mnTasks.add(mntmCreateTask);
@@ -145,37 +145,38 @@ public class InitialPage extends JFrame{
 		JMenuItem mntmUserEdit = new JMenuItem("Cadastro de Usuários");
 		mntmUserEdit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg1) {
-				createInternalFrame(new UserEdit(), "Criar/editar usuário", 450, 350);
+				createInternalFrame(new UserEdit(), "Cadastro de Usuários", 450, 350);
 			}
 		});
 		mnUsers.add(mntmUserEdit);
 		
-		JMenuItem mntmFamilyRegistration = new JMenuItem("Cadastro de Famílias");
+		JMenuItem mntmFamilyRegistration = new JMenuItem("Cadastro de Família");
 		mntmFamilyRegistration.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg4) {
-				createInternalFrame(new FamilyRegistration(), "Criar/editar família", 600, 400);
+				createInternalFrame(new FamilyRegistration(), "Cadastro de Família", 600, 400);
 			}
 		});
 		mnUsers.add(mntmFamilyRegistration);
+		
+		// Criar Itens
+		JMenuItem mntmCreateItems = new JMenuItem("Cadastro de Itens");
+		mntmCreateItems.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg5) {
+				createInternalFrame(new CreateItems(), "Cadastro de Itens", 800, 600);
+				//createIntFrame();
+			}
+		});
+		mnItems.add(mntmCreateItems);
 		
 		// Categorias
 		JMenuItem mntmCategoryRegistration = new JMenuItem("Cadastro de Categorias");
 		mntmCategoryRegistration.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg2) {
-				createInternalFrame(new CategoryRegistration(), "Criar/editar categoria", 600, 600);
+				createInternalFrame(new CategoryRegistration(), "Cadastro de Categorias", 600, 600);
 			}
 		});
 		mnCategories.add(mntmCategoryRegistration);
 		
-		// Criar Itens
-		JMenuItem mntmCreateItems = new JMenuItem("Criar Itens");
-		mntmCreateItems.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg5) {
-				createInternalFrame(new CreateItems(), "Criar Itens", 800, 600);
-				//createIntFrame();
-			}
-		});
-		mnOptions.add(mntmCreateItems);
 	}
 	
 	//abrir janela irma, pelos filhos
@@ -197,9 +198,9 @@ public class InitialPage extends JFrame{
 		}
 	}
 	
-	protected void createIntFrame() {
-		new CreateItem();
-	}
+//	protected void createIntFrame() {
+//		new CreateItem();
+//	}
 	
 	protected void createInternalFrame(JPanel panel, String title, Integer width, Integer height) {
 		final JInternalFrame intFrame = new JInternalFrame(title, true, true, true, true);

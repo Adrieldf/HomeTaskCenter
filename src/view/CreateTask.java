@@ -39,14 +39,14 @@ public class CreateTask extends JPanel implements ActionListener {
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
-		lblTitle = new JLabel("Criar/editar tarefa");
-		lblTitle.setFont(new Font("Tahoma", Font.BOLD, 17));
-		GridBagConstraints gbc_lblTitle = new GridBagConstraints();
-		gbc_lblTitle.gridwidth = 7;
-		gbc_lblTitle.insets = new Insets(0, 0, 5, 0);
-		gbc_lblTitle.gridx = 0;
-		gbc_lblTitle.gridy = 0;
-		add(lblTitle, gbc_lblTitle);
+//		lblTitle = new JLabel("Criar/editar tarefa");
+//		lblTitle.setFont(new Font("Tahoma", Font.BOLD, 17));
+//		GridBagConstraints gbc_lblTitle = new GridBagConstraints();
+//		gbc_lblTitle.gridwidth = 7;
+//		gbc_lblTitle.insets = new Insets(0, 0, 5, 0);
+//		gbc_lblTitle.gridx = 0;
+//		gbc_lblTitle.gridy = 0;
+//		add(lblTitle, gbc_lblTitle);
 		
 		lblTitleTask = new JLabel("T\u00EDtulo\r\n");
 		lblTitleTask.setFont(new Font("Tahoma", Font.BOLD, 11));

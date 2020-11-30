@@ -39,14 +39,14 @@ public class CategoryRegistration extends JPanel implements ActionListener{
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
-		lbTitle = new JLabel("Criar/editar categoria");
-		lbTitle.setFont(new Font("Tahoma", Font.BOLD, 17));
-		GridBagConstraints gbc_lbTitle = new GridBagConstraints();
-		gbc_lbTitle.gridwidth = 7;
-		gbc_lbTitle.insets = new Insets(0, 0, 5, 5);
-		gbc_lbTitle.gridx = 1;
-		gbc_lbTitle.gridy = 0;
-		add(lbTitle, gbc_lbTitle);
+//		lbTitle = new JLabel("Criar/editar categoria");
+//		lbTitle.setFont(new Font("Tahoma", Font.BOLD, 17));
+//		GridBagConstraints gbc_lbTitle = new GridBagConstraints();
+//		gbc_lbTitle.gridwidth = 7;
+//		gbc_lbTitle.insets = new Insets(0, 0, 5, 5);
+//		gbc_lbTitle.gridx = 1;
+//		gbc_lbTitle.gridy = 0;
+//		add(lbTitle, gbc_lbTitle);
 		
 		lbCategories = new JLabel("Categorias");
 		lbCategories.setFont(new Font("Tahoma", Font.BOLD, 11));

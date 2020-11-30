@@ -31,14 +31,14 @@ public class CreateReminder extends JPanel implements ActionListener {
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
-		lblTitle = new JLabel("Criar/editar lembrete");
-		lblTitle.setFont(new Font("Tahoma", Font.BOLD, 17));
-		GridBagConstraints gbc_lblTitle = new GridBagConstraints();
-		gbc_lblTitle.gridwidth = 6;
-		gbc_lblTitle.insets = new Insets(0, 0, 5, 5);
-		gbc_lblTitle.gridx = 0;
-		gbc_lblTitle.gridy = 0;
-		add(lblTitle, gbc_lblTitle);
+//		lblTitle = new JLabel("Criar/editar lembrete");
+//		lblTitle.setFont(new Font("Tahoma", Font.BOLD, 17));
+//		GridBagConstraints gbc_lblTitle = new GridBagConstraints();
+//		gbc_lblTitle.gridwidth = 6;
+//		gbc_lblTitle.insets = new Insets(0, 0, 5, 5);
+//		gbc_lblTitle.gridx = 0;
+//		gbc_lblTitle.gridy = 0;
+//		add(lblTitle, gbc_lblTitle);
 		
 		lblTask = new JLabel("Tarefa vinculada");
 		lblTask.setFont(new Font("Tahoma", Font.BOLD, 11));

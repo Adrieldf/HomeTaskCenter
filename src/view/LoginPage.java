@@ -30,14 +30,14 @@ public class LoginPage extends JPanel implements ActionListener{
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
-		lbTitle = new JLabel("Login");
-		lbTitle.setFont(new Font("Tahoma", Font.BOLD, 17));
-		GridBagConstraints gbc_lbTitle = new GridBagConstraints();
-		gbc_lbTitle.gridwidth = 6;
-		gbc_lbTitle.insets = new Insets(0, 0, 5, 0);
-		gbc_lbTitle.gridx = 0;
-		gbc_lbTitle.gridy = 0;
-		add(lbTitle, gbc_lbTitle);
+//		lbTitle = new JLabel("Login");
+//		lbTitle.setFont(new Font("Tahoma", Font.BOLD, 17));
+//		GridBagConstraints gbc_lbTitle = new GridBagConstraints();
+//		gbc_lbTitle.gridwidth = 6;
+//		gbc_lbTitle.insets = new Insets(0, 0, 5, 0);
+//		gbc_lbTitle.gridx = 0;
+//		gbc_lbTitle.gridy = 0;
+//		add(lbTitle, gbc_lbTitle);
 		
 		lbName = new JLabel("Nome");
 		lbName.setFont(new Font("Tahoma", Font.BOLD, 11));
