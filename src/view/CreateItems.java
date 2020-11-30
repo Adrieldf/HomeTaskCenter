@@ -150,7 +150,7 @@ public class CreateItems extends JPanel implements ActionListener{
 	void actionCreateItem() {
 		Product newProduct = new Product();
 		newProduct.setName(tfName.getText());
-		
+		//switchList.getlist2()
 		
 		ProductDAO podDAO = InitialPage.getInstance().getDaoFactory().getProductDAO();
 		podDAO.insert(newProduct);

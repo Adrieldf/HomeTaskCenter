@@ -6,9 +6,7 @@ public class Product {
 	private Integer idFamily;
 	private Integer id;
 	private String name;
-	//sepa trocar de int para list
 	private Integer idCategory;
-	//checkbox aqui
 
 	public Product(Integer id, String name, Integer idCategory, Integer idFamily) {
 		this.setId(id);

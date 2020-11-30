@@ -6,6 +6,9 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import view.listModel.CreateItemsListModel;
+import view.tableModel.CategoryTableModel;
+
 public class SwitchList extends JPanel{
 	
 	private JList list1, list2;
@@ -15,7 +18,7 @@ public class SwitchList extends JPanel{
 	public SwitchList() {
 		
 		super(new GridLayout(1,3));
-		list1 = new JList();
+		list1 = new JList(new CreateItemsListModel());
 		slist1 = new JScrollPane(list1);
 		this.add(slist1);
 		
@@ -30,7 +33,7 @@ public class SwitchList extends JPanel{
 		botoes.add(bRemoveAll);
 		this.add(botoes);
 		
-		list2 = new JList();
+		list2 = new JList(new CreateItemsListModel());
 		slist2 = new JScrollPane(list2);
 		this.add(slist2);
 		

@@ -54,7 +54,6 @@ public class CategoryTableModel extends AbstractTableModel {
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-
 		Category category = categories.get(rowIndex);
 		return category.getName();
 	}
