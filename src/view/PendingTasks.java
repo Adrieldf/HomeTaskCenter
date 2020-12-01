@@ -24,19 +24,19 @@ public class PendingTasks extends JPanel implements ActionListener{
 	public PendingTasks() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 0};
-		gridBagLayout.rowHeights = new int[]{0, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 0};
+		gridBagLayout.rowHeights = new int[]{30, 0, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
-//		lbTitle = new JLabel("Tarefas Pendentes");
-//		lbTitle.setFont(new Font("Tahoma", Font.BOLD, 17));
-//		GridBagConstraints gbc_lbTitle = new GridBagConstraints();
-//		gbc_lbTitle.gridwidth = 15;
-//		gbc_lbTitle.insets = new Insets(0, 0, 5, 0);
-//		gbc_lbTitle.gridx = 0;
-//		gbc_lbTitle.gridy = 0;
-//		add(lbTitle, gbc_lbTitle);
+		lbTitle = new JLabel("Tarefas Pendentes");
+		lbTitle.setFont(new Font("Tahoma", Font.BOLD, 17));
+		GridBagConstraints gbc_lbTitle = new GridBagConstraints();
+		gbc_lbTitle.gridwidth = 15;
+		gbc_lbTitle.insets = new Insets(0, 0, 5, 0);
+		gbc_lbTitle.gridx = 0;
+		gbc_lbTitle.gridy = 1;
+		add(lbTitle, gbc_lbTitle);
 		
 		tabTasks = new JTable();
 		GridBagConstraints gbc_tabTasks = new GridBagConstraints();
@@ -45,7 +45,7 @@ public class PendingTasks extends JPanel implements ActionListener{
 		gbc_tabTasks.insets = new Insets(0, 0, 5, 5);
 		gbc_tabTasks.fill = GridBagConstraints.BOTH;
 		gbc_tabTasks.gridx = 1;
-		gbc_tabTasks.gridy = 2;
+		gbc_tabTasks.gridy = 3;
 		add(tabTasks, gbc_tabTasks);
 		
 		btnCreateTask = new JButton("Criar Tarefa");
@@ -54,7 +54,7 @@ public class PendingTasks extends JPanel implements ActionListener{
 		gbc_btnCreateTask.gridwidth = 13;
 		gbc_btnCreateTask.insets = new Insets(0, 0, 5, 5);
 		gbc_btnCreateTask.gridx = 1;
-		gbc_btnCreateTask.gridy = 9;
+		gbc_btnCreateTask.gridy = 10;
 		add(btnCreateTask, gbc_btnCreateTask);
 	}
 

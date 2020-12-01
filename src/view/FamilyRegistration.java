@@ -39,19 +39,19 @@ public class FamilyRegistration extends JPanel implements ActionListener {
 	public FamilyRegistration() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{30, 100, 100, 30, 30, 30, 100, 100, 30, 0};
-		gridBagLayout.rowHeights = new int[]{30, 30, 30, 30, 30, 0, 30, 30, 30, 0};
+		gridBagLayout.rowHeights = new int[]{30, 30, 30, 30, 30, 30, 0, 30, 30, 30, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
-//		lbTitle = new JLabel("Criar/editar fam\u00EDlia");
-//		lbTitle.setFont(new Font("Tahoma", Font.BOLD, 17));
-//		GridBagConstraints gbc_lbTitle = new GridBagConstraints();
-//		gbc_lbTitle.gridwidth = 9;
-//		gbc_lbTitle.insets = new Insets(0, 0, 5, 0);
-//		gbc_lbTitle.gridx = 0;
-//		gbc_lbTitle.gridy = 0;
-//		add(lbTitle, gbc_lbTitle);
+		lbTitle = new JLabel("Cadastro de Família");
+		lbTitle.setFont(new Font("Tahoma", Font.BOLD, 17));
+		GridBagConstraints gbc_lbTitle = new GridBagConstraints();
+		gbc_lbTitle.gridwidth = 9;
+		gbc_lbTitle.insets = new Insets(0, 0, 5, 0);
+		gbc_lbTitle.gridx = 0;
+		gbc_lbTitle.gridy = 1;
+		add(lbTitle, gbc_lbTitle);
 		
 		lbFamily = new JLabel("Fam\u00EDlia");
 		lbFamily.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -59,7 +59,7 @@ public class FamilyRegistration extends JPanel implements ActionListener {
 		gbc_lbFamily.gridwidth = 2;
 		gbc_lbFamily.insets = new Insets(0, 0, 5, 5);
 		gbc_lbFamily.gridx = 1;
-		gbc_lbFamily.gridy = 2;
+		gbc_lbFamily.gridy = 3;
 		add(lbFamily, gbc_lbFamily);
 		
 		lblName = new JLabel("Nome");
@@ -68,7 +68,7 @@ public class FamilyRegistration extends JPanel implements ActionListener {
 		gbc_lblName.anchor = GridBagConstraints.WEST;
 		gbc_lblName.insets = new Insets(0, 0, 5, 5);
 		gbc_lblName.gridx = 4;
-		gbc_lblName.gridy = 2;
+		gbc_lblName.gridy = 3;
 		add(lblName, gbc_lblName);
 		
 		tfName = new JTextField();
@@ -77,7 +77,7 @@ public class FamilyRegistration extends JPanel implements ActionListener {
 		gbc_tfName.insets = new Insets(0, 0, 5, 5);
 		gbc_tfName.fill = GridBagConstraints.HORIZONTAL;
 		gbc_tfName.gridx = 6;
-		gbc_tfName.gridy = 2;
+		gbc_tfName.gridy = 3;
 		add(tfName, gbc_tfName);
 		tfName.setColumns(10);
 		
@@ -97,7 +97,7 @@ public class FamilyRegistration extends JPanel implements ActionListener {
 		gbc_tabFamily.insets = new Insets(0, 0, 5, 5);
 		gbc_tabFamily.fill = GridBagConstraints.BOTH;
 		gbc_tabFamily.gridx = 1;
-		gbc_tabFamily.gridy = 3;
+		gbc_tabFamily.gridy = 4;
 		add(tabFamily, gbc_tabFamily);
 		
 		lblAdmin = new JLabel("Administrador");
@@ -105,7 +105,7 @@ public class FamilyRegistration extends JPanel implements ActionListener {
 		GridBagConstraints gbc_lblAdmin = new GridBagConstraints();
 		gbc_lblAdmin.insets = new Insets(0, 0, 5, 5);
 		gbc_lblAdmin.gridx = 4;
-		gbc_lblAdmin.gridy = 4;
+		gbc_lblAdmin.gridy = 5;
 		add(lblAdmin, gbc_lblAdmin);
 		
 		chckbxAdmin = new JCheckBox("");
@@ -120,7 +120,7 @@ public class FamilyRegistration extends JPanel implements ActionListener {
 		gbc_chckbxAdmin.anchor = GridBagConstraints.WEST;
 		gbc_chckbxAdmin.insets = new Insets(0, 0, 5, 5);
 		gbc_chckbxAdmin.gridx = 6;
-		gbc_chckbxAdmin.gridy = 4;
+		gbc_chckbxAdmin.gridy = 5;
 		add(chckbxAdmin, gbc_chckbxAdmin);
 		
 		btnInsert = new JButton("Inserir");
@@ -129,7 +129,7 @@ public class FamilyRegistration extends JPanel implements ActionListener {
 		gbc_btnInsert.gridwidth = 2;
 		gbc_btnInsert.insets = new Insets(0, 0, 5, 5);
 		gbc_btnInsert.gridx = 6;
-		gbc_btnInsert.gridy = 6;
+		gbc_btnInsert.gridy = 7;
 		add(btnInsert, gbc_btnInsert);
 		
 		btnDelete = new JButton("Excluir\r\n");
@@ -138,7 +138,7 @@ public class FamilyRegistration extends JPanel implements ActionListener {
 		gbc_btnDelete.gridwidth = 2;
 		gbc_btnDelete.insets = new Insets(0, 0, 5, 5);
 		gbc_btnDelete.gridx = 1;
-		gbc_btnDelete.gridy = 7;
+		gbc_btnDelete.gridy = 8;
 		add(btnDelete, gbc_btnDelete);
 	}
 	

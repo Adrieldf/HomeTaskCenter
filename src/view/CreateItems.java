@@ -3,35 +3,37 @@ package view;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
+//import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
+//import javax.swing.JCheckBox;
 import javax.swing.JLabel;
-import javax.swing.JList;
+//import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import dao.ProductDAO;
 import model.Product;
 import javax.swing.JTable;
-import javax.swing.JScrollPane;
+//import javax.swing.JTable;
+//import javax.swing.JScrollPane;
 
 public class CreateItems extends JPanel implements ActionListener{
 	private JTextField tfName;
-	private JLabel lblTitle, lbName, lblCategorie;
+	private JLabel lblTitle, lbName, lblCategories;
 	private JButton btnCreateItem;
 	private GridBagLayout gridBagLayout;
 	private SwitchList switchList;
 	private JButton btnNewButton;
+	private JTable table;
 //	private GridBagConstraints gbc_btnCreateItem;
 	
 	
 //	private GridLayout gridExterno;
-//	private JList listAllCategories,listCategories;
+//	private JList listAllCategoriess,listCategoriess;
 //	private JButton btnAdd,btnRemove;
 //	private JPanel panelSwitchList;
 	
@@ -59,9 +61,11 @@ public class CreateItems extends JPanel implements ActionListener{
 
 		gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{30, 50, 30, 100, 100, 100, 30, 0};
-		gridBagLayout.rowHeights = new int[]{30, 30, 30, 30, 100, 0, 0, 0, 0, 0, 0};
+		gridBagLayout.rowHeights = new int[]{30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		
+		setLayout(gridBagLayout);
 		
 //		p2 = new JPanel(gridBagLayout);
 //		
@@ -69,23 +73,22 @@ public class CreateItems extends JPanel implements ActionListener{
 //		this.add(p1);
 //		this.add(p2);
 		
-		setLayout(gridBagLayout);
 //	
-//		lblTitle = new JLabel("teste");//mudei label
-//		lblTitle.setFont(new Font("Tahoma", Font.BOLD, 17));
-//		GridBagConstraints gbc_lblTitle = new GridBagConstraints();
-//		gbc_lblTitle.gridwidth = 4;
-//		gbc_lblTitle.insets = new Insets(0, 0, 5, 0);
-//		gbc_lblTitle.gridx = 1;
-//		gbc_lblTitle.gridy = 0;
-//		add(lblTitle, gbc_lblTitle);
+		lblTitle = new JLabel("Cadastro de Itens");
+		lblTitle.setFont(new Font("Tahoma", Font.BOLD, 17));
+		GridBagConstraints gbc_lblTitle = new GridBagConstraints();
+		gbc_lblTitle.gridwidth = 5;
+		gbc_lblTitle.insets = new Insets(0, 0, 5, 5);
+		gbc_lblTitle.gridx = 1;
+		gbc_lblTitle.gridy = 1;
+		add(lblTitle, gbc_lblTitle);
 		
 		lbName = new JLabel("Nome");
 		lbName.setFont(new Font("Tahoma", Font.BOLD, 11));
 		GridBagConstraints gbc_lbName = new GridBagConstraints();
 		gbc_lbName.insets = new Insets(0, 0, 5, 5);
 		gbc_lbName.gridx = 1;
-		gbc_lbName.gridy = 1;
+		gbc_lbName.gridy = 3;
 		add(lbName, gbc_lbName);
 		
 		tfName = new JTextField();
@@ -94,37 +97,47 @@ public class CreateItems extends JPanel implements ActionListener{
 		gbc_tfName.insets = new Insets(0, 0, 5, 5);
 		gbc_tfName.fill = GridBagConstraints.HORIZONTAL;
 		gbc_tfName.gridx = 3;
-		gbc_tfName.gridy = 1;
+		gbc_tfName.gridy = 3;
 		add(tfName, gbc_tfName);
 		tfName.setColumns(10);
 		
-		lblCategorie = new JLabel("Categoria");
-		lblCategorie.setFont(new Font("Tahoma", Font.BOLD, 11));
-		GridBagConstraints gbc_lblCategorie = new GridBagConstraints();
-		gbc_lblCategorie.insets = new Insets(0, 0, 5, 5);
-		gbc_lblCategorie.gridx = 1;
-		gbc_lblCategorie.gridy = 3;
-		add(lblCategorie, gbc_lblCategorie);
+		lblCategories = new JLabel("Categorias");
+		lblCategories.setFont(new Font("Tahoma", Font.BOLD, 11));
+		GridBagConstraints gbc_lblCategories = new GridBagConstraints();
+		gbc_lblCategories.insets = new Insets(0, 0, 5, 5);
+		gbc_lblCategories.gridx = 1;
+		gbc_lblCategories.gridy = 5;
+		add(lblCategories, gbc_lblCategories);
 		
-		switchList = new SwitchList();
-		GridBagConstraints gbc_switchList = new GridBagConstraints();
-		gbc_switchList.gridheight = 4;
-		gbc_switchList.gridwidth = 3;
-		gbc_switchList.fill = GridBagConstraints.BOTH;
-		gbc_switchList.insets = new Insets(0, 0, 5, 5);
-		gbc_switchList.gridx = 3;
-		gbc_switchList.gridy = 3;
-		add(switchList, gbc_switchList);
+//		switchList = new SwitchList();
+//		GridBagConstraints gbc_switchList = new GridBagConstraints();
+//		gbc_switchList.gridheight = 4;
+//		gbc_switchList.gridwidth = 3;
+//		gbc_switchList.fill = GridBagConstraints.BOTH;
+//		gbc_switchList.insets = new Insets(0, 0, 5, 5);
+//		gbc_switchList.gridx = 3;
+//		gbc_switchList.gridy = 3;
+//		add(switchList, gbc_switchList);
 		
 		btnCreateItem = new JButton("Criar item");
 		btnCreateItem.addActionListener(this);
+		
+		table = new JTable();
+		GridBagConstraints gbc_table = new GridBagConstraints();
+		gbc_table.gridheight = 6;
+		gbc_table.gridwidth = 3;
+		gbc_table.insets = new Insets(0, 0, 5, 5);
+		gbc_table.fill = GridBagConstraints.BOTH;
+		gbc_table.gridx = 3;
+		gbc_table.gridy = 5;
+		add(table, gbc_table);
 		
 		btnNewButton = new JButton("Criar item");
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 		gbc_btnNewButton.gridwidth = 3;
 		gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
 		gbc_btnNewButton.gridx = 3;
-		gbc_btnNewButton.gridy = 8;
+		gbc_btnNewButton.gridy = 12;
 		add(btnNewButton, gbc_btnNewButton);
 		
 //		scrollPane = new JScrollPane();	
