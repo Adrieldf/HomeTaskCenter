@@ -14,9 +14,17 @@ import javax.swing.JLabel;
 //import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
+import dao.CategoryDAO;
 import dao.ProductDAO;
+import model.Category;
 import model.Product;
+import view.tableModel.CategoryTableModel;
+import view.tableModel.CreateItemTableModel;
+
 import javax.swing.JTable;
 //import javax.swing.JTable;
 //import javax.swing.JScrollPane;
@@ -28,7 +36,9 @@ public class CreateItems extends JPanel implements ActionListener{
 	private GridBagLayout gridBagLayout;
 	private SwitchList switchList;
 	private JButton btnNewButton;
-	private JTable table;
+	private JTable tableCItems;
+	private Integer selected;
+	
 //	private GridBagConstraints gbc_btnCreateItem;
 	
 	
@@ -122,7 +132,14 @@ public class CreateItems extends JPanel implements ActionListener{
 		btnCreateItem = new JButton("Criar item");
 		btnCreateItem.addActionListener(this);
 		
-		table = new JTable();
+		tableCItems = new JTable(new CreateItemTableModel());
+		tableCItems.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		ListSelectionModel selectionModel = tableCItems.getSelectionModel();
+		selectionModel.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e) {
+				actionKeepSelected();
+			}
+		});
 		GridBagConstraints gbc_table = new GridBagConstraints();
 		gbc_table.gridheight = 6;
 		gbc_table.gridwidth = 3;
@@ -130,7 +147,7 @@ public class CreateItems extends JPanel implements ActionListener{
 		gbc_table.fill = GridBagConstraints.BOTH;
 		gbc_table.gridx = 3;
 		gbc_table.gridy = 5;
-		add(table, gbc_table);
+		add(tableCItems, gbc_table);
 		
 		btnNewButton = new JButton("Criar item");
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
@@ -158,18 +175,20 @@ public class CreateItems extends JPanel implements ActionListener{
 //		add(btnCreateItem, gbc_btnCreateItem);
 	}
 	
-
+	void actionKeepSelected() {
+		selected = tableCItems.getSelectedRow();
+		System.out.println(selected);
+	}
 	
 	void actionCreateItem() {
+		CreateItemTableModel model = (CreateItemTableModel) tableCItems.getModel();
+		ProductDAO podDAO = InitialPage.getInstance().getDaoFactory().getProductDAO();
 		Product newProduct = new Product();
 		newProduct.setName(tfName.getText());
-		//switchList.getlist2()
-		
-		ProductDAO podDAO = InitialPage.getInstance().getDaoFactory().getProductDAO();
 		podDAO.insert(newProduct);
+		model.addItem(newProduct);;
+		model.fireTableDataChanged();
 	}
-
-
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {

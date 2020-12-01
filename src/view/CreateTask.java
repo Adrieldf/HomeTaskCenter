@@ -18,6 +18,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import dao.TaskDAO;
+import model.Occurrence;
 import model.Task;
 
 public class CreateTask extends JPanel implements ActionListener {
@@ -211,6 +212,12 @@ public class CreateTask extends JPanel implements ActionListener {
 		newTask.setName(tfTitleTask.getText());
 		newTask.setDescription(taDescription.getText());
 		newTask.setCompleted(false);
+		
+		//salva a ocorrencia para sepa usar ela
+		Occurrence newOccurrence = new Occurrence();
+		newOccurrence.setDate(Integer.parseInt(tfDate.getText()));
+		newOccurrence.setHour(Integer.parseInt(tfHour.getText()));
+		
 		//newTask.setResponsible(); faltou checkbox
 		TaskDAO taskDAO = InitialPage.getInstance().getDaoFactory().getTaskDAO();
 		taskDAO.insert(newTask);
@@ -255,6 +262,23 @@ public class CreateTask extends JPanel implements ActionListener {
 		InitialPage.getInstance().createInternalFrame(new CreateReminder(), "Criar novo lembrete", 800, 600);
 	}
 
+	void actionSwitchListPullAll() {
+		//seria bom assim, mas sla se funciona
+		switchList.setlist2(switchList.getlist1());
+	}
+	
+	void actionSwitchListPullOne() {
+		
+	}
+	
+	void actionSwitchListRemoveAll() {
+		
+	}
+	
+	void actionSwitchListRemoveOne() {
+		
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
@@ -272,6 +296,22 @@ public class CreateTask extends JPanel implements ActionListener {
 					}else {
 						if(arg0.getSource()==btnCreateReminder) {
 							actionCreateReminder();
+						} else {
+							if(arg0.getSource()==switchList.getbPuttAll()) {
+								actionSwitchListPullAll();
+							} else {
+								if(arg0.getSource()==switchList.getbPuttOne()) {
+									actionSwitchListPullOne();
+								} else {
+									if(arg0.getSource()==switchList.getbRemoveAll()) {
+										actionSwitchListRemoveAll();
+									} else {
+										if(arg0.getSource()==switchList.getbRemoveOne()) {
+											actionSwitchListRemoveOne();
+										}
+									}
+								}
+							}
 						}
 					}
 				}

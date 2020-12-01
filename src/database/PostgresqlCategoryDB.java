@@ -106,9 +106,9 @@ public class PostgresqlCategoryDB implements CategoryDAO {
 			pstmt = conn.prepareStatement("insert into category (name, \"idFamily\") values (?,?)");
 
 			pstmt.setString(1, category.getName());
-			//if(category.getIdFamily()!=null) {
+			if(category.getIdFamily()!=null) {
 				pstmt.setInt(2, category.getIdFamily());
-			//}
+			}
 			
 			
 			pstmt.executeUpdate();

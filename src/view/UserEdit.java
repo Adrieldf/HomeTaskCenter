@@ -126,9 +126,10 @@ public class UserEdit extends JPanel implements ActionListener {
 	
 	void actionCreateUser() {
 		User newUser = new User();
+		UserDAO userDB = InitialPage.getInstance().getDaoFactory().getUserDAO();
 		newUser.setName(textField.getText());
 		newUser.setPassword(textField_1.getText());
-		UserDAO userDB = InitialPage.getInstance().getDaoFactory().getUserDAO();
+		newUser.setEmail(textField_2.getText());
 		userDB.insert(newUser);
 	}
 	
@@ -137,6 +138,7 @@ public class UserEdit extends JPanel implements ActionListener {
 		User user1 = userDB.getByName(textField.getText());
 		textField.setText(user1.getName());
 		textField_1.setText(user1.getPassword());
+		textField_2.setText(user1.getEmail());
 	}
 
 	void actionUpdate() {
@@ -144,6 +146,7 @@ public class UserEdit extends JPanel implements ActionListener {
 		UserDAO userDB = InitialPage.getInstance().getDaoFactory().getUserDAO();
 		newUser.setName(textField.getText());
 		newUser.setPassword(textField_1.getText());
+		newUser.setEmail(textField_2.getText());
 		userDB.edit(newUser);
 	}
 

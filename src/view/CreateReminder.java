@@ -14,6 +14,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import dao.ReminderDAO;
+import model.Occurrence;
 import model.Reminder;
 
 public class CreateReminder extends JPanel implements ActionListener {
@@ -160,7 +161,6 @@ public class CreateReminder extends JPanel implements ActionListener {
 		
 		ReminderDAO remDAO = InitialPage.getInstance().getDaoFactory().getReminderDAO();
 		remDAO.edit(newReminder);
-		
 	}
 
 	private void actionDeleteReminder() {

@@ -150,25 +150,32 @@ public class FamilyRegistration extends JPanel implements ActionListener {
 	void actionInsert() {
 		UserDAO userDAO = InitialPage.getInstance().getDaoFactory().getUserDAO();
 		Family newFamily = new Family();
+		//PELO NOME?????????????
 		User newUser = userDAO.getByName(tfName.getText());
+		//talvez pesquisar o usuario pelo nome no banco
+		
 		//verifica se é admin
 		if(isTrue) {
 			//menmbro é admin
-			
+			newUser.setAdmin(true);
 		}
+		//insere a familia na tabela
 		FamilyRegistrationTableModel model = (FamilyRegistrationTableModel) tabFamily.getModel();
-		model.addMember(newUser);
+		for(User fam :newFamily.getMermber()) {
+			model.addMember(fam);
+		}
+		//insere a familia no banco
 		FamilyDAO famDAO = InitialPage.getInstance().getDaoFactory().getFamilyDAO();
-		newFamily.setMermber(model.getMembers());
+		newFamily.addMember(newUser);
 		famDAO.insert(newFamily);
 		model.fireTableDataChanged();
 	}
 	
 	void actionDelete() {
 		FamilyRegistrationTableModel model = (FamilyRegistrationTableModel) tabFamily.getModel();
-		Family killCategory = (Family)model.getValueAt(selected, 0);
+		Family killFamily = (Family)model.getValueAt(selected, 0);
 		FamilyDAO famDAO = InitialPage.getInstance().getDaoFactory().getFamilyDAO();
-		famDAO.remove(killCategory);
+		famDAO.remove(killFamily);
 		model.removeMember(selected);
 		model.fireTableDataChanged();
 	}
