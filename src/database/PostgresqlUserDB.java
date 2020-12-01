@@ -204,12 +204,12 @@ public class PostgresqlUserDB implements UserDAO {
 
 	@Override
 	public User getByName(String name) {
-		// TODO Auto-generated method stub
+		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		User user = new User();
 		try {
-			pstmt = conn.prepareStatement("select id, name, password, \"idFamily\", email from user where name = ? and \"idFamily\" = ? order by id");
+			pstmt = conn.prepareStatement("select id, name, password, \"idFamily\", email from user where name = ? order by id");
 			pstmt.setString(1, name);
 			rs = pstmt.executeQuery();
 			
