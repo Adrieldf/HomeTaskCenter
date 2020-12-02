@@ -32,8 +32,8 @@ import view.tableModel.FamilyRegistrationTableModel;
 public class FamilyRegistration extends JPanel implements ActionListener {
 	private JTable tabFamily;
 	private JTextField tfName;
-	private JButton btnInsert,btnDelete;
-	private JLabel lbTitle,lbFamily,lblName,lblAdmin;
+	private JButton btnSave, btnDelete;
+	private JLabel lbTitle, lbFamily, lblName, lblAdmin;
 	private JCheckBox chckbxAdmin;
 	private Integer selected;
 	private boolean isTrue = false;
@@ -43,9 +43,9 @@ public class FamilyRegistration extends JPanel implements ActionListener {
 		this.user = user;
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{30, 100, 100, 30, 30, 30, 100, 100, 30, 0};
-		gridBagLayout.rowHeights = new int[]{30, 30, 30, 30, 30, 30, 0, 30, 30, 30, 0};
+		gridBagLayout.rowHeights = new int[]{30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
 		lbTitle = new JLabel("Cadastro de Família");
@@ -76,6 +76,8 @@ public class FamilyRegistration extends JPanel implements ActionListener {
 		add(lblName, gbc_lblName);
 		
 		tfName = new JTextField();
+		tfName.setEnabled(false);
+		tfName.setEditable(false);
 		GridBagConstraints gbc_tfName = new GridBagConstraints();
 		gbc_tfName.gridwidth = 2;
 		gbc_tfName.insets = new Insets(0, 0, 5, 5);
@@ -96,7 +98,7 @@ public class FamilyRegistration extends JPanel implements ActionListener {
 		});
 		
 		GridBagConstraints gbc_tabFamily = new GridBagConstraints();
-		gbc_tabFamily.gridheight = 3;
+		gbc_tabFamily.gridheight = 9;
 		gbc_tabFamily.gridwidth = 2;
 		gbc_tabFamily.insets = new Insets(0, 0, 5, 5);
 		gbc_tabFamily.fill = GridBagConstraints.BOTH;
@@ -127,22 +129,20 @@ public class FamilyRegistration extends JPanel implements ActionListener {
 		gbc_chckbxAdmin.gridy = 5;
 		add(chckbxAdmin, gbc_chckbxAdmin);
 		
-		btnInsert = new JButton("Inserir");
-		btnInsert.addActionListener(this);
-		GridBagConstraints gbc_btnInsert = new GridBagConstraints();
-		gbc_btnInsert.gridwidth = 2;
-		gbc_btnInsert.insets = new Insets(0, 0, 5, 5);
-		gbc_btnInsert.gridx = 6;
-		gbc_btnInsert.gridy = 7;
-		add(btnInsert, gbc_btnInsert);
+		btnSave = new JButton("Salvar");
+		btnSave.addActionListener(this);
+		GridBagConstraints gbc_btnSave = new GridBagConstraints();
+		gbc_btnSave.insets = new Insets(0, 0, 5, 5);
+		gbc_btnSave.gridx = 6;
+		gbc_btnSave.gridy = 7;
+		add(btnSave, gbc_btnSave);
 		
 		btnDelete = new JButton("Excluir\r\n");
 		btnDelete.addActionListener(this);
 		GridBagConstraints gbc_btnDelete = new GridBagConstraints();
-		gbc_btnDelete.gridwidth = 2;
 		gbc_btnDelete.insets = new Insets(0, 0, 5, 5);
-		gbc_btnDelete.gridx = 1;
-		gbc_btnDelete.gridy = 8;
+		gbc_btnDelete.gridx = 7;
+		gbc_btnDelete.gridy = 7;
 		add(btnDelete, gbc_btnDelete);
 	}
 	
@@ -199,7 +199,7 @@ public class FamilyRegistration extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
-		if(arg0.getSource()==btnInsert) {
+		if(arg0.getSource()==btnSave) {
 			actionInsert();
 		}else {
 			if(arg0.getSource()==btnDelete) {

@@ -93,7 +93,7 @@ public class InitialPage extends JFrame{
 		showPanelFullScreen(new PendingTasks(user), "Home Task Center");			
 		
 		// TODO: validar se o login foi realizado com sucesso para mostrar as tasks
-		createInternalFrame(new LoginPage(user), "Home Task Center", 400, 400);
+		createInternalFrame(new LoginPage(user), "Home Task Center", 380, 350);
 	}
 	
 	public DAOFactory getDaoFactory() {
@@ -139,7 +139,7 @@ public class InitialPage extends JFrame{
 		JMenuItem mntmCreateTask = new JMenuItem("Cadastro de Tarefas");
 		mntmCreateTask.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg3) {
-				createInternalFrame(new CreateTask(user), "Home Task Center", 500, 600);
+				createInternalFrame(new CreateTask(user), "Home Task Center", 500, 800);
 			}
 		});
 		mnTasks.add(mntmCreateTask);
@@ -148,7 +148,7 @@ public class InitialPage extends JFrame{
 		JMenuItem mntmUserEdit = new JMenuItem("Cadastro de Usuários");
 		mntmUserEdit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg1) {
-				createInternalFrame(new UserEdit(user), "Home Task Center", 450, 350);
+				createInternalFrame(new UserEdit(user), "Home Task Center", 500, 380);
 			}
 		});
 		mnUsers.add(mntmUserEdit);
@@ -156,7 +156,7 @@ public class InitialPage extends JFrame{
 		JMenuItem mntmFamilyRegistration = new JMenuItem("Cadastro de Família");
 		mntmFamilyRegistration.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg4) {
-				createInternalFrame(new FamilyRegistration(user), "Home Task Center", 600, 400);
+				createInternalFrame(new FamilyRegistration(user), "Home Task Center", 600, 500);
 			}
 		});
 		mnUsers.add(mntmFamilyRegistration);
@@ -165,7 +165,7 @@ public class InitialPage extends JFrame{
 		JMenuItem mntmCreateItems = new JMenuItem("Cadastro de Itens");
 		mntmCreateItems.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg5) {
-				createInternalFrame(new CreateItems(user), "Home Task Center", 550, 400);
+				createInternalFrame(new CreateItems(user), "Home Task Center", 500, 450);
 				//createIntFrame();
 			}
 		});
