@@ -7,16 +7,16 @@ import javax.swing.table.AbstractTableModel;
 
 import model.Product;
 
-public class CreateItemTableModel extends AbstractTableModel{
+public class ItemTableModel extends AbstractTableModel{
 
 	private List<Product> items;
 	private static final String names[] = {"Item"};
 
-	public CreateItemTableModel() {
+	public ItemTableModel() {
 		this.items = new ArrayList<Product>();
 	}
 	
-	public CreateItemTableModel(List<Product> items) {
+	public ItemTableModel(List<Product> items) {
 		this.items = items;
 	}
 	

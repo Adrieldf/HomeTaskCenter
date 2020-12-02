@@ -90,11 +90,12 @@ public class PostgresqlUserDB implements UserDAO {
 		}
 		PreparedStatement pstmt = null;
 		try {
-			pstmt = conn.prepareStatement("insert into user (name, password, email) values ( ? , ?, ? )");
-		
+			pstmt = conn.prepareStatement("insert into user (name, password, email, \'idFamily\') values (?,?,?,?)");
+			System.out.println(user.toString());
 			pstmt.setString(1, user.getName());
-			pstmt.setString(2, Criptography.Encode(user.getPassword()).toString());
+			pstmt.setString(2, user.getPassword());
 			pstmt.setString(3, user.getEmail());
+			pstmt.setInt(4, user.getIdFamily());
 			pstmt.executeUpdate();
 		}
 		catch(SQLException ex) {
@@ -156,7 +157,6 @@ public class PostgresqlUserDB implements UserDAO {
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 			}
-
 		}
 
 	}

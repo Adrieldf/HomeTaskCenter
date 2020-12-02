@@ -90,7 +90,7 @@ public class InitialPage extends JFrame{
 	}
 	
 	private void initial() {
-		showPanelFullScreen(new PendingTasks(user), "Home Task Center");			
+		//showPanelFullScreen(new PendingTasks(user), "Home Task Center");			
 		
 		// TODO: validar se o login foi realizado com sucesso para mostrar as tasks
 		createInternalFrame(new LoginPage(user), "Home Task Center", 380, 350);
@@ -253,5 +253,12 @@ public class InitialPage extends JFrame{
 		
 	}
 
+	
+	public void enableMenu(boolean habilita) {
+		int quantos = menuBar_1.getMenuCount();
+		for(int i=0;i<quantos;i++) {
+			menuBar_1.getMenu(i).setEnabled(habilita);
+		}
+	}
 	
 }

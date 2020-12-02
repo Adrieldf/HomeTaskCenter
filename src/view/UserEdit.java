@@ -13,7 +13,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import dao.FamilyDAO;
 import dao.UserDAO;
+import model.Family;
 import model.User;
 
 public class UserEdit extends JPanel implements ActionListener {
@@ -32,7 +34,6 @@ public class UserEdit extends JPanel implements ActionListener {
 	public UserEdit(User user) {
 		this.user = user;
 
-		
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{40, 30, 30, 100, 100, 100, 30, 0};
 		gridBagLayout.rowHeights = new int[]{30, 30, 30, 30, 20, 30, 20, 30, 20, 30, 20, 30, 30, 0};
@@ -155,11 +156,16 @@ public class UserEdit extends JPanel implements ActionListener {
 	
 	
 	void actionCreateUser() {
+		Family newFamily = new Family(tfFamily.getText());
 		User newUser = new User();
 		UserDAO userDB = InitialPage.getInstance().getDaoFactory().getUserDAO();
 		newUser.setName(tfName.getText());
 		newUser.setPassword(tfPassword.getText());
 		newUser.setEmail(tfMail.getText());
+		newFamily.addMember(newUser);
+		FamilyDAO famDAO = InitialPage.getInstance().getDaoFactory().getFamilyDAO();
+		famDAO.insert(newFamily);
+		newUser.setIdFamily(famDAO.getMaxId());
 		userDB.insert(newUser);
 	}
 	

@@ -13,7 +13,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 
+import dao.TaskDAO;
+import model.Category;
+import model.Task;
 import model.User;
+import view.tableModel.CategoryTableModel;
+import view.tableModel.ItemTableModel;
+import view.tableModel.TaskTableModel;
 
 //jPanel frame
 public class PendingTasks extends JPanel implements ActionListener{
@@ -23,6 +29,9 @@ public class PendingTasks extends JPanel implements ActionListener{
 	private JButton btnCreateTask;
 	private JLabel lbTitle;
 	private User user;
+	
+	private TaskDAO taskDAO = InitialPage.getInstance().getDaoFactory().getTaskDAO();
+	private TaskTableModel model;
 	
 	public PendingTasks(User user) {
 		this.user = user;
@@ -43,7 +52,8 @@ public class PendingTasks extends JPanel implements ActionListener{
 		gbc_lbTitle.gridy = 1;
 		add(lbTitle, gbc_lbTitle);
 		
-		tabTasks = new JTable();
+		model = new TaskTableModel();
+		tabTasks = new JTable(model);
 		GridBagConstraints gbc_tabTasks = new GridBagConstraints();
 		gbc_tabTasks.gridheight = 6;
 		gbc_tabTasks.gridwidth = 13;
@@ -61,7 +71,19 @@ public class PendingTasks extends JPanel implements ActionListener{
 		gbc_btnCreateTask.gridx = 1;
 		gbc_btnCreateTask.gridy = 10;
 		add(btnCreateTask, gbc_btnCreateTask);
+		
+		popula();
 	}
+
+
+	private void popula() {
+		// TODO Auto-generated method stub
+//		for(Task tas : taskDAO.getAll(user.getIdFamily())) {
+//			model.addTask(tas);
+//		}
+		//model.fireTableDataChanged();
+	}
+
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {

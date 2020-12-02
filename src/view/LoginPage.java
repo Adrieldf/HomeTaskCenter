@@ -104,12 +104,15 @@ public class LoginPage extends JPanel implements ActionListener {
 		add(btnCancel, gbc_btnCancel);
 		
 		btnUserEdit = new JButton("Cadastrar-se");
+		btnUserEdit.addActionListener(this);
 		GridBagConstraints gbc_btnUserEdit = new GridBagConstraints();
 		gbc_btnUserEdit.gridwidth = 4;
 		gbc_btnUserEdit.insets = new Insets(0, 0, 5, 5);
 		gbc_btnUserEdit.gridx = 2;
 		gbc_btnUserEdit.gridy = 9;
 		add(btnUserEdit, gbc_btnUserEdit);
+		
+		InitialPage.getInstance().enableMenu(false);
 	}
 
 	void actionLogin() {
@@ -120,6 +123,8 @@ public class LoginPage extends JPanel implements ActionListener {
 			JOptionPane.showMessageDialog(null, "Login realizado com sucesso!", "Sucesso",
 					JOptionPane.INFORMATION_MESSAGE);
 			// definir a variavel do usuario que vai ser usada nas demais telas
+			InitialPage.getInstance().enableMenu(true);
+			//InitialPage.getInstance().
 			this.user = user;
 			// fecha a tela de login
 		} else {
@@ -143,6 +148,10 @@ public class LoginPage extends JPanel implements ActionListener {
 		} else {
 			if (arg0.getSource() == btnCancel) {
 				actionCancel();
+			} else{
+				if(arg0.getSource() == btnUserEdit) {
+					InitialPage.getInstance().createInternalFrame(new UserEdit(user), "Cadastro de usuario", 800, 600);
+				}
 			}
 		}
 	}

@@ -14,6 +14,11 @@ public class Family {
 		members = new ArrayList<User>();
 	}
 
+	public Family(String name) {
+		this();
+		this.setName(name);
+	}
+	
 	public Family(int id, String name) {
 		this();
 		this.setId(id);

@@ -254,15 +254,13 @@ public class CreateTask extends JPanel implements ActionListener {
 		newTask.setIdUser(user.getId());
 		newTask.setIdFamily(user.getIdFamily());
 		
-		//talvez jogar a conversao para dentro do switch list ou model dele
 		JList listResponsibles = switchListResponsible.getlist2();
-		List list = new ArrayList(listResponsibles.getModel().getSize());
-		for (int i = 0; i < listResponsibles.getModel().getSize(); i++) {
-		    list.add(listResponsibles.getModel().getElementAt(i));
-		}
-		newTask.setResponsible(list);
+		newTask.setResponsible(switchListResponsible.getArray(listResponsibles));
+		
+		JList listItens = switchListItems.getlist2();
+		newTask.setProducts(switchListItems.getArray(listItens));
 		newTask.setCompleted(false);
-		newTask.setProducts(null);
+		//faltou checkbox
 		
 		TaskDAO taskDAO = InitialPage.getInstance().getDaoFactory().getTaskDAO();
 		taskDAO.insert(newTask);
@@ -282,7 +280,7 @@ public class CreateTask extends JPanel implements ActionListener {
 	void actionSearch() {
 		
 		TaskDAO taskDAO = InitialPage.getInstance().getDaoFactory().getTaskDAO();
-		//taskDAO.getById(id, idFamily)
+		//taskDAO.getById(, idFamily);
 		Task newTask = new Task();
 		
 	}
@@ -373,5 +371,4 @@ public class CreateTask extends JPanel implements ActionListener {
 		}
 	}
 	
-
 }

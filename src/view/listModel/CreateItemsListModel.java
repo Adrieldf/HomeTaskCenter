@@ -7,12 +7,12 @@ import javax.swing.event.ListDataListener;
 
 public class CreateItemsListModel implements ListModel{
 
-	private ArrayList list;
-    private ArrayList<ListDataListener> listListeners;
+	private ArrayList list,list2;
+    //private ArrayList<ListDataListener> listListeners;
 
     public CreateItemsListModel() {
         list = new ArrayList();
-        listListeners = new ArrayList();
+        list2 = new ArrayList();
     }
     
     public void addElement(Object element){

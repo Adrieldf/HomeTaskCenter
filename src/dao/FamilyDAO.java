@@ -10,4 +10,5 @@ public interface FamilyDAO {
     void insert(Family family);
     void remove(Family family);
     void edit(Family family);
+    int getMaxId();
 }

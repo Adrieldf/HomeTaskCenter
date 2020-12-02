@@ -1,5 +1,7 @@
 package view;
 import java.awt.GridLayout;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JList;
@@ -85,6 +87,14 @@ public class SwitchList extends JPanel{
 
 	public void setbRemoveAll(JButton bRemoveAll) {
 		this.bRemoveAll = bRemoveAll;
+	}
+	
+	public List getArray(JList jList) {
+		List list = new ArrayList(jList.getModel().getSize());
+		for (int i = 0; i < jList.getModel().getSize(); i++) {
+		    list.add(jList.getModel().getElementAt(i));
+		}
+		return list;
 	}
 	
 

@@ -32,6 +32,9 @@ public class CategoryRegistration extends JPanel implements ActionListener{
 	private Integer selected;
 	private User user;
 	
+	private CategoryTableModel model;
+	private CategoryDAO catDAO = InitialPage.getInstance().getDaoFactory().getCategoryDAO();
+	
 	public CategoryRegistration(User user) {
 		this.user = user;
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -80,9 +83,8 @@ public class CategoryRegistration extends JPanel implements ActionListener{
 		btnNewCategorie = new JButton("Criar categoria");
 		btnNewCategorie.addActionListener(this);
 		
-		
-		table = new JTable(new CategoryTableModel());
-		
+		model = new CategoryTableModel();
+		table = new JTable(model);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		ListSelectionModel selectionModel = table.getSelectionModel();
 		selectionModel.addListSelectionListener(new ListSelectionListener() {
@@ -121,8 +123,6 @@ public class CategoryRegistration extends JPanel implements ActionListener{
 	}
 
 	void actionNewCategorie(){
-		CategoryTableModel model = (CategoryTableModel) table.getModel();
-		CategoryDAO catDAO = InitialPage.getInstance().getDaoFactory().getCategoryDAO();
 		Category newCategory = new Category();
 		newCategory.setName(tfName.getText());
 		newCategory.setIdFamily(user.getIdFamily());
@@ -132,9 +132,7 @@ public class CategoryRegistration extends JPanel implements ActionListener{
 	}
 	
 	void actionDelete(){
-		CategoryTableModel model = (CategoryTableModel) table.getModel();
 		Category killCategory = model.getCategory(selected);
-		CategoryDAO catDAO = InitialPage.getInstance().getDaoFactory().getCategoryDAO();
 		catDAO.remove(killCategory);
 		model.removeCategory(selected);
 		model.fireTableDataChanged();

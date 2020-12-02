@@ -24,7 +24,7 @@ import model.Category;
 import model.Product;
 import model.User;
 import view.tableModel.CategoryTableModel;
-import view.tableModel.CreateItemTableModel;
+import view.tableModel.ItemTableModel;
 
 import javax.swing.JTable;
 //import javax.swing.JTable;
@@ -42,7 +42,7 @@ public class CreateItems extends JPanel implements ActionListener{
 	private User user;
 	
 	private CategoryDAO catDAO = InitialPage.getInstance().getDaoFactory().getCategoryDAO();
-	//private CategoryTableModel model = (CategoryTableModel) tableCItems.getModel();
+	private CategoryTableModel model;
 	
 //	private GridBagConstraints gbc_btnCreateItem;
 	
@@ -139,7 +139,8 @@ public class CreateItems extends JPanel implements ActionListener{
 		btnCreateItem = new JButton("Criar item");
 		btnCreateItem.addActionListener(this);
 		
-		tableCItems = new JTable(new CreateItemTableModel());
+		model = new CategoryTableModel();
+		tableCItems = new JTable(model);
 		tableCItems.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		ListSelectionModel selectionModel = tableCItems.getSelectionModel();
 		selectionModel.addListSelectionListener(new ListSelectionListener() {
@@ -181,17 +182,18 @@ public class CreateItems extends JPanel implements ActionListener{
 //		gbc_btnCreateItem.gridy = 6;
 //		add(btnCreateItem, gbc_btnCreateItem);
 		
-		//popula();
+		
+		popula();
 		
 	}
 	
-//	void popula() {
-//		
-//		for(Category categ : catDAO.getAll(user.getIdFamily())) {
-//			model.addCategory(categ);
-//			//fireTableDataChanged();
-//		}
-//	}
+	void popula() {
+		
+		for(Category categ : catDAO.getAll(user.getIdFamily())) {
+			model.addCategory(categ);
+		}
+		model.fireTableDataChanged();
+	}
 	
 	void actionKeepSelected() {
 		selected = tableCItems.getSelectedRow();
@@ -200,7 +202,6 @@ public class CreateItems extends JPanel implements ActionListener{
 	
 	void actionCreateItem() {
 		//mudei a model para a mesma model da category registration, agora a model creteitem não esta mais sendo usada
-		CategoryTableModel model = (CategoryTableModel) tableCItems.getModel();
 		ProductDAO podDAO = InitialPage.getInstance().getDaoFactory().getProductDAO();
 		Product newProduct = new Product();
 		newProduct.setName(tfName.getText());

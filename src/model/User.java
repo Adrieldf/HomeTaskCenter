@@ -94,6 +94,12 @@ public class User implements Serializable {
 	public void setAdmin(boolean admin) {
 		this.admin = admin;
 	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", password=" + password + ", idFamily=" + idFamily + ", email="
+				+ email + ", admin=" + admin + "]";
+	}
 	
 	
 
