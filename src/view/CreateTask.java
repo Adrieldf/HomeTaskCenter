@@ -20,25 +20,27 @@ import javax.swing.event.ListSelectionListener;
 import dao.TaskDAO;
 import model.Occurrence;
 import model.Task;
+import javax.swing.JCheckBox;
 
 public class CreateTask extends JPanel implements ActionListener {
 	private JTextField tfTitleTask;
 	private JTextField tfDate;
 	private JTextField tfHour;
 //	private JTable tbResponsible;
-	private JButton btnCreateTask,btnSearchTask,btnUpdateTask,btnDeleteTask,btnCreateReminder;
-	private JLabel lblTitle,lblTitleTask,lblDescription,lblResponsible,lblDate,lblHour;
+	private JButton btnCreateTask, btnSearchTask, btnUpdateTask, btnDeleteTask, btnEditReminder;
+	private JLabel lblTitle, lblTitleTask, lblDescription, lblResponsible, lblDate, lblHour;
 	private JTextArea taDescription;
 	private Integer selected;
 	private boolean isTrue = false;
 	private SwitchList switchList;
+	private JCheckBox chckbxIsConcluded;
 	
 	public CreateTask() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{30, 30, 30, 100, 100, 100, 30, 0};
-		gridBagLayout.rowHeights = new int[]{30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 0, 30, 30, 30, 30, 30, 30, 0};
+		gridBagLayout.rowHeights = new int[]{30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 0, 30, 30, 30, 30, 30, 30, 30, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
 		lblTitle = new JLabel("Cadastro de Tarefas");
@@ -50,13 +52,20 @@ public class CreateTask extends JPanel implements ActionListener {
 		gbc_lblTitle.gridy = 1;
 		add(lblTitle, gbc_lblTitle);
 		
+		chckbxIsConcluded = new JCheckBox("Concluída");
+		GridBagConstraints gbc_chckbxIsConcluded = new GridBagConstraints();
+		gbc_chckbxIsConcluded.insets = new Insets(0, 0, 5, 5);
+		gbc_chckbxIsConcluded.gridx = 5;
+		gbc_chckbxIsConcluded.gridy = 2;
+		add(chckbxIsConcluded, gbc_chckbxIsConcluded);
+		
 		lblTitleTask = new JLabel("Título");
 		lblTitleTask.setFont(new Font("Tahoma", Font.BOLD, 11));
 		GridBagConstraints gbc_lblTitleTask = new GridBagConstraints();
 		gbc_lblTitleTask.anchor = GridBagConstraints.WEST;
 		gbc_lblTitleTask.insets = new Insets(0, 0, 5, 5);
 		gbc_lblTitleTask.gridx = 1;
-		gbc_lblTitleTask.gridy = 3;
+		gbc_lblTitleTask.gridy = 4;
 		add(lblTitleTask, gbc_lblTitleTask);
 		
 		tfTitleTask = new JTextField();
@@ -65,7 +74,7 @@ public class CreateTask extends JPanel implements ActionListener {
 		gbc_tfTitleTask.insets = new Insets(0, 0, 5, 5);
 		gbc_tfTitleTask.fill = GridBagConstraints.HORIZONTAL;
 		gbc_tfTitleTask.gridx = 3;
-		gbc_tfTitleTask.gridy = 3;
+		gbc_tfTitleTask.gridy = 4;
 		add(tfTitleTask, gbc_tfTitleTask);
 		tfTitleTask.setColumns(10);
 		
@@ -76,7 +85,7 @@ public class CreateTask extends JPanel implements ActionListener {
 		gbc_lblDescription.anchor = GridBagConstraints.WEST;
 		gbc_lblDescription.insets = new Insets(0, 0, 5, 5);
 		gbc_lblDescription.gridx = 1;
-		gbc_lblDescription.gridy = 5;
+		gbc_lblDescription.gridy = 6;
 		add(lblDescription, gbc_lblDescription);
 		
 		taDescription = new JTextArea();
@@ -86,7 +95,7 @@ public class CreateTask extends JPanel implements ActionListener {
 		gbc_taDescription.insets = new Insets(0, 0, 5, 5);
 		gbc_taDescription.fill = GridBagConstraints.BOTH;
 		gbc_taDescription.gridx = 3;
-		gbc_taDescription.gridy = 5;
+		gbc_taDescription.gridy = 6;
 		add(taDescription, gbc_taDescription);
 		
 		lblResponsible = new JLabel("Responsável (s)");
@@ -95,7 +104,7 @@ public class CreateTask extends JPanel implements ActionListener {
 		gbc_lblResponsible.gridheight = 2;
 		gbc_lblResponsible.insets = new Insets(0, 0, 5, 5);
 		gbc_lblResponsible.gridx = 1;
-		gbc_lblResponsible.gridy = 9;
+		gbc_lblResponsible.gridy = 10;
 		add(lblResponsible, gbc_lblResponsible);
 		
 		switchList = new SwitchList();
@@ -105,7 +114,7 @@ public class CreateTask extends JPanel implements ActionListener {
 		gbc_switchList.fill = GridBagConstraints.BOTH;
 		gbc_switchList.insets = new Insets(0, 0, 5, 5);
 		gbc_switchList.gridx = 3;
-		gbc_switchList.gridy = 9;
+		gbc_switchList.gridy = 10;
 		add(switchList, gbc_switchList);
 		
 //		tbResponsible = new JTable();
@@ -132,7 +141,7 @@ public class CreateTask extends JPanel implements ActionListener {
 		gbc_lblDate.anchor = GridBagConstraints.WEST;
 		gbc_lblDate.insets = new Insets(0, 0, 5, 5);
 		gbc_lblDate.gridx = 1;
-		gbc_lblDate.gridy = 14;
+		gbc_lblDate.gridy = 15;
 		add(lblDate, gbc_lblDate);
 		
 		tfDate = new JTextField();
@@ -140,7 +149,7 @@ public class CreateTask extends JPanel implements ActionListener {
 		gbc_tfDate.insets = new Insets(0, 0, 5, 5);
 		gbc_tfDate.fill = GridBagConstraints.HORIZONTAL;
 		gbc_tfDate.gridx = 3;
-		gbc_tfDate.gridy = 14;
+		gbc_tfDate.gridy = 15;
 		add(tfDate, gbc_tfDate);
 		tfDate.setColumns(10);
 		
@@ -149,7 +158,7 @@ public class CreateTask extends JPanel implements ActionListener {
 		GridBagConstraints gbc_lblHour = new GridBagConstraints();
 		gbc_lblHour.insets = new Insets(0, 0, 5, 5);
 		gbc_lblHour.gridx = 4;
-		gbc_lblHour.gridy = 14;
+		gbc_lblHour.gridy = 15;
 		add(lblHour, gbc_lblHour);
 		
 		tfHour = new JTextField();
@@ -157,7 +166,7 @@ public class CreateTask extends JPanel implements ActionListener {
 		gbc_tfHour.insets = new Insets(0, 0, 5, 5);
 		gbc_tfHour.fill = GridBagConstraints.HORIZONTAL;
 		gbc_tfHour.gridx = 5;
-		gbc_tfHour.gridy = 14;
+		gbc_tfHour.gridy = 15;
 		add(tfHour, gbc_tfHour);
 		tfHour.setColumns(10);
 		
@@ -166,7 +175,7 @@ public class CreateTask extends JPanel implements ActionListener {
 		GridBagConstraints gbc_btnCreateTask = new GridBagConstraints();
 		gbc_btnCreateTask.insets = new Insets(0, 0, 5, 5);
 		gbc_btnCreateTask.gridx = 1;
-		gbc_btnCreateTask.gridy = 16;
+		gbc_btnCreateTask.gridy = 17;
 		add(btnCreateTask, gbc_btnCreateTask);
 		
 		btnSearchTask = new JButton("Buscar");
@@ -174,7 +183,7 @@ public class CreateTask extends JPanel implements ActionListener {
 		GridBagConstraints gbc_btnSearchTask = new GridBagConstraints();
 		gbc_btnSearchTask.insets = new Insets(0, 0, 5, 5);
 		gbc_btnSearchTask.gridx = 3;
-		gbc_btnSearchTask.gridy = 16;
+		gbc_btnSearchTask.gridy = 17;
 		add(btnSearchTask, gbc_btnSearchTask);
 		
 		btnUpdateTask = new JButton("Alterar");
@@ -182,7 +191,7 @@ public class CreateTask extends JPanel implements ActionListener {
 		GridBagConstraints gbc_btnUpdateTask = new GridBagConstraints();
 		gbc_btnUpdateTask.insets = new Insets(0, 0, 5, 5);
 		gbc_btnUpdateTask.gridx = 4;
-		gbc_btnUpdateTask.gridy = 16;
+		gbc_btnUpdateTask.gridy = 17;
 		add(btnUpdateTask, gbc_btnUpdateTask);
 		
 		btnDeleteTask = new JButton("Excluir");
@@ -190,17 +199,17 @@ public class CreateTask extends JPanel implements ActionListener {
 		GridBagConstraints gbc_btnDeleteTask = new GridBagConstraints();
 		gbc_btnDeleteTask.insets = new Insets(0, 0, 5, 5);
 		gbc_btnDeleteTask.gridx = 5;
-		gbc_btnDeleteTask.gridy = 16;
+		gbc_btnDeleteTask.gridy = 17;
 		add(btnDeleteTask, gbc_btnDeleteTask);
 		
-		btnCreateReminder = new JButton("Criar/editar lembrete");
-		btnCreateReminder.addActionListener(this);
-		GridBagConstraints gbc_btnCreateReminder = new GridBagConstraints();
-		gbc_btnCreateReminder.gridwidth = 2;
-		gbc_btnCreateReminder.insets = new Insets(0, 0, 5, 5);
-		gbc_btnCreateReminder.gridx = 3;
-		gbc_btnCreateReminder.gridy = 18;
-		add(btnCreateReminder, gbc_btnCreateReminder);
+		btnEditReminder = new JButton("Editar lembrete");
+		btnEditReminder.addActionListener(this);
+		GridBagConstraints gbc_btnEditReminder = new GridBagConstraints();
+		gbc_btnEditReminder.gridwidth = 2;
+		gbc_btnEditReminder.insets = new Insets(0, 0, 5, 5);
+		gbc_btnEditReminder.gridx = 3;
+		gbc_btnEditReminder.gridy = 19;
+		add(btnEditReminder, gbc_btnEditReminder);
 	}
 
 	void actionKeepSelected() {
@@ -258,8 +267,8 @@ public class CreateTask extends JPanel implements ActionListener {
 		
 	}
 	
-	void actionCreateReminder() {
-		InitialPage.getInstance().createInternalFrame(new CreateReminder(), "Criar novo lembrete", 800, 600);
+	void actionEditReminder() {
+		InitialPage.getInstance().createInternalFrame(new EditReminder(), "Home Task Center", 800, 600);
 	}
 
 	void actionSwitchListPullAll() {
@@ -294,8 +303,8 @@ public class CreateTask extends JPanel implements ActionListener {
 					if(arg0.getSource()==btnDeleteTask) {
 						actionDelete();
 					}else {
-						if(arg0.getSource()==btnCreateReminder) {
-							actionCreateReminder();
+						if(arg0.getSource()==btnEditReminder) {
+							actionEditReminder();
 						} else {
 							if(arg0.getSource()==switchList.getbPuttAll()) {
 								actionSwitchListPullAll();

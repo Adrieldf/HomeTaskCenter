@@ -90,7 +90,7 @@ public class InitialPage extends JFrame{
 		showPanelFullScreen(new PendingTasks(), "Home Task Center");			
 		
 		// TODO: validar se o login foi realizado com sucesso para mostrar as tasks
-		createInternalFrame(new LoginPage(), "Home Task Center", 400, 300);
+		createInternalFrame(new LoginPage(), "Home Task Center", 400, 400);
 	}
 	
 	public DAOFactory getDaoFactory() {
@@ -136,7 +136,7 @@ public class InitialPage extends JFrame{
 		JMenuItem mntmCreateTask = new JMenuItem("Cadastro de Tarefas");
 		mntmCreateTask.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg3) {
-				createInternalFrame(new CreateTask(), "Home Task Center", 500, 550);
+				createInternalFrame(new CreateTask(), "Home Task Center", 500, 600);
 			}
 		});
 		mnTasks.add(mntmCreateTask);

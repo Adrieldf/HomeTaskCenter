@@ -24,18 +24,20 @@ public class LoginPage extends JPanel implements ActionListener {
 	private JLabel lbTitle, lbName, lbPassword;
 	private JButton btnLogin, btnCancel;
 
+	private JButton btnUserEdit;
+	
 	public LoginPage() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[] { 30, 30, 30, 100, 100, 30, 0 };
-		gridBagLayout.rowHeights = new int[] { 30, 30, 30, 30, 30, 30, 30, 30, 30, 0 };
-		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
-		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		gridBagLayout.columnWidths = new int[]{30, 30, 30, 100, 100, 30, 30, 0};
+		gridBagLayout.rowHeights = new int[]{30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 0};
+		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 
 		lbTitle = new JLabel("Login");
 		lbTitle.setFont(new Font("Tahoma", Font.BOLD, 17));
 		GridBagConstraints gbc_lbTitle = new GridBagConstraints();
-		gbc_lbTitle.gridwidth = 6;
+		gbc_lbTitle.gridwidth = 7;
 		gbc_lbTitle.insets = new Insets(0, 0, 5, 0);
 		gbc_lbTitle.gridx = 0;
 		gbc_lbTitle.gridy = 1;
@@ -95,6 +97,14 @@ public class LoginPage extends JPanel implements ActionListener {
 		gbc_btnCancel.gridx = 4;
 		gbc_btnCancel.gridy = 7;
 		add(btnCancel, gbc_btnCancel);
+		
+		btnUserEdit = new JButton("Criar usuário");
+		GridBagConstraints gbc_btnUserEdit = new GridBagConstraints();
+		gbc_btnUserEdit.gridwidth = 2;
+		gbc_btnUserEdit.insets = new Insets(0, 0, 5, 5);
+		gbc_btnUserEdit.gridx = 3;
+		gbc_btnUserEdit.gridy = 9;
+		add(btnUserEdit, gbc_btnUserEdit);
 	}
 
 	void actionLogin() {
