@@ -40,9 +40,9 @@ public class EditReminder extends JPanel implements ActionListener {
 		lblTitle = new JLabel("Editar Lembrete");
 		lblTitle.setFont(new Font("Tahoma", Font.BOLD, 17));
 		GridBagConstraints gbc_lblTitle = new GridBagConstraints();
-		gbc_lblTitle.gridwidth = 7;
+		gbc_lblTitle.gridwidth = 6;
 		gbc_lblTitle.insets = new Insets(0, 0, 5, 5);
-		gbc_lblTitle.gridx = 0;
+		gbc_lblTitle.gridx = 1;
 		gbc_lblTitle.gridy = 1;
 		add(lblTitle, gbc_lblTitle);
 		
@@ -116,8 +116,9 @@ public class EditReminder extends JPanel implements ActionListener {
 		btnUpdateReminder = new JButton("Alterar");
 		btnUpdateReminder.addActionListener(this);
 		GridBagConstraints gbc_btnUpdateReminder = new GridBagConstraints();
+		gbc_btnUpdateReminder.gridwidth = 3;
 		gbc_btnUpdateReminder.insets = new Insets(0, 0, 5, 5);
-		gbc_btnUpdateReminder.gridx = 4;
+		gbc_btnUpdateReminder.gridx = 2;
 		gbc_btnUpdateReminder.gridy = 11;
 		add(btnUpdateReminder, gbc_btnUpdateReminder);
 		
