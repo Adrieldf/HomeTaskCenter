@@ -6,9 +6,12 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
@@ -17,10 +20,12 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import dao.OccurrenceDAO;
 import dao.TaskDAO;
 import model.Occurrence;
 import model.Task;
 import javax.swing.JCheckBox;
+import model.User;
 
 public class CreateTask extends JPanel implements ActionListener {
 	private JTextField tfTitleTask;
@@ -34,8 +39,10 @@ public class CreateTask extends JPanel implements ActionListener {
 	private boolean isTrue = false;
 	private SwitchList switchList;
 	private JCheckBox chckbxIsConcluded;
+	private User user;
 	
-	public CreateTask() {
+	public CreateTask(User user) {
+		this.user = user;
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{30, 30, 30, 100, 100, 100, 30, 0};
 		gridBagLayout.rowHeights = new int[]{30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 0, 30, 30, 30, 30, 30, 30, 30, 0};
@@ -212,26 +219,41 @@ public class CreateTask extends JPanel implements ActionListener {
 		add(btnEditReminder, gbc_btnEditReminder);
 	}
 
-	void actionKeepSelected() {
+//	void actionKeepSelected() {
 //		selected = tbResponsible.getSelectedRow();
-		//System.out.println(selected); //teste
-	}
+//		System.out.println(selected); //teste
+//	}
+	
 	void actionCreateTask() {
 		Task newTask= new Task();
 		newTask.setName(tfTitleTask.getText());
 		newTask.setDescription(taDescription.getText());
-		newTask.setCompleted(false);
+		newTask.setIdUser(user.getId());
+		newTask.setIdFamily(user.getIdFamily());
 		
-		//salva a ocorrencia para sepa usar ela
+		//talvez jogar a conversao para dentro do switch list ou model dele
+		JList listResponsibles = switchList.getlist2();
+		List list = new ArrayList(listResponsibles.getModel().getSize());
+		for (int i = 0; i < listResponsibles.getModel().getSize(); i++) {
+		    list.add(listResponsibles.getModel().getElementAt(i));
+		}
+		newTask.setResponsible(list);
+		newTask.setCompleted(false);
+		newTask.setProducts(null);
+		
+		TaskDAO taskDAO = InitialPage.getInstance().getDaoFactory().getTaskDAO();
+		taskDAO.insert(newTask);
+			
 		Occurrence newOccurrence = new Occurrence();
 		newOccurrence.setDate(Integer.parseInt(tfDate.getText()));
 		newOccurrence.setHour(Integer.parseInt(tfHour.getText()));
+		Integer idTarefa = taskDAO.getMaxId(user.getId());
+		newOccurrence.setIdTask(idTarefa);
+		newOccurrence.setIdFamily(user.getIdFamily());
 		
-		//newTask.setResponsible(); faltou checkbox
-		TaskDAO taskDAO = InitialPage.getInstance().getDaoFactory().getTaskDAO();
-		taskDAO.insert(newTask);
-		
-		//pegar id de insert e usar pra inserir os outros
+		OccurrenceDAO occuDAO = InitialPage.getInstance().getDaoFactory().getOcurrenceDAO();
+		occuDAO.insert(newOccurrence);
+		newOccurrence.setId(occuDAO.getMaxId(user.getIdFamily(), idTarefa));
 	}
 	
 	void actionSearch() {
@@ -268,7 +290,7 @@ public class CreateTask extends JPanel implements ActionListener {
 	}
 	
 	void actionEditReminder() {
-		InitialPage.getInstance().createInternalFrame(new EditReminder(), "Home Task Center", 800, 600);
+		InitialPage.getInstance().createInternalFrame(new EditReminder(user), "Home Task Center", 800, 600);
 	}
 
 	void actionSwitchListPullAll() {

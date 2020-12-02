@@ -19,6 +19,7 @@ import javax.swing.event.ListSelectionListener;
 
 import dao.CategoryDAO;
 import model.Category;
+import model.User;
 import view.tableModel.CategoryTableModel;
 
 public class CategoryRegistration extends JPanel implements ActionListener{
@@ -29,9 +30,10 @@ public class CategoryRegistration extends JPanel implements ActionListener{
 	private JLabel lbTitle,lbCategories,lbName;
 	
 	private Integer selected;
+	private User user;
 	
-	public CategoryRegistration() {
-		
+	public CategoryRegistration(User user) {
+		this.user = user;
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{30, 100, 100, 40, 50, 0, 100, 100, 0, 0};
 		gridBagLayout.rowHeights = new int[]{30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 0};
@@ -123,6 +125,7 @@ public class CategoryRegistration extends JPanel implements ActionListener{
 		CategoryDAO catDAO = InitialPage.getInstance().getDaoFactory().getCategoryDAO();
 		Category newCategory = new Category();
 		newCategory.setName(tfName.getText());
+		newCategory.setIdFamily(user.getIdFamily());
 		catDAO.insert(newCategory);
 		model.addCategory(newCategory);
 		model.fireTableDataChanged();

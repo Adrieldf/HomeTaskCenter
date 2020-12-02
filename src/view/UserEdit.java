@@ -22,10 +22,16 @@ public class UserEdit extends JPanel implements ActionListener {
 	private JLabel lblTitle,lblName,lblPassword;
 	private JButton btnCreateUser,btnSearch,btnUpdate;
 	private JLabel lblMail;
+
 	private JTextField tfMail;
 	private JLabel lblFamily;
 	private JTextField tfFamily;
-	public UserEdit() {
+
+	private User user;
+	
+	public UserEdit(User user) {
+		this.user = user;
+
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{30, 30, 30, 100, 100, 100, 30, 0};

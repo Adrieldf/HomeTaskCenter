@@ -12,6 +12,7 @@ import java.awt.event.ItemListener;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -36,7 +37,10 @@ public class FamilyRegistration extends JPanel implements ActionListener {
 	private JCheckBox chckbxAdmin;
 	private Integer selected;
 	private boolean isTrue = false;
-	public FamilyRegistration() {
+	private User user;
+	
+	public FamilyRegistration(User user) {
+		this.user = user;
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{30, 100, 100, 30, 30, 30, 100, 100, 30, 0};
 		gridBagLayout.rowHeights = new int[]{30, 30, 30, 30, 30, 30, 0, 30, 30, 30, 0};
@@ -81,7 +85,7 @@ public class FamilyRegistration extends JPanel implements ActionListener {
 		add(tfName, gbc_tfName);
 		tfName.setColumns(10);
 		
-		tabFamily = new JTable();
+		tabFamily = new JTable(new FamilyRegistrationTableModel());
 		tabFamily.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
 		ListSelectionModel selectionModel = tabFamily.getSelectionModel();
@@ -178,6 +182,18 @@ public class FamilyRegistration extends JPanel implements ActionListener {
 		famDAO.remove(killFamily);
 		model.removeMember(selected);
 		model.fireTableDataChanged();
+	}
+	
+	void actionSearchUser() {
+		User newUser=null;
+		//buscar usuario do banco
+		if(newUser!=null) {
+			JOptionPane.showMessageDialog(null, "Usuario encontrado com sucesso!", "Pode ser inserido na família",
+			JOptionPane.INFORMATION_MESSAGE);
+		} else {
+			JOptionPane.showMessageDialog(null, "Usuario não encontrado", "Pesquise novamente",
+			JOptionPane.INFORMATION_MESSAGE);
+		}
 	}
 
 	@Override

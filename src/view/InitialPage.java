@@ -24,6 +24,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 import dao.DAOFactory;
 import database.PostgresqlDBFactory;
+import model.User;
 
 //import view.InitialPage;
 //import test.TestePanel;
@@ -37,6 +38,8 @@ public class InitialPage extends JFrame{
 	private JMenuBar menuBar_1;
 	
 	private DAOFactory daoFact;
+	
+	private User user = null;
 
 	public static void main(String[] args) {
 		
@@ -87,10 +90,10 @@ public class InitialPage extends JFrame{
 	}
 	
 	private void initial() {
-		showPanelFullScreen(new PendingTasks(), "Home Task Center");			
+		showPanelFullScreen(new PendingTasks(user), "Home Task Center");			
 		
 		// TODO: validar se o login foi realizado com sucesso para mostrar as tasks
-		createInternalFrame(new LoginPage(), "Home Task Center", 400, 400);
+		createInternalFrame(new LoginPage(user), "Home Task Center", 400, 400);
 	}
 	
 	public DAOFactory getDaoFactory() {
@@ -128,7 +131,7 @@ public class InitialPage extends JFrame{
 		JMenuItem mntmTarefas = new JMenuItem("Visualizar Tarefas Pendentes");
 		mntmTarefas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				createInternalFrame(new PendingTasks(), "Home Task Center", 800, 600);
+				createInternalFrame(new PendingTasks(user), "Home Task Center", 800, 600);
 			}
 		});
 		mnTasks.add(mntmTarefas);
@@ -136,7 +139,7 @@ public class InitialPage extends JFrame{
 		JMenuItem mntmCreateTask = new JMenuItem("Cadastro de Tarefas");
 		mntmCreateTask.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg3) {
-				createInternalFrame(new CreateTask(), "Home Task Center", 500, 600);
+				createInternalFrame(new CreateTask(user), "Home Task Center", 500, 600);
 			}
 		});
 		mnTasks.add(mntmCreateTask);
@@ -145,7 +148,7 @@ public class InitialPage extends JFrame{
 		JMenuItem mntmUserEdit = new JMenuItem("Cadastro de Usuários");
 		mntmUserEdit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg1) {
-				createInternalFrame(new UserEdit(), "Home Task Center", 450, 350);
+				createInternalFrame(new UserEdit(user), "Home Task Center", 450, 350);
 			}
 		});
 		mnUsers.add(mntmUserEdit);
@@ -153,7 +156,7 @@ public class InitialPage extends JFrame{
 		JMenuItem mntmFamilyRegistration = new JMenuItem("Cadastro de Família");
 		mntmFamilyRegistration.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg4) {
-				createInternalFrame(new FamilyRegistration(), "Home Task Center", 600, 400);
+				createInternalFrame(new FamilyRegistration(user), "Home Task Center", 600, 400);
 			}
 		});
 		mnUsers.add(mntmFamilyRegistration);
@@ -162,7 +165,7 @@ public class InitialPage extends JFrame{
 		JMenuItem mntmCreateItems = new JMenuItem("Cadastro de Itens");
 		mntmCreateItems.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg5) {
-				createInternalFrame(new CreateItems(), "Home Task Center", 550, 400);
+				createInternalFrame(new CreateItems(user), "Home Task Center", 550, 400);
 				//createIntFrame();
 			}
 		});
@@ -172,7 +175,7 @@ public class InitialPage extends JFrame{
 		JMenuItem mntmCategoryRegistration = new JMenuItem("Cadastro de Categorias");
 		mntmCategoryRegistration.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg2) {
-				createInternalFrame(new CategoryRegistration(), "Home Task Center", 600, 600);
+				createInternalFrame(new CategoryRegistration(user), "Home Task Center", 600, 600);
 			}
 		});
 		mnCategories.add(mntmCategoryRegistration);

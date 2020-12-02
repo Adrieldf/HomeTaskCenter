@@ -25,8 +25,13 @@ public class LoginPage extends JPanel implements ActionListener {
 	private JButton btnLogin, btnCancel;
 
 	private JButton btnUserEdit;
+
+	private User user = null;
+
 	
-	public LoginPage() {
+	public LoginPage(User user) {
+		
+		this.user = user;
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{30, 30, 30, 100, 100, 30, 30, 0};
 		gridBagLayout.rowHeights = new int[]{30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 0};
@@ -108,13 +113,14 @@ public class LoginPage extends JPanel implements ActionListener {
 	}
 
 	void actionLogin() {
+
 		UserDAO userDAO = InitialPage.getInstance().getDaoFactory().getUserDAO();
 		User user = userDAO.getByName(tfName.getText());
 		if (user != null && user.getPassword().equals(Criptography.Encode(tfPassword.getText()).toString())) {
 			JOptionPane.showMessageDialog(null, "Login realizado com sucesso!", "Sucesso",
 					JOptionPane.INFORMATION_MESSAGE);
 			// definir a variavel do usuario que vai ser usada nas demais telas
-
+			this.user = user;
 			// fecha a tela de login
 		} else {
 			JOptionPane.showMessageDialog(null, "Dados informados não conferem, verifique e tente novamente.", "Erro",

@@ -13,6 +13,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 
+import model.User;
+
 //jPanel frame
 public class PendingTasks extends JPanel implements ActionListener{
 	private JTable tabTasks;
@@ -20,8 +22,11 @@ public class PendingTasks extends JPanel implements ActionListener{
 	
 	private JButton btnCreateTask;
 	private JLabel lbTitle;
+	private User user;
 	
-	public PendingTasks() {
+	public PendingTasks(User user) {
+		this.user = user;
+		
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 0};
 		gridBagLayout.rowHeights = new int[]{30, 0, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 0};
@@ -67,7 +72,7 @@ public class PendingTasks extends JPanel implements ActionListener{
 	}
 	
 	void actionCreateTask() {
-		InitialPage.getInstance().createInternalFrame(new CreateTask(), "Criar nova tarefa", 800, 600);
+		InitialPage.getInstance().createInternalFrame(new CreateTask(user), "Criar nova tarefa", 800, 600);
 	}
 
 }

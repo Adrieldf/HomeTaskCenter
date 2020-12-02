@@ -16,6 +16,7 @@ import javax.swing.JTextField;
 import dao.ReminderDAO;
 import model.Occurrence;
 import model.Reminder;
+import model.User;
 
 public class EditReminder extends JPanel implements ActionListener {
 	private JTextField tfTask;
@@ -23,8 +24,12 @@ public class EditReminder extends JPanel implements ActionListener {
 	private JTextArea taDescription;
 	private JButton btnCreateReminder, btnUpdateReminder, btnDeleteReminder;
 	private JLabel lblDescription,lblTitleReminder,lblTitle,lblTask;
+	private User user;
 	
-	public EditReminder() {
+	public EditReminder(User user) {
+
+		this.user = user;
+
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{30, 0, 30, 100, 100, 100, 30, 0};
 		gridBagLayout.rowHeights = new int[]{30, 30, 30, 30, 30, 30, 30, 30, 0, 0, 30, 30, 30, 0};

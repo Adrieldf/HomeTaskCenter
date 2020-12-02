@@ -75,6 +75,22 @@ public class Task {
 	public void setIdUser(int idUser) {
 		this.idUser = idUser;
 	}
+
+	public List<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(List<Product> products) {
+		this.products = products;
+	}
+
+	public List<Occurrence> getOccurrences() {
+		return occurrences;
+	}
+
+	public void setOccurrences(List<Occurrence> occurrences) {
+		this.occurrences = occurrences;
+	}
 	
 	
 }
