@@ -10,6 +10,7 @@ import java.util.List;
 
 import dao.UserDAO;
 import model.User;
+import security.Criptography;
 
 public class PostgresqlUserDB implements UserDAO {
 	
@@ -89,10 +90,10 @@ public class PostgresqlUserDB implements UserDAO {
 		}
 		PreparedStatement pstmt = null;
 		try {
-			pstmt = conn.prepareStatement("insert into user(name, password, email) values ( ? , ?, ? )");
+			pstmt = conn.prepareStatement("insert into user (name, password, email) values ( ? , ?, ? )");
 		
 			pstmt.setString(1, user.getName());
-			pstmt.setString(2, user.getPassword());
+			pstmt.setString(2, Criptography.Encode(user.getPassword()).toString());
 			pstmt.setString(3, user.getEmail());
 			pstmt.executeUpdate();
 		}
@@ -160,47 +161,6 @@ public class PostgresqlUserDB implements UserDAO {
 
 	}
 
-
-	@Override
-	public boolean validateUser(User user) {
-		// TODO Auto-generated method stub
-			
-		PreparedStatement pstmt = null;
-		User newUser;
-		ResultSet rs = null;
-		boolean validate = false;
-		try {
-			pstmt = conn.prepareStatement("select id, name, password, email from user where name = ?");
-			pstmt.setString(1, user.getName());
-			rs = pstmt.executeQuery();
-			
-			newUser = new User();
-			newUser.setId(rs.getInt("id"));
-			newUser.setName(rs.getString("name"));
-			newUser.setPassword(rs.getString("password"));
-			newUser.setEmail(rs.getString("email"));
-			
-			
-			if(user.equals(newUser)) {
-				validate = true;
-			}
-			
-		}catch(SQLException ex) {
-			System.out.println("Ocorreu um erro : " + ex.getMessage());
-			ex.printStackTrace();
-		}
-		finally {
-			try {
-				rs.close();
-				pstmt.close();
-			} catch (Exception e) {
-				System.out.println(e.getMessage());
-			}
-		}
-		
-		return validate;
-		
-	}
 
 	@Override
 	public User getByName(String name) {
