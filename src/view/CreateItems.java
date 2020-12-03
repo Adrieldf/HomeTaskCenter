@@ -42,6 +42,7 @@ public class CreateItems extends JPanel implements ActionListener{
 	private User user;
 	
 	private CategoryDAO catDAO = InitialPage.getInstance().getDaoFactory().getCategoryDAO();
+	private ProductDAO podDAO = InitialPage.getInstance().getDaoFactory().getProductDAO();
 	private CategoryTableModel model;
 	
 //	private GridBagConstraints gbc_btnCreateItem;
@@ -202,7 +203,6 @@ public class CreateItems extends JPanel implements ActionListener{
 	
 	void actionCreateItem() {
 		//mudei a model para a mesma model da category registration, agora a model creteitem não esta mais sendo usada
-		ProductDAO podDAO = InitialPage.getInstance().getDaoFactory().getProductDAO();
 		Product newProduct = new Product();
 		newProduct.setName(tfName.getText());
 		newProduct.setIdFamily(user.getIdFamily());

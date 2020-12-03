@@ -183,6 +183,7 @@ public class UserEdit extends JPanel implements ActionListener {
 		newUser.setName(tfName.getText());
 		newUser.setPassword(tfPassword.getText());
 		newUser.setEmail(tfMail.getText());
+		newUser.setIdFamily(Integer.parseInt(tfFamily.getText()));
 		userDB.edit(newUser);
 	}
 
