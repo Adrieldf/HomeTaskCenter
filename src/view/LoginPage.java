@@ -119,7 +119,7 @@ public class LoginPage extends JPanel implements ActionListener {
 
 		UserDAO userDAO = InitialPage.getInstance().getDaoFactory().getUserDAO();
 		User user = userDAO.getByName(tfName.getText());
-		if (user != null && user.getPassword().equals(Criptography.Encode(tfPassword.getText()).toString())) {
+		if (user != null && user.getPassword().equals(tfPassword.getText())) {
 			JOptionPane.showMessageDialog(null, "Login realizado com sucesso!", "Sucesso",
 					JOptionPane.INFORMATION_MESSAGE);
 			// definir a variavel do usuario que vai ser usada nas demais telas
