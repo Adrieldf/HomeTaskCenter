@@ -139,7 +139,7 @@ public class InitialPage extends JFrame{
 		JMenuItem mntmCreateTask = new JMenuItem("Cadastro de Tarefas");
 		mntmCreateTask.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg3) {
-				createInternalFrame(new CreateTask(user), "Home Task Center", 500, 800);
+				createInternalFrame(new CreateTask(user), "Home Task Center", 500, 700);
 			}
 		});
 		mnTasks.add(mntmCreateTask);
