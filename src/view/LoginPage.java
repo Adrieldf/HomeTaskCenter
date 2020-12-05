@@ -28,15 +28,15 @@ public class LoginPage extends JPanel implements ActionListener {
 
 	private User user = null;
 
-	
 	public LoginPage(User user) {
-		
+
 		this.user = user;
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{30, 30, 30, 100, 100, 30, 0};
-		gridBagLayout.rowHeights = new int[]{30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.columnWidths = new int[] { 30, 30, 30, 100, 100, 30, 0 };
+		gridBagLayout.rowHeights = new int[] { 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 0 };
+		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+				Double.MIN_VALUE };
 		setLayout(gridBagLayout);
 
 		lbTitle = new JLabel("Login");
@@ -102,7 +102,7 @@ public class LoginPage extends JPanel implements ActionListener {
 		gbc_btnCancel.gridx = 4;
 		gbc_btnCancel.gridy = 7;
 		add(btnCancel, gbc_btnCancel);
-		
+
 		btnUserEdit = new JButton("Cadastrar-se");
 		btnUserEdit.addActionListener(this);
 		GridBagConstraints gbc_btnUserEdit = new GridBagConstraints();
@@ -111,7 +111,7 @@ public class LoginPage extends JPanel implements ActionListener {
 		gbc_btnUserEdit.gridx = 2;
 		gbc_btnUserEdit.gridy = 9;
 		add(btnUserEdit, gbc_btnUserEdit);
-		
+
 		InitialPage.getInstance().enableMenu(false);
 	}
 
@@ -122,15 +122,14 @@ public class LoginPage extends JPanel implements ActionListener {
 		if (user != null && user.getPassword().equals(tfPassword.getText())) {
 			JOptionPane.showMessageDialog(null, "Login realizado com sucesso!", "Sucesso",
 					JOptionPane.INFORMATION_MESSAGE);
-			// definir a variavel do usuario que vai ser usada nas demais telas
+
 			InitialPage.getInstance().enableMenu(true);
-			//InitialPage.getInstance().
+			InitialPage.getInstance().setUser(user);
 			this.user = user;
-			// fecha a tela de login
+			this.actionCancel();
 		} else {
 			JOptionPane.showMessageDialog(null, "Dados informados não conferem, verifique e tente novamente.", "Erro",
 					JOptionPane.INFORMATION_MESSAGE);
-			// deixa a tela de login aberta para tentar de novo
 		}
 
 	}
@@ -148,8 +147,8 @@ public class LoginPage extends JPanel implements ActionListener {
 		} else {
 			if (arg0.getSource() == btnCancel) {
 				actionCancel();
-			} else{
-				if(arg0.getSource() == btnUserEdit) {
+			} else {
+				if (arg0.getSource() == btnUserEdit) {
 					InitialPage.getInstance().createInternalFrame(new UserEdit(user), "Cadastro de usuario", 800, 600);
 				}
 			}

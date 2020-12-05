@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -167,6 +168,8 @@ public class UserEdit extends JPanel implements ActionListener {
 		famDAO.insert(newFamily);
 		newUser.setIdFamily(famDAO.getMaxId());
 		userDB.insert(newUser);
+		JOptionPane.showMessageDialog(null, "Usuário criado com sucesso!", "Sucesso",
+				JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 	void actionSearch() {
