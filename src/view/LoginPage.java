@@ -17,9 +17,11 @@ import javax.swing.JTextField;
 import dao.UserDAO;
 import model.User;
 import security.Criptography;
+import javax.swing.JPasswordField;
+import java.awt.Dimension;
 
 public class LoginPage extends JPanel implements ActionListener {
-	private JTextField tfName, tfPassword;
+	private JTextField tfName;
 	private boolean valid;
 	private JLabel lbTitle, lbName, lbPassword;
 	private JButton btnLogin, btnCancel;
@@ -27,12 +29,13 @@ public class LoginPage extends JPanel implements ActionListener {
 	private JButton btnUserEdit;
 
 	private User user = null;
+	private JPasswordField tfPassword;
 
 	public LoginPage(User user) {
 
 		this.user = user;
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[] { 30, 30, 30, 100, 100, 30, 0 };
+		gridBagLayout.columnWidths = new int[] { 30, 30, 30, 166, 100, 30, 0 };
 		gridBagLayout.rowHeights = new int[] { 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 0 };
 		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
@@ -74,8 +77,12 @@ public class LoginPage extends JPanel implements ActionListener {
 		gbc_lbPassword.gridy = 5;
 		add(lbPassword, gbc_lbPassword);
 
-		tfPassword = new JTextField();
-		tfPassword.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnLogin = new JButton("Login");
+		btnLogin.addActionListener(this);
+		
+		tfPassword = new JPasswordField();
+		tfPassword.setMinimumSize(new Dimension(4, 19));
+		tfPassword.setPreferredSize(new Dimension(4, 19));
 		GridBagConstraints gbc_tfPassword = new GridBagConstraints();
 		gbc_tfPassword.gridwidth = 2;
 		gbc_tfPassword.insets = new Insets(0, 0, 5, 5);
@@ -83,10 +90,6 @@ public class LoginPage extends JPanel implements ActionListener {
 		gbc_tfPassword.gridx = 3;
 		gbc_tfPassword.gridy = 5;
 		add(tfPassword, gbc_tfPassword);
-		tfPassword.setColumns(10);
-
-		btnLogin = new JButton("Login");
-		btnLogin.addActionListener(this);
 		GridBagConstraints gbc_btnLogin = new GridBagConstraints();
 		gbc_btnLogin.gridwidth = 2;
 		gbc_btnLogin.insets = new Insets(0, 0, 5, 5);
@@ -107,7 +110,7 @@ public class LoginPage extends JPanel implements ActionListener {
 		btnUserEdit.addActionListener(this);
 		GridBagConstraints gbc_btnUserEdit = new GridBagConstraints();
 		gbc_btnUserEdit.gridwidth = 4;
-		gbc_btnUserEdit.insets = new Insets(0, 0, 5, 5);
+		gbc_btnUserEdit.insets = new Insets(0, 0, 5, 0);
 		gbc_btnUserEdit.gridx = 2;
 		gbc_btnUserEdit.gridy = 9;
 		add(btnUserEdit, gbc_btnUserEdit);
