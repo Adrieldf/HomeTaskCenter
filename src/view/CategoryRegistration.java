@@ -127,6 +127,7 @@ public class CategoryRegistration extends JPanel implements ActionListener{
 		newCategory.setName(tfName.getText());
 		newCategory.setIdFamily(user.getIdFamily());
 		catDAO.insert(newCategory);
+		newCategory.setId(catDAO.getMaxId());
 		model.addCategory(newCategory);
 		model.fireTableDataChanged();
 	}

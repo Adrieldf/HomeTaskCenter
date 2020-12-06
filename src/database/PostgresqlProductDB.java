@@ -171,5 +171,37 @@ public class PostgresqlProductDB implements ProductDAO {
 			}
 		}
 	}
+	
+	@Override
+	public int getMaxId() {
+		int maxId = 0;
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			pstmt = conn.prepareStatement("select MAX (id) from product");
+		
+			
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				maxId = rs.getInt("max");
+				
+			}
+
+		} catch (SQLException se) {
+			System.out.println("Ocorreu um erro : " + se.getMessage());
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		return maxId;
+	}
 
 }

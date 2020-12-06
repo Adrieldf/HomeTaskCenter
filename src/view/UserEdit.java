@@ -32,6 +32,9 @@ public class UserEdit extends JPanel implements ActionListener {
 
 	private User user;
 	
+	private UserDAO userDB = InitialPage.getInstance().getDaoFactory().getUserDAO();
+	private FamilyDAO famDAO = InitialPage.getInstance().getDaoFactory().getFamilyDAO();
+	
 	public UserEdit(User user) {
 		this.user = user;
 
@@ -159,12 +162,10 @@ public class UserEdit extends JPanel implements ActionListener {
 	void actionCreateUser() {
 		Family newFamily = new Family(tfFamily.getText());
 		User newUser = new User();
-		UserDAO userDB = InitialPage.getInstance().getDaoFactory().getUserDAO();
 		newUser.setName(tfName.getText());
 		newUser.setPassword(tfPassword.getText());
 		newUser.setEmail(tfMail.getText());
 		newFamily.addMember(newUser);
-		FamilyDAO famDAO = InitialPage.getInstance().getDaoFactory().getFamilyDAO();
 		famDAO.insert(newFamily);
 		newUser.setIdFamily(famDAO.getMaxId());
 		userDB.insert(newUser);
@@ -173,20 +174,18 @@ public class UserEdit extends JPanel implements ActionListener {
 	}
 	
 	void actionSearch() {
-		UserDAO userDB = InitialPage.getInstance().getDaoFactory().getUserDAO();
 		User user1 = userDB.getByName(tfName.getText());
 		tfName.setText(user1.getName());
 		tfPassword.setText(user1.getPassword());
 		tfMail.setText(user1.getEmail());
+		tfFamily.setText(famDAO.getById(user1.getIdFamily()).getName());
 	}
 
 	void actionUpdate() {
 		User newUser = new User();
-		UserDAO userDB = InitialPage.getInstance().getDaoFactory().getUserDAO();
 		newUser.setName(tfName.getText());
 		newUser.setPassword(tfPassword.getText());
 		newUser.setEmail(tfMail.getText());
-		newUser.setIdFamily(Integer.parseInt(tfFamily.getText()));
 		userDB.edit(newUser);
 	}
 

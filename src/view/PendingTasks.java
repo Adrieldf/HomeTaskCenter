@@ -4,8 +4,11 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 import javax.swing.JDesktopPane;
@@ -14,11 +17,8 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 
 import dao.TaskDAO;
-import model.Category;
 import model.Task;
 import model.User;
-import view.tableModel.CategoryTableModel;
-import view.tableModel.ItemTableModel;
 import view.tableModel.TaskTableModel;
 
 //jPanel frame
@@ -33,7 +33,7 @@ public class PendingTasks extends JPanel implements ActionListener{
 	private TaskDAO taskDAO = InitialPage.getInstance().getDaoFactory().getTaskDAO();
 	private TaskTableModel model;
 	
-	public PendingTasks(User user) {
+	public PendingTasks(User user){
 		this.user = user;
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -54,6 +54,18 @@ public class PendingTasks extends JPanel implements ActionListener{
 		
 		model = new TaskTableModel();
 		tabTasks = new JTable(model);
+		tabTasks.addMouseListener(new MouseAdapter() {
+		    public void mousePressed(MouseEvent mouseEvent) {
+		        JTable table =(JTable) mouseEvent.getSource();
+		        Point point = mouseEvent.getPoint();
+		        int row = table.rowAtPoint(point);
+		        if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
+		            // your valueChanged overridden method 
+		        	System.out.println("estou na linha " + row);
+		        	InitialPage.getInstance().createInternalFrame(new CreateTask(user,model.getTask(row)), "Editar tarefa", 600,800);
+		        }
+		    }
+		});
 		GridBagConstraints gbc_tabTasks = new GridBagConstraints();
 		gbc_tabTasks.gridheight = 6;
 		gbc_tabTasks.gridwidth = 13;
@@ -77,11 +89,11 @@ public class PendingTasks extends JPanel implements ActionListener{
 
 
 	private void popula() {
-		// TODO Auto-generated method stub
+//		//TODO Auto-generated method stub
 //		for(Task tas : taskDAO.getAll(user.getIdFamily())) {
 //			model.addTask(tas);
 //		}
-		//model.fireTableDataChanged();
+//		model.fireTableDataChanged();
 	}
 
 
@@ -94,7 +106,7 @@ public class PendingTasks extends JPanel implements ActionListener{
 	}
 	
 	void actionCreateTask() {
-		InitialPage.getInstance().createInternalFrame(new CreateTask(user), "Criar nova tarefa", 800, 600);
+		InitialPage.getInstance().createInternalFrame(new CreateTask(user,null), "Criar nova tarefa", 800, 600);
 	}
 
 }

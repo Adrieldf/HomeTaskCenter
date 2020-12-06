@@ -10,4 +10,5 @@ public interface MessageDAO {
     void insert(Message message);
     void remove(Message message);
     void edit(Message message);
+    int getMaxId();
 }

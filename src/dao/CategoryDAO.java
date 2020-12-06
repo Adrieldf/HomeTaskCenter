@@ -11,4 +11,5 @@ public interface CategoryDAO {
 	    void insert(Category category);
 	    void remove(Category category);
 	    void edit(Category category);
+	    int getMaxId();
 }

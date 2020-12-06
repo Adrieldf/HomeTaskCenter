@@ -35,7 +35,6 @@ public class CreateItems extends JPanel implements ActionListener{
 	private JLabel lblTitle, lbName, lblCategories;
 	private JButton btnCreateItem;
 	private GridBagLayout gridBagLayout;
-	private SwitchList switchList;
 	private JButton btnNewButton;
 	private JTable tableCItems;
 	private Integer selected;
@@ -208,7 +207,9 @@ public class CreateItems extends JPanel implements ActionListener{
 		newProduct.setIdFamily(user.getIdFamily());
 		Category cat = model.getCategory(selected);
 		newProduct.setIdCategory(cat.getId());
+		//newProduct.setId(podDAO.getMaxId());
 		podDAO.insert(newProduct);
+		
 	}
 
 	@Override

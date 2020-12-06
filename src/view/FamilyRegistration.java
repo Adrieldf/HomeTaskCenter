@@ -39,6 +39,9 @@ public class FamilyRegistration extends JPanel implements ActionListener {
 	private boolean isTrue = false;
 	private User user;
 	
+	private FamilyRegistrationTableModel model;
+	private FamilyDAO famDAO = InitialPage.getInstance().getDaoFactory().getFamilyDAO();
+	
 	public FamilyRegistration(User user) {
 		this.user = user;
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -87,7 +90,8 @@ public class FamilyRegistration extends JPanel implements ActionListener {
 		add(tfName, gbc_tfName);
 		tfName.setColumns(10);
 		
-		tabFamily = new JTable(new FamilyRegistrationTableModel());
+		model = new FamilyRegistrationTableModel();
+		tabFamily = new JTable(model);
 		tabFamily.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
 		ListSelectionModel selectionModel = tabFamily.getSelectionModel();
@@ -154,31 +158,22 @@ public class FamilyRegistration extends JPanel implements ActionListener {
 	void actionInsert() {
 		UserDAO userDAO = InitialPage.getInstance().getDaoFactory().getUserDAO();
 		Family newFamily = new Family();
-		//PELO NOME?????????????
 		User newUser = userDAO.getByName(tfName.getText());
-		//talvez pesquisar o usuario pelo nome no banco
 		
-		//verifica se é admin
-		if(isTrue) {
-			//menmbro é admin
-			newUser.setAdmin(true);
-		}
-		//insere a familia na tabela
-		FamilyRegistrationTableModel model = (FamilyRegistrationTableModel) tabFamily.getModel();
+		
+		newUser.setAdmin(isTrue);
+
 		for(User fam :newFamily.getMermber()) {
 			model.addMember(fam);
 		}
 		//insere a familia no banco
-		FamilyDAO famDAO = InitialPage.getInstance().getDaoFactory().getFamilyDAO();
 		newFamily.addMember(newUser);
 		famDAO.insert(newFamily);
 		model.fireTableDataChanged();
 	}
 	
 	void actionDelete() {
-		FamilyRegistrationTableModel model = (FamilyRegistrationTableModel) tabFamily.getModel();
 		Family killFamily = (Family)model.getValueAt(selected, 0);
-		FamilyDAO famDAO = InitialPage.getInstance().getDaoFactory().getFamilyDAO();
 		famDAO.remove(killFamily);
 		model.removeMember(selected);
 		model.fireTableDataChanged();

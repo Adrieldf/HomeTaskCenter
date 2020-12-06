@@ -17,5 +17,5 @@ public interface UserDAO {
 	void remove(User user);
 
 	void edit(User user);
-
+	int getMaxId();
 }

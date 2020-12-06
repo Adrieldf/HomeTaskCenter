@@ -30,6 +30,8 @@ public class LoginPage extends JPanel implements ActionListener {
 
 	private User user = null;
 	private JPasswordField tfPassword;
+	
+	private UserDAO userDAO = InitialPage.getInstance().getDaoFactory().getUserDAO();
 
 	public LoginPage(User user) {
 
@@ -120,7 +122,7 @@ public class LoginPage extends JPanel implements ActionListener {
 
 	void actionLogin() {
 
-		UserDAO userDAO = InitialPage.getInstance().getDaoFactory().getUserDAO();
+		
 		User user = userDAO.getByName(tfName.getText());
 		if (user != null && user.getPassword().equals(tfPassword.getText())) {
 			JOptionPane.showMessageDialog(null, "Login realizado com sucesso!", "Sucesso",

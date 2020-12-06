@@ -6,6 +6,8 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,9 +25,15 @@ import javax.swing.event.ListSelectionListener;
 import dao.OccurrenceDAO;
 import dao.TaskDAO;
 import model.Occurrence;
+import model.Product;
 import model.Task;
 import javax.swing.JCheckBox;
 import model.User;
+import view.listModel.ProductListModel;
+import view.listModel.ResponsableListModel;
+import view.listModel.SwitchListProduct;
+import view.listModel.SwitchListResponsable;
+import view.tableModel.CategoryTableModel;
 
 public class CreateTask extends JPanel implements ActionListener {
 	private JTextField tfTitleTask;
@@ -37,13 +45,30 @@ public class CreateTask extends JPanel implements ActionListener {
 	private JTextArea taDescription;
 	private Integer selected;
 	private boolean isTrue = false;
-	private SwitchList switchListResponsible, switchListItems;
+	private SwitchListProduct switchListItems;
+	private SwitchListResponsable switchListResponsible;
 	private JCheckBox chckbxIsConcluded;
 	private User user;
 	private JLabel lblItems;
+	private Task task;
 	
-	public CreateTask(User user) {
+	
+	
+	private TaskDAO taskDAO = InitialPage.getInstance().getDaoFactory().getTaskDAO();
+	private OccurrenceDAO occuDAO = InitialPage.getInstance().getDaoFactory().getOcurrenceDAO();
+	
+	private ProductListModel modelProduct1, modelProduct2;
+	private ResponsableListModel modelResponsable1,modelResponsable2;
+	
+	public CreateTask(User user, Task taskR) {
 		this.user = user;
+		if(taskR==null) {
+			task = new Task();
+		} else {
+			task = taskR;
+		}
+		
+		
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{30, 30, 30, 100, 100, 100, 30, 0};
 		gridBagLayout.rowHeights = new int[]{30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 0, 30, 30, 30, 30, 30, 30, 0};
@@ -61,6 +86,13 @@ public class CreateTask extends JPanel implements ActionListener {
 		add(lblTitle, gbc_lblTitle);
 		
 		chckbxIsConcluded = new JCheckBox("Concluída");
+		chckbxIsConcluded.addItemListener(new ItemListener() {    
+			@Override
+			public void itemStateChanged(ItemEvent arg0) {
+				// TODO Auto-generated method stub
+				isTrue = !isTrue;
+			}    
+        }); 
 		chckbxIsConcluded.setFont(new Font("Tahoma", Font.BOLD, 11));
 		GridBagConstraints gbc_chckbxIsConcluded = new GridBagConstraints();
 		gbc_chckbxIsConcluded.insets = new Insets(0, 0, 5, 5);
@@ -116,7 +148,12 @@ public class CreateTask extends JPanel implements ActionListener {
 		gbc_lblItems.gridy = 9;
 		add(lblItems, gbc_lblItems);
 		
-		switchListItems = new SwitchList();
+		modelProduct1 = new ProductListModel();
+		modelProduct2 = new ProductListModel();
+		
+		switchListItems = new SwitchListProduct();
+		modelProduct1 = (ProductListModel) switchListItems.getlist1().getModel();
+		modelProduct2 = (ProductListModel) switchListItems.getlist2().getModel();
 		GridBagConstraints gbc_switchListItems = new GridBagConstraints();
 		gbc_switchListItems.gridheight = 4;
 		gbc_switchListItems.gridwidth = 3;
@@ -136,7 +173,11 @@ public class CreateTask extends JPanel implements ActionListener {
 		gbc_lblResponsible.gridy = 13;
 		add(lblResponsible, gbc_lblResponsible);
 		
-		switchListResponsible = new SwitchList();
+		modelResponsable1 = new ResponsableListModel();
+		modelResponsable2 = new ResponsableListModel();
+		switchListResponsible = new SwitchListResponsable();
+		modelResponsable1 = (ResponsableListModel) switchListResponsible.getlist1().getModel();
+		modelResponsable2 = (ResponsableListModel) switchListResponsible.getlist2().getModel();
 		GridBagConstraints gbc_switchListResponsible = new GridBagConstraints();
 		gbc_switchListResponsible.gridheight = 4;
 		gbc_switchListResponsible.gridwidth = 3;
@@ -248,50 +289,50 @@ public class CreateTask extends JPanel implements ActionListener {
 //	}
 	
 	void actionCreateTask() {
-		Task newTask= new Task();
+		Task newTask = task;
 		newTask.setName(tfTitleTask.getText());
 		newTask.setDescription(taDescription.getText());
 		newTask.setIdUser(user.getId());
 		newTask.setIdFamily(user.getIdFamily());
-		
 		JList listResponsibles = switchListResponsible.getlist2();
-		newTask.setResponsible(switchListResponsible.getArray(listResponsibles));
-		
+		newTask.setResponsible(switchListResponsible.listToArray(listResponsibles));
 		JList listItens = switchListItems.getlist2();
-		newTask.setProducts(switchListItems.getArray(listItens));
-		newTask.setCompleted(false);
-		//faltou checkbox
-		
-		TaskDAO taskDAO = InitialPage.getInstance().getDaoFactory().getTaskDAO();
+		newTask.setProducts(switchListItems.listToArray(listItens));
+		newTask.setCompleted(isTrue);
 		taskDAO.insert(newTask);
-			
+		newTask.setId(taskDAO.getMaxId(user.getId()));
+		
 		Occurrence newOccurrence = new Occurrence();
 		newOccurrence.setDate(Integer.parseInt(tfDate.getText()));
 		newOccurrence.setHour(Integer.parseInt(tfHour.getText()));
-		Integer idTarefa = taskDAO.getMaxId(user.getId());
-		newOccurrence.setIdTask(idTarefa);
+		newOccurrence.setIdTask(newTask.getId());
 		newOccurrence.setIdFamily(user.getIdFamily());
-		
-		OccurrenceDAO occuDAO = InitialPage.getInstance().getDaoFactory().getOcurrenceDAO();
 		occuDAO.insert(newOccurrence);
-		newOccurrence.setId(occuDAO.getMaxId(user.getIdFamily(), idTarefa));
+		newOccurrence.setId(occuDAO.getMaxId(user.getIdFamily(), newTask.getId()));
 	}
 	
 	void actionSearch() {
+		Task newTask = task;
+		task = taskDAO.getById(task.getId(), user.getIdFamily());
+		tfTitleTask.setText(task.getName());
+		taDescription.setText(task.getDescription());
 		
-		TaskDAO taskDAO = InitialPage.getInstance().getDaoFactory().getTaskDAO();
-		//taskDAO.getById(, idFamily);
-		Task newTask = new Task();
-		
+		int idOccurrence = 0;//TEM Q PEGAR ID ##############################################
+		int data = occuDAO.getById(idOccurrence, task.getId(), user.getIdFamily()).getDate();
+		tfDate.setText(Integer.toString(data));
+		int hour = occuDAO.getById(idOccurrence, task.getId(), user.getIdFamily()).getHour();
+		tfHour.setText(Integer.toString(hour));
 	}
 	
 	void actionUpdate() {
 		Task newTask = new Task();
 		newTask.setName(tfTitleTask.getText());
 		newTask.setDescription(taDescription.getText());
+		JList listResponsibles = switchListResponsible.getlist2();
+		newTask.setResponsible(switchListResponsible.listToArray(listResponsibles));
+		JList listItens = switchListItems.getlist2();
+		newTask.setProducts(switchListItems.listToArray(listItens));
 		newTask.setCompleted(isTrue);
-		//sobrou listas para ligacoes
-		TaskDAO taskDAO = InitialPage.getInstance().getDaoFactory().getTaskDAO();
 		taskDAO.edit(newTask);
 	}
 	
@@ -305,8 +346,12 @@ public class CreateTask extends JPanel implements ActionListener {
 		
 		
 		
-		TaskDAO taskDAO = InitialPage.getInstance().getDaoFactory().getTaskDAO();
 		taskDAO.remove(newTask);
+		for(Occurrence oc : newTask.getOccurrences()) {
+			occuDAO.remove(oc);
+		}
+		
+		
 		
 	}
 	
@@ -314,21 +359,50 @@ public class CreateTask extends JPanel implements ActionListener {
 		InitialPage.getInstance().createInternalFrame(new EditReminder(user), "Home Task Center", 550, 350);
 	}
 
-	void actionSwitchListPullAll() {
-		//seria bom assim, mas sla se funciona
-		switchListResponsible.setlist2(switchListResponsible.getlist1());
+	void actionSwitchListPullAllItems() {
+		modelProduct1.list1ToList2();
+		//modelProduct1.fire tem q dar fire nas duas
 	}
 	
-	void actionSwitchListPullOne() {
-		
+	void actionSwitchListPullOneItems() {
+		int index=0;
+		Product p = (Product) modelProduct1.getElementAt(index);
+		modelProduct1.removeList1(p);
+		modelProduct2.addList2(p);
 	}
 	
-	void actionSwitchListRemoveAll() {
-		
+	void actionSwitchListRemoveAllItems() {
+		modelProduct1.list2ToList1();
+		//fire
 	}
 	
-	void actionSwitchListRemoveOne() {
-		
+	void actionSwitchListRemoveOneItems() {
+		int index=0;
+		Product p = (Product) modelProduct2.getElementAt(index);
+		modelProduct2.removeList1(p);
+		modelProduct1.addList2(p);
+	}
+	
+	void actionSwitchListPullAllResponsables() {
+		modelProduct1.list1ToList2();
+	}
+	
+	void actionSwitchListPullOneResponsables() {
+		int index=0;
+		Product p = (Product) modelProduct1.getElementAt(index);
+		modelProduct1.removeList1(p);
+		modelProduct2.addList2(p);
+	}
+	
+	void actionSwitchListRemoveAllResponsables() {
+		modelProduct1.list2ToList1();
+	}
+	
+	void actionSwitchListRemoveOneResponsables() {
+		int index=0;
+		Product p = (Product) modelProduct2.getElementAt(index);
+		modelProduct2.removeList1(p);
+		modelProduct1.addList2(p);
 	}
 	
 	@Override
@@ -349,17 +423,33 @@ public class CreateTask extends JPanel implements ActionListener {
 						if(arg0.getSource()==btnEditReminder) {
 							actionEditReminder();
 						} else {
-							if(arg0.getSource()==switchListResponsible.getbPuttAll()) {
-								actionSwitchListPullAll();
+							if(arg0.getSource()==switchListItems.getbPuttAll()) {
+								actionSwitchListPullAllItems();
 							} else {
-								if(arg0.getSource()==switchListResponsible.getbPuttOne()) {
-									actionSwitchListPullOne();
+								if(arg0.getSource()==switchListItems.getbPuttOne()) {
+									actionSwitchListPullOneItems();
 								} else {
-									if(arg0.getSource()==switchListResponsible.getbRemoveAll()) {
-										actionSwitchListRemoveAll();
+									if(arg0.getSource()==switchListItems.getbRemoveAll()) {
+										actionSwitchListRemoveAllItems();
 									} else {
-										if(arg0.getSource()==switchListResponsible.getbRemoveOne()) {
-											actionSwitchListRemoveOne();
+										if(arg0.getSource()==switchListItems.getbRemoveOne()) {
+											actionSwitchListRemoveOneItems();
+										} else {
+											if(arg0.getSource()==switchListResponsible.getbPuttAll()) {
+												actionSwitchListPullAllResponsables();
+											} else {
+												if(arg0.getSource()==switchListResponsible.getbPuttOne()) {
+													actionSwitchListPullOneResponsables();
+												} else {
+													if(arg0.getSource()==switchListResponsible.getbRemoveAll()) {
+														actionSwitchListRemoveAllResponsables();
+													} else {
+														if(arg0.getSource()==switchListResponsible.getbRemoveOne()) {
+															actionSwitchListRemoveOneResponsables();
+														}
+													}
+												}
+											}
 										}
 									}
 								}
@@ -370,5 +460,4 @@ public class CreateTask extends JPanel implements ActionListener {
 			}
 		}
 	}
-	
 }

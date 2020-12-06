@@ -1,4 +1,4 @@
-package view;
+package view.listModel;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,19 +8,18 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import view.listModel.CreateItemsListModel;
 import view.tableModel.CategoryTableModel;
 
-public class SwitchList extends JPanel{
+public class SwitchListProduct extends JPanel{
 	
 	private JList list1, list2;
 	private JButton bPuttOne, bPuttAll, bRemoveOne, bRemoveAll;
 	private JScrollPane slist1, slist2;
 	
-	public SwitchList() {
+	public SwitchListProduct() {
 		
 		super(new GridLayout(1,3));
-		list1 = new JList(new CreateItemsListModel());
+		list1 = new JList(new ProductListModel());
 		slist1 = new JScrollPane(list1);
 		this.add(slist1);
 		
@@ -35,7 +34,7 @@ public class SwitchList extends JPanel{
 		botoes.add(bRemoveAll);
 		this.add(botoes);
 		
-		list2 = new JList(new CreateItemsListModel());
+		list2 = new JList(new ProductListModel());
 		slist2 = new JScrollPane(list2);
 		this.add(slist2);
 		
@@ -89,7 +88,7 @@ public class SwitchList extends JPanel{
 		this.bRemoveAll = bRemoveAll;
 	}
 	
-	public List getArray(JList jList) {
+	public List listToArray(JList jList) {
 		List list = new ArrayList(jList.getModel().getSize());
 		for (int i = 0; i < jList.getModel().getSize(); i++) {
 		    list.add(jList.getModel().getElementAt(i));
@@ -97,5 +96,8 @@ public class SwitchList extends JPanel{
 		return list;
 	}
 	
-
+	public JList arrayToList(List list) {
+		JList jL = new JList(list.toArray());
+		return jL;
+	}
 }
