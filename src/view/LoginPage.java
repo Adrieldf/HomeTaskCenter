@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Container;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -31,12 +32,17 @@ public class LoginPage extends JPanel implements ActionListener {
 	private JButton btnUserEdit;
 
 	private User user = null;
+
 	private JPasswordField tfPassword;
 	
 	private UserDAO userDAO = InitialPage.getInstance().getDaoFactory().getUserDAO();
 
-	public LoginPage(User user) {
-
+	private final LookupCallback<Boolean> callback;
+	
+	public LoginPage(User user, LookupCallback<Boolean> callback) {
+		
+		this.callback = callback;
+		
 		this.user = user;
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths  = new int[] { 30, 30, 30, 100, 100, 30, 30, 30, 0 };
@@ -122,33 +128,32 @@ public class LoginPage extends JPanel implements ActionListener {
 	}
 
 	void actionLogin() {
-
-		System.out.println("Login");
 		
-//		User user = userDAO.getByName(tfName.getText());
-//		if (user != null && user.getPassword().equals(tfPassword.getText())) {
-//			JOptionPane.showMessageDialog(null, "Login realizado com sucesso!", "Sucesso",
-//					JOptionPane.INFORMATION_MESSAGE);
-//
-//			InitialPage.getInstance().enableMenu(true);
-//			InitialPage.getInstance().setUser(user);
-//			this.user = user;
-//			this.actionCancel();
-//		} else {
-//			JOptionPane.showMessageDialog(null, "Dados informados não conferem, verifique e tente novamente.", "Erro",
-//					JOptionPane.INFORMATION_MESSAGE);
-//		}
+		UserDAO userDAO = InitialPage.getInstance().getDaoFactory().getUserDAO();
+		User user = userDAO.getByName(tfName.getText());
+		if (user != null && user.getPassword().equals(tfPassword.getText())) {
+			JOptionPane.showMessageDialog(null, "Login realizado com sucesso!", "Sucesso",
+					JOptionPane.INFORMATION_MESSAGE);
+			// definir a variavel do usuario que vai ser usada nas demais telas
+			InitialPage.getInstance().enableMenu(true);
+			//InitialPage.getInstance().
+			this.user = user;
+			// fecha a tela de login
+			callback.callback(true);
+		} else {
+			JOptionPane.showMessageDialog(null, "Dados informados não conferem, verifique e tente novamente.", "Erro",
+					JOptionPane.INFORMATION_MESSAGE);
+			// deixa a tela de login aberta para tentar de novo
+		}
 
 	}
 
-	public void actionCancel() {
-		System.out.println("Cancelar");
-//		JInternalFrame jif = (JInternalFrame) this.getParent();
-		
-//		jif.dispose(); 
-		
-		InitialPage.getInstance().removePanel(this);
 
+	void actionCancel() {
+		callback.callback(false);
+//		Container parent = this.getParent();
+//		JInternalFrame jif = (JInternalFrame) this.getParent();
+//		jif.dispose();
 	}
 
 	@Override

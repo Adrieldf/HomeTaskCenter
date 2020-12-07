@@ -20,6 +20,7 @@ import model.Family;
 import model.User;
 
 public class UserEdit extends JPanel implements ActionListener {
+	
 	private JTextField tfName;
 	private JTextField tfPassword;
 	private JLabel lblTitle, lblName, lblPassword;

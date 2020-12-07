@@ -46,7 +46,10 @@ public class InitialPage extends JFrame {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				InitialPage f = InitialPage.getInstance();
-				f.setVisible(true);
+				if (SenhaHelper.check()) {
+					f.setVisible(true);					
+				}
+				
 			}
 		});
 	}
@@ -92,10 +95,11 @@ public class InitialPage extends JFrame {
 	private void initial() {
 		//showPanelFullScreen(new PendingTasks(user), "Home Task Center");			
 		// TODO: validar se o login foi realizado com sucesso para mostrar as tasks
-		if(user == null) {
-			createInternalFrame(new LoginPage(user), "Home Task Center", 380, 350);
-		}
-
+//		if(user == null) {
+//			createInternalFrame(new LoginPage(user), "Home Task Center", 380, 350);
+//		}
+//		createInternalFrame(new LoginPage(user), "Home Task Center", 380, 350);
+//		SenhaHelper.check();
 	}
 
 	public DAOFactory getDaoFactory() {
@@ -253,10 +257,6 @@ public class InitialPage extends JFrame {
 			e.printStackTrace();
 		}
 
-	}
-	
-	public void removePanel(JPanel panel) {
-		desktopPane.setVisible(false);
 	}
 
 	public void enableMenu(boolean habilita) {
