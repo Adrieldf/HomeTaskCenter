@@ -89,11 +89,13 @@ public class PendingTasks extends JPanel implements ActionListener{
 
 
 	private void popula() {
-//		//TODO Auto-generated method stub
-//		for(Task tas : taskDAO.getAll(user.getIdFamily())) {
-//			model.addTask(tas);
-//		}
-//		model.fireTableDataChanged();
+		//TODO Auto-generated method stub
+		int idfam = user.getIdFamily();
+		
+		for(Task tas : taskDAO.getAll(idfam)) {
+			model.addTask(tas);
+		}
+		model.fireTableDataChanged();
 	}
 
 

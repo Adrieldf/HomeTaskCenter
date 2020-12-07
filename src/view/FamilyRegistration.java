@@ -41,6 +41,7 @@ public class FamilyRegistration extends JPanel implements ActionListener {
 	
 	private FamilyRegistrationTableModel model;
 	private FamilyDAO famDAO = InitialPage.getInstance().getDaoFactory().getFamilyDAO();
+	private UserDAO userDAO = InitialPage.getInstance().getDaoFactory().getUserDAO();
 	
 	public FamilyRegistration(User user) {
 		this.user = user;
@@ -148,33 +149,36 @@ public class FamilyRegistration extends JPanel implements ActionListener {
 		gbc_btnDelete.gridx = 7;
 		gbc_btnDelete.gridy = 7;
 		add(btnDelete, gbc_btnDelete);
+		
+		popula();
 	}
 	
+	private void popula() {
+		// TODO Auto-generated method stub
+		Family fami = famDAO.getById(user.getIdFamily());
+		for(User fam :fami.getMermber()) {
+			model.addMember(fam);
+		}
+		model.fireTableDataChanged();
+	}
+
 	void actionKeepSelected() {
 		selected = tabFamily.getSelectedRow();
 		//System.out.println(selected); //teste
 	}
 	
 	void actionInsert() {
-		UserDAO userDAO = InitialPage.getInstance().getDaoFactory().getUserDAO();
-		Family newFamily = new Family();
 		User newUser = userDAO.getByName(tfName.getText());
-		
-		
 		newUser.setAdmin(isTrue);
-
-		for(User fam :newFamily.getMermber()) {
-			model.addMember(fam);
-		}
-		//insere a familia no banco
-		newFamily.addMember(newUser);
-		famDAO.insert(newFamily);
+		newUser.setIdFamily(user.getIdFamily());
+		userDAO.edit(newUser);
+		model.addMember(newUser);
 		model.fireTableDataChanged();
 	}
 	
 	void actionDelete() {
-		Family killFamily = (Family)model.getValueAt(selected, 0);
-		famDAO.remove(killFamily);
+		User killUser = (User) model.getValueAt(selected, 0);
+		killUser.setIdFamily(-1);
 		model.removeMember(selected);
 		model.fireTableDataChanged();
 	}

@@ -31,13 +31,24 @@ public class UserEdit extends JPanel implements ActionListener {
 	private JTextField tfFamily;
 
 	private User user;
+	private Family fam;
+	private boolean flagNew = false;
 	
 	private UserDAO userDB   = InitialPage.getInstance().getDaoFactory().getUserDAO();
 	private FamilyDAO famDAO = InitialPage.getInstance().getDaoFactory().getFamilyDAO();
 	
 	public UserEdit(User user) {
-		this.user = user;
-
+		
+		if(user==null) {
+			this.user = new User();
+			fam = new Family();
+			flagNew = true;
+		}else {
+			this.user = user;
+			fam = famDAO.getById(user.getIdFamily());
+		}
+		
+		
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths  = new int[]{40, 30, 30, 100, 100, 100, 30, 0};
 		gridBagLayout.rowHeights    = new int[]{30, 30, 30, 30, 20, 30, 20, 30, 20, 30, 20, 30, 30, 0};
@@ -160,15 +171,20 @@ public class UserEdit extends JPanel implements ActionListener {
 	
 	
 	void actionCreateUser() {
-		Family newFamily = new Family(tfFamily.getText());
 		User newUser = new User();
 		newUser.setName(tfName.getText());
 		newUser.setPassword(tfPassword.getText());
 		newUser.setEmail(tfMail.getText());
-		newFamily.addMember(newUser);
-		famDAO.insert(newFamily);
-		newUser.setIdFamily(famDAO.getMaxId());
+		fam.addMember(newUser);
+		if(flagNew) {
+			fam.setName(tfFamily.getText());
+			famDAO.insert(fam);
+			newUser.setIdFamily(famDAO.getMaxId());
+		}else {
+			newUser.setIdFamily(fam.getId());
+		}
 		userDB.insert(newUser);
+		newUser.setId(userDB.getMaxId());
 		JOptionPane.showMessageDialog(null, "Usuário criado com sucesso!", "Sucesso",
 				JOptionPane.INFORMATION_MESSAGE);
 	}

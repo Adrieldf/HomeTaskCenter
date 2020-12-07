@@ -22,11 +22,15 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import dao.MessageDAO;
 import dao.OccurrenceDAO;
+import dao.ReminderDAO;
 import dao.TaskDAO;
 import model.Occurrence;
 import model.Product;
+import model.Reminder;
 import model.Task;
+import model.Message;
 import javax.swing.JCheckBox;
 import model.User;
 import view.listModel.ProductListModel;
@@ -56,6 +60,8 @@ public class CreateTask extends JPanel implements ActionListener {
 	
 	private TaskDAO taskDAO = InitialPage.getInstance().getDaoFactory().getTaskDAO();
 	private OccurrenceDAO occuDAO = InitialPage.getInstance().getDaoFactory().getOcurrenceDAO();
+	private ReminderDAO remDAO = InitialPage.getInstance().getDaoFactory().getReminderDAO();
+	private MessageDAO mesDAO = InitialPage.getInstance().getDaoFactory().getMessageDAO();
 	
 	private ProductListModel modelProduct1, modelProduct2;
 	private ResponsableListModel modelResponsable1,modelResponsable2;
@@ -299,7 +305,9 @@ public class CreateTask extends JPanel implements ActionListener {
 		newTask.setProducts(switchListItems.listToArray(listItens));
 		newTask.setCompleted(isTrue);
 		taskDAO.insert(newTask);
-		newTask.setId(taskDAO.getMaxId(user.getId()));
+		int idTask = taskDAO.getMaxId(user.getId());
+		newTask.setId(idTask);
+		task=newTask;
 		
 		Occurrence newOccurrence = new Occurrence();
 		newOccurrence.setDate(Integer.parseInt(tfDate.getText()));
@@ -307,7 +315,9 @@ public class CreateTask extends JPanel implements ActionListener {
 		newOccurrence.setIdTask(newTask.getId());
 		newOccurrence.setIdFamily(user.getIdFamily());
 		occuDAO.insert(newOccurrence);
-		newOccurrence.setId(occuDAO.getMaxId(user.getIdFamily(), newTask.getId()));
+		int idOccurrence = occuDAO.getMaxId(user.getIdFamily(), newTask.getId());
+		newOccurrence.setId(idOccurrence);
+		
 	}
 	
 	void actionSearch() {
@@ -316,11 +326,13 @@ public class CreateTask extends JPanel implements ActionListener {
 		tfTitleTask.setText(task.getName());
 		taDescription.setText(task.getDescription());
 		
-		int idOccurrence = 0;//TEM Q PEGAR ID ##############################################
-		int data = occuDAO.getById(idOccurrence, task.getId(), user.getIdFamily()).getDate();
+		List<Occurrence> l  = occuDAO.getAll(task.getId(), user.getId());
+		int data = l.get(0).getDate();
 		tfDate.setText(Integer.toString(data));
-		int hour = occuDAO.getById(idOccurrence, task.getId(), user.getIdFamily()).getHour();
+		int hour = l.get(0).getHour();
 		tfHour.setText(Integer.toString(hour));
+		
+		
 	}
 	
 	void actionUpdate() {
@@ -355,7 +367,7 @@ public class CreateTask extends JPanel implements ActionListener {
 	}
 	
 	void actionEditReminder() {
-		InitialPage.getInstance().createInternalFrame(new EditReminder(user), "Home Task Center", 550, 350);
+		InitialPage.getInstance().createInternalFrame(new EditReminder(user, task), "Home Task Center", 550, 350);
 	}
 
 	void actionSwitchListPullAllItems() {

@@ -6,6 +6,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -13,9 +14,13 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import dao.MessageDAO;
+import dao.OccurrenceDAO;
 import dao.ReminderDAO;
+import model.Message;
 import model.Occurrence;
 import model.Reminder;
+import model.Task;
 import model.User;
 
 public class EditReminder extends JPanel implements ActionListener {
@@ -25,9 +30,15 @@ public class EditReminder extends JPanel implements ActionListener {
 	private JButton btnCreateReminder, btnUpdateReminder, btnDeleteReminder;
 	private JLabel lblDescription, lblTitleReminder, lblTitle, lblTask;
 	private User user;
+	private Task task;
+	private Reminder reminder;
+	private Message message;
+	private ReminderDAO remDAO = InitialPage.getInstance().getDaoFactory().getReminderDAO();
+	private MessageDAO mesDAO = InitialPage.getInstance().getDaoFactory().getMessageDAO();
+	private OccurrenceDAO occuDAO = InitialPage.getInstance().getDaoFactory().getOcurrenceDAO();
 	
-	public EditReminder(User user) {
-
+	public EditReminder(User user, Task t) {
+		this.task = t;
 		this.user = user;
 
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -149,33 +160,53 @@ public class EditReminder extends JPanel implements ActionListener {
 	}
 	
 	private void actionCreateReminder() {
+		
 		Reminder newReminder = new Reminder();
 		newReminder.setTitle(tfTitleReminder.getText());
 		newReminder.setDescription(taDescription.getText());
-		//newReminder.setDate(t); faltando?
-		
-		ReminderDAO remDAO = InitialPage.getInstance().getDaoFactory().getReminderDAO();
+		newReminder.setIdFamily(user.getIdFamily());
+		int idTask = task.getId();
+		newReminder.setIdTask(idTask);
+		List<Occurrence> l  = occuDAO.getAll(task.getId(), user.getId());
+		int idOccurrence = l.get(0).getId();
+		newReminder.setIdOccurrence(idOccurrence);
 		remDAO.insert(newReminder);
+		int idReminder = remDAO.getMaxId(user.getId(), idTask, idOccurrence);
+		newReminder.setId(idReminder);
+		reminder = newReminder;
+		
+		Message newMassage = new Message();
+		newMassage.setIdFamily(user.getIdFamily());
+		newMassage.setIdOccurrence(idOccurrence);
+		newMassage.setIdReminder(idReminder);
+		newMassage.setIdTask(idTask);
+		//newMassage.setSender(sender);
+		//newMassage.setReceiver(receiver);
+		//newMassage.setMessage(message);
+		
+		mesDAO.insert(newMassage);
+		int idmes = mesDAO.getMaxId();
+		newMassage.setId(idmes);
+		message = newMassage;
+		
 	}
 
 	private void actionUpdateReminder() {
-		Reminder newReminder = new Reminder();
-		newReminder.setTitle(tfTitleReminder.getText());
-		newReminder.setDescription(taDescription.getText());
-		//newReminder.setDate(t); faltando?
-		
-		ReminderDAO remDAO = InitialPage.getInstance().getDaoFactory().getReminderDAO();
-		remDAO.edit(newReminder);
+
+		reminder.setTitle(tfTitleReminder.getText());
+		reminder.setDescription(taDescription.getText());
+		reminder.setIdFamily(user.getIdFamily());
+		remDAO.edit(reminder);
+
+		//message.setSender(sender);
+		//message.setReceiver(receiver);
+		//message.setMessage(message);
+		mesDAO.edit(message);
 	}
 
 	private void actionDeleteReminder() {
-		Reminder newReminder = new Reminder();
-		newReminder.setTitle(tfTitleReminder.getText());
-		newReminder.setDescription(taDescription.getText());
-		//newReminder.setDate(t); faltando?
-		
-		ReminderDAO remDAO = InitialPage.getInstance().getDaoFactory().getReminderDAO();
-		remDAO.remove(newReminder);
+		remDAO.remove(reminder);
+		mesDAO.remove(message);
 	}
 	
 }

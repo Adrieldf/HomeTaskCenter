@@ -90,7 +90,7 @@ public class InitialPage extends JFrame {
 	}
 
 	private void initial() {
-		showPanelFullScreen(new PendingTasks(user), "Home Task Center");			
+		//showPanelFullScreen(new PendingTasks(user), "Home Task Center");			
 		// TODO: validar se o login foi realizado com sucesso para mostrar as tasks
 		if(user == null) {
 			createInternalFrame(new LoginPage(user), "Home Task Center", 380, 350);
