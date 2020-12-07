@@ -26,8 +26,8 @@ public class CategoryRegistration extends JPanel implements ActionListener{
 	
 	private JTable table;
 	private JTextField tfName;
-	private JButton btnNewCategorie,btnDelete;
-	private JLabel lbTitle,lbCategories,lbName;
+	private JButton btnNewCategorie, btnDelete;
+	private JLabel lbTitle, lbCategories, lbName;
 	
 	private Integer selected;
 	private User user;
@@ -38,10 +38,10 @@ public class CategoryRegistration extends JPanel implements ActionListener{
 	public CategoryRegistration(User user) {
 		this.user = user;
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{30, 100, 100, 40, 50, 0, 100, 100, 0, 0};
-		gridBagLayout.rowHeights = new int[]{30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 0};
+		gridBagLayout.columnWidths  = new int[]{30, 100, 100, 40, 50, 0, 100, 100, 0, 0};
+		gridBagLayout.rowHeights    = new int[]{30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights    = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
 		lbTitle = new JLabel("Cadastro de Categorias");

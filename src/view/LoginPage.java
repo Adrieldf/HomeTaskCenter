@@ -8,11 +8,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 
 import dao.UserDAO;
 import model.User;
@@ -37,18 +39,17 @@ public class LoginPage extends JPanel implements ActionListener {
 
 		this.user = user;
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[] { 30, 30, 30, 166, 100, 30, 0 };
-		gridBagLayout.rowHeights = new int[] { 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 0 };
-		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
-		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-				Double.MIN_VALUE };
+		gridBagLayout.columnWidths  = new int[] { 30, 30, 30, 100, 100, 30, 30, 30, 0 };
+		gridBagLayout.rowHeights    = new int[] { 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 0 };
+		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		gridBagLayout.rowWeights    = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		setLayout(gridBagLayout);
 
 		lbTitle = new JLabel("Login");
 		lbTitle.setFont(new Font("Tahoma", Font.BOLD, 17));
 		GridBagConstraints gbc_lbTitle = new GridBagConstraints();
-		gbc_lbTitle.gridwidth = 6;
-		gbc_lbTitle.insets = new Insets(0, 0, 5, 0);
+		gbc_lbTitle.gridwidth = 8;
+		gbc_lbTitle.insets = new Insets(0, 0, 5, 5);
 		gbc_lbTitle.gridx = 0;
 		gbc_lbTitle.gridy = 1;
 		add(lbTitle, gbc_lbTitle);
@@ -63,7 +64,7 @@ public class LoginPage extends JPanel implements ActionListener {
 
 		tfName = new JTextField();
 		GridBagConstraints gbc_tfName = new GridBagConstraints();
-		gbc_tfName.gridwidth = 2;
+		gbc_tfName.gridwidth = 4;
 		gbc_tfName.insets = new Insets(0, 0, 5, 5);
 		gbc_tfName.fill = GridBagConstraints.HORIZONTAL;
 		gbc_tfName.gridx = 3;
@@ -86,7 +87,7 @@ public class LoginPage extends JPanel implements ActionListener {
 		tfPassword.setMinimumSize(new Dimension(4, 19));
 		tfPassword.setPreferredSize(new Dimension(4, 19));
 		GridBagConstraints gbc_tfPassword = new GridBagConstraints();
-		gbc_tfPassword.gridwidth = 2;
+		gbc_tfPassword.gridwidth = 4;
 		gbc_tfPassword.insets = new Insets(0, 0, 5, 5);
 		gbc_tfPassword.fill = GridBagConstraints.HORIZONTAL;
 		gbc_tfPassword.gridx = 3;
@@ -102,7 +103,7 @@ public class LoginPage extends JPanel implements ActionListener {
 		btnCancel = new JButton("Cancelar");
 		btnCancel.addActionListener(this);
 		GridBagConstraints gbc_btnCancel = new GridBagConstraints();
-		gbc_btnCancel.anchor = GridBagConstraints.EAST;
+		gbc_btnCancel.gridwidth = 3;
 		gbc_btnCancel.insets = new Insets(0, 0, 5, 5);
 		gbc_btnCancel.gridx = 4;
 		gbc_btnCancel.gridy = 7;
@@ -112,7 +113,7 @@ public class LoginPage extends JPanel implements ActionListener {
 		btnUserEdit.addActionListener(this);
 		GridBagConstraints gbc_btnUserEdit = new GridBagConstraints();
 		gbc_btnUserEdit.gridwidth = 4;
-		gbc_btnUserEdit.insets = new Insets(0, 0, 5, 0);
+		gbc_btnUserEdit.insets = new Insets(0, 0, 5, 5);
 		gbc_btnUserEdit.gridx = 2;
 		gbc_btnUserEdit.gridy = 9;
 		add(btnUserEdit, gbc_btnUserEdit);
@@ -122,26 +123,31 @@ public class LoginPage extends JPanel implements ActionListener {
 
 	void actionLogin() {
 
+		System.out.println("Login");
 		
-		User user = userDAO.getByName(tfName.getText());
-		if (user != null && user.getPassword().equals(tfPassword.getText())) {
-			JOptionPane.showMessageDialog(null, "Login realizado com sucesso!", "Sucesso",
-					JOptionPane.INFORMATION_MESSAGE);
-
-			InitialPage.getInstance().enableMenu(true);
-			InitialPage.getInstance().setUser(user);
-			this.user = user;
-			this.actionCancel();
-		} else {
-			JOptionPane.showMessageDialog(null, "Dados informados não conferem, verifique e tente novamente.", "Erro",
-					JOptionPane.INFORMATION_MESSAGE);
-		}
+//		User user = userDAO.getByName(tfName.getText());
+//		if (user != null && user.getPassword().equals(tfPassword.getText())) {
+//			JOptionPane.showMessageDialog(null, "Login realizado com sucesso!", "Sucesso",
+//					JOptionPane.INFORMATION_MESSAGE);
+//
+//			InitialPage.getInstance().enableMenu(true);
+//			InitialPage.getInstance().setUser(user);
+//			this.user = user;
+//			this.actionCancel();
+//		} else {
+//			JOptionPane.showMessageDialog(null, "Dados informados não conferem, verifique e tente novamente.", "Erro",
+//					JOptionPane.INFORMATION_MESSAGE);
+//		}
 
 	}
 
-	void actionCancel() {
-		JInternalFrame jif = (JInternalFrame) this.getParent();
-		jif.dispose();
+	public void actionCancel() {
+		System.out.println("Cancelar");
+//		JInternalFrame jif = (JInternalFrame) this.getParent();
+		
+//		jif.dispose(); 
+		
+		InitialPage.getInstance().removePanel(this);
 	}
 
 	@Override
@@ -154,7 +160,7 @@ public class LoginPage extends JPanel implements ActionListener {
 				actionCancel();
 			} else {
 				if (arg0.getSource() == btnUserEdit) {
-					InitialPage.getInstance().createInternalFrame(new UserEdit(user), "Cadastro de usuario", 800, 600);
+					InitialPage.getInstance().createInternalFrame(new UserEdit(user), "Cadastro de usuario", 500, 380);
 				}
 			}
 		}

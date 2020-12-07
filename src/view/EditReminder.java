@@ -23,7 +23,7 @@ public class EditReminder extends JPanel implements ActionListener {
 	private JTextField tfTitleReminder;
 	private JTextArea taDescription;
 	private JButton btnCreateReminder, btnUpdateReminder, btnDeleteReminder;
-	private JLabel lblDescription,lblTitleReminder,lblTitle,lblTask;
+	private JLabel lblDescription, lblTitleReminder, lblTitle, lblTask;
 	private User user;
 	
 	public EditReminder(User user) {
@@ -31,10 +31,10 @@ public class EditReminder extends JPanel implements ActionListener {
 		this.user = user;
 
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{30, 0, 30, 100, 100, 100, 30, 0};
-		gridBagLayout.rowHeights = new int[]{30, 30, 30, 30, 30, 30, 30, 30, 0, 0, 30, 30, 30, 0};
+		gridBagLayout.columnWidths  = new int[]{30, 0, 30, 100, 100, 100, 30, 0};
+		gridBagLayout.rowHeights    = new int[]{30, 30, 30, 30, 30, 30, 30, 30, 0, 0, 30, 30, 30, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights    = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
 		lblTitle = new JLabel("Editar Lembrete");

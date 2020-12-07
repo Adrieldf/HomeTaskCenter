@@ -254,6 +254,10 @@ public class InitialPage extends JFrame {
 		}
 
 	}
+	
+	public void removePanel(JPanel panel) {
+		desktopPane.setVisible(false);
+	}
 
 	public void enableMenu(boolean habilita) {
 		int quantos = menuBar_1.getMenuCount();
@@ -261,9 +265,11 @@ public class InitialPage extends JFrame {
 			menuBar_1.getMenu(i).setEnabled(habilita);
 		}
 	}
+	
 	public void setUser(User user) {
 		this.user = user;
 	}
+	
 	public User getUser() {
 		return this.user;
 	}

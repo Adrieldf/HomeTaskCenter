@@ -22,8 +22,8 @@ import model.User;
 public class UserEdit extends JPanel implements ActionListener {
 	private JTextField tfName;
 	private JTextField tfPassword;
-	private JLabel lblTitle,lblName,lblPassword;
-	private JButton btnCreateUser,btnSearch,btnUpdate;
+	private JLabel lblTitle, lblName, lblPassword;
+	private JButton btnCreateUser, btnSearch, btnUpdate;
 	private JLabel lblMail;
 
 	private JTextField tfMail;
@@ -32,17 +32,17 @@ public class UserEdit extends JPanel implements ActionListener {
 
 	private User user;
 	
-	private UserDAO userDB = InitialPage.getInstance().getDaoFactory().getUserDAO();
+	private UserDAO userDB   = InitialPage.getInstance().getDaoFactory().getUserDAO();
 	private FamilyDAO famDAO = InitialPage.getInstance().getDaoFactory().getFamilyDAO();
 	
 	public UserEdit(User user) {
 		this.user = user;
 
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{40, 30, 30, 100, 100, 100, 30, 0};
-		gridBagLayout.rowHeights = new int[]{30, 30, 30, 30, 20, 30, 20, 30, 20, 30, 20, 30, 30, 0};
+		gridBagLayout.columnWidths  = new int[]{40, 30, 30, 100, 100, 100, 30, 0};
+		gridBagLayout.rowHeights    = new int[]{30, 30, 30, 30, 20, 30, 20, 30, 20, 30, 20, 30, 30, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights    = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
 		lblTitle = new JLabel("Cadastro de Usuários");
