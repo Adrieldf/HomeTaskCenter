@@ -183,17 +183,17 @@ public class FamilyRegistration extends JPanel implements ActionListener {
 		model.fireTableDataChanged();
 	}
 	
-	void actionSearchUser() {
-		User newUser=null;
-		//buscar usuario do banco
-		if(newUser!=null) {
-			JOptionPane.showMessageDialog(null, "Usuario encontrado com sucesso!", "Pode ser inserido na família",
-			JOptionPane.INFORMATION_MESSAGE);
-		} else {
-			JOptionPane.showMessageDialog(null, "Usuario não encontrado", "Pesquise novamente",
-			JOptionPane.INFORMATION_MESSAGE);
-		}
-	}
+//	void actionSearchUser() {
+//		User newUser=null;
+//		//buscar usuario do banco
+//		if(newUser!=null) {
+//			JOptionPane.showMessageDialog(null, "Usuario encontrado com sucesso!", "Pode ser inserido na família",
+//			JOptionPane.INFORMATION_MESSAGE);
+//		} else {
+//			JOptionPane.showMessageDialog(null, "Usuario não encontrado", "Pesquise novamente",
+//			JOptionPane.INFORMATION_MESSAGE);
+//		}
+//	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {

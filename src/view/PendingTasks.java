@@ -84,14 +84,16 @@ public class PendingTasks extends JPanel implements ActionListener{
 		gbc_btnCreateTask.gridy = 10;
 		add(btnCreateTask, gbc_btnCreateTask);
 		
-		//popula();
+		popula();
 	}
 
 
 	private void popula() {
 		//TODO Auto-generated method stub
-		int idfam = user.getIdFamily();
+		System.out.println(user);
 		
+		int idfam = user.getIdFamily();
+		System.out.println(idfam);
 		for(Task tas : taskDAO.getAll(idfam)) {
 			model.addTask(tas);
 		}
