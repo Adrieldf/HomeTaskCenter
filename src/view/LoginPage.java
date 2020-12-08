@@ -20,6 +20,8 @@ import javax.swing.SwingUtilities;
 import dao.UserDAO;
 import model.User;
 import security.Criptography;
+import util.LookupCallback;
+
 import javax.swing.JPasswordField;
 import java.awt.Dimension;
 
@@ -124,7 +126,7 @@ public class LoginPage extends JPanel implements ActionListener {
 		gbc_btnUserEdit.gridy = 9;
 		add(btnUserEdit, gbc_btnUserEdit);
 
-		InitialPage.getInstance().enableMenu(false);
+//		InitialPage.getInstance().enableMenu(false);
 	}
 
 	void actionLogin() {
@@ -135,7 +137,7 @@ public class LoginPage extends JPanel implements ActionListener {
 			JOptionPane.showMessageDialog(null, "Login realizado com sucesso!", "Sucesso",
 					JOptionPane.INFORMATION_MESSAGE);
 			// definir a variavel do usuario que vai ser usada nas demais telas
-			InitialPage.getInstance().enableMenu(true);
+//			InitialPage.getInstance().enableMenu(true);
 			//InitialPage.getInstance().
 			this.user = user;
 			// fecha a tela de login
@@ -148,12 +150,8 @@ public class LoginPage extends JPanel implements ActionListener {
 
 	}
 
-
 	void actionCancel() {
 		callback.callback(false);
-//		Container parent = this.getParent();
-//		JInternalFrame jif = (JInternalFrame) this.getParent();
-//		jif.dispose();
 	}
 
 	@Override
@@ -166,7 +164,7 @@ public class LoginPage extends JPanel implements ActionListener {
 				actionCancel();
 			} else {
 				if (arg0.getSource() == btnUserEdit) {
-					InitialPage.getInstance().createInternalFrame(new UserEdit(user), "Cadastro de usuario", 500, 380);
+					InitialPage.getInstance().createInternalFrame(new UserEdit(user), "Home Task Center", 500, 380);
 				}
 			}
 		}

@@ -25,6 +25,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import dao.DAOFactory;
 import database.PostgresqlDBFactory;
 import model.User;
+import util.LoginDialog;
 
 //import view.InitialPage;
 //import test.TestePanel;
@@ -45,8 +46,8 @@ public class InitialPage extends JFrame {
 
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				InitialPage f = InitialPage.getInstance();
-				if (SenhaHelper.check()) {
+				if (LoginDialog.check()) {
+					InitialPage f = InitialPage.getInstance();
 					f.setVisible(true);					
 				}
 				
@@ -93,13 +94,13 @@ public class InitialPage extends JFrame {
 	}
 
 	private void initial() {
-		//showPanelFullScreen(new PendingTasks(user), "Home Task Center");			
+		showPanelFullScreen(new PendingTasks(user), "Home Task Center");			
 		// TODO: validar se o login foi realizado com sucesso para mostrar as tasks
 //		if(user == null) {
 //			createInternalFrame(new LoginPage(user), "Home Task Center", 380, 350);
 //		}
 //		createInternalFrame(new LoginPage(user), "Home Task Center", 380, 350);
-//		SenhaHelper.check();
+//		LoginDialog.check();
 	}
 
 	public DAOFactory getDaoFactory() {
@@ -110,22 +111,22 @@ public class InitialPage extends JFrame {
 		JMenu mnArchive = new JMenu("Arquivo");
 		menuBar.add(mnArchive);
 
-		JMenuItem mntmSair = new JMenuItem("Sair");
-		mntmSair.addActionListener(new ActionListener() {
+		JMenuItem mntmExit = new JMenuItem("Sair");
+		mntmExit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
 			}
 		});
 
-		mnArchive.add(mntmSair);
+		mnArchive.add(mntmExit);
 	}
 
 	private void buildMenuOptions(JMenuBar menuBar) {
 
-		JMenu mnTasks = new JMenu("Tarefas");
-		JMenu mnUsers = new JMenu("Usuários");
-		JMenu mnItems = new JMenu("Itens");
+		JMenu mnTasks      = new JMenu("Tarefas");
+		JMenu mnUsers      = new JMenu("Usuários");
+		JMenu mnItems      = new JMenu("Itens");
 		JMenu mnCategories = new JMenu("Categorias");
 
 		menuBar.add(mnTasks);
@@ -208,10 +209,6 @@ public class InitialPage extends JFrame {
 		}
 	}
 
-//	protected void createIntFrame() {
-//		new CreateItem();
-//	}
-
 	protected void createInternalFrame(JPanel panel, String title, Integer width, Integer height) {
 		final JInternalFrame intFrame = new JInternalFrame(title, true, true, true, true);
 		showPanel(panel, intFrame, width, height);
@@ -259,12 +256,12 @@ public class InitialPage extends JFrame {
 
 	}
 
-	public void enableMenu(boolean habilita) {
-		int quantos = menuBar_1.getMenuCount();
-		for (int i = 0; i < quantos; i++) {
-			menuBar_1.getMenu(i).setEnabled(habilita);
-		}
-	}
+//	public void enableMenu(boolean habilita) {
+//		int quantos = menuBar_1.getMenuCount();
+//		for (int i = 0; i < quantos; i++) {
+//			menuBar_1.getMenu(i).setEnabled(habilita);
+//		}
+//	}
 	
 	public void setUser(User user) {
 		this.user = user;

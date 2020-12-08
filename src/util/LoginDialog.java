@@ -1,12 +1,15 @@
-package view;
+package util;
 
-public class SenhaHelper {
+import view.InitialPage;
+import view.LoginPage;
+
+public class LoginDialog {
 	
 	private static boolean CHECK;
 	
 	public static boolean check() {
 		CHECK = false;
-		new LookupCallback<Boolean>(InitialPage.getInstance(), "Login", 380, 350) {
+		new LookupCallback<Boolean>(InitialPage.getInstance(), "Home Task Center", 380, 350) {
 			private static final long serialVersionUID = 1L;
 
 			@Override
