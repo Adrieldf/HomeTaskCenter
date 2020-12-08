@@ -4,12 +4,12 @@ import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import view.SwitchList;
+
 
 public class Teste extends JFrame{
 
 	private JPanel fundo;
-	private SwitchList listaSelecao;
+	//private SwitchList listaSelecao;
 	
 	public void init() {
 		
@@ -18,8 +18,8 @@ public class Teste extends JFrame{
 		
 		this.fundo = new JPanel(new BorderLayout());
 		
-		this.listaSelecao = new SwitchList();
-		this.fundo.add(this.listaSelecao);
+//		this.listaSelecao = new SwitchList();
+//		this.fundo.add(this.listaSelecao);
 		
 		this.getContentPane().add(this.fundo);
 		

@@ -55,7 +55,9 @@ public class CreateTask extends JPanel implements ActionListener {
 	private User user;
 	private JLabel lblItems;
 	private Task task;
-	
+	private Occurrence occurrence;
+	private Message message;
+	private Reminder reminder;
 	
 	
 	private TaskDAO taskDAO = InitialPage.getInstance().getDaoFactory().getTaskDAO();
@@ -317,6 +319,10 @@ public class CreateTask extends JPanel implements ActionListener {
 		occuDAO.insert(newOccurrence);
 		int idOccurrence = occuDAO.getMaxId(user.getIdFamily(), newTask.getId());
 		newOccurrence.setId(idOccurrence);
+		occurrence = newOccurrence;
+		
+		message = new Message();
+		reminder = new Reminder();
 		
 	}
 	
@@ -367,7 +373,7 @@ public class CreateTask extends JPanel implements ActionListener {
 	}
 	
 	void actionEditReminder() {
-		InitialPage.getInstance().createInternalFrame(new EditReminder(user, task), "Home Task Center", 550, 350);
+		InitialPage.getInstance().createInternalFrame(new EditReminder(user, task, message, reminder), "Home Task Center", 550, 350);
 	}
 
 	void actionSwitchListPullAllItems() {
@@ -470,5 +476,21 @@ public class CreateTask extends JPanel implements ActionListener {
 				}
 			}
 		}
+	}
+
+	public Message getMessage() {
+		return message;
+	}
+
+	public void setMessage(Message message) {
+		this.message = message;
+	}
+
+	public Reminder getReminder() {
+		return reminder;
+	}
+
+	public void setReminder(Reminder reminder) {
+		this.reminder = reminder;
 	}
 }

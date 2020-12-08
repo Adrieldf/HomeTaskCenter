@@ -39,14 +39,15 @@ public class UserEdit extends JPanel implements ActionListener {
 	private FamilyDAO famDAO = InitialPage.getInstance().getDaoFactory().getFamilyDAO();
 	
 	public UserEdit(User user) {
-		
-		if(user==null) {
+
+		if(user==null || user.getIdFamily()==-1) {
 			this.user = new User();
 			fam = new Family();
 			flagNew = true;
 		}else {
 			this.user = user;
 			fam = famDAO.getById(user.getIdFamily());
+			
 		}
 		
 		

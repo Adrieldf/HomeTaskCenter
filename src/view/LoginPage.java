@@ -130,8 +130,8 @@ public class LoginPage extends JPanel implements ActionListener {
 	}
 
 	void actionLogin() {
-		
-		UserDAO userDAO = InitialPage.getInstance().getDaoFactory().getUserDAO();
+
+
 		User user = userDAO.getByName(tfName.getText());
 		if (user != null && user.getPassword().equals(tfPassword.getText())) {
 			JOptionPane.showMessageDialog(null, "Login realizado com sucesso!", "Sucesso",
@@ -146,6 +146,7 @@ public class LoginPage extends JPanel implements ActionListener {
 			JOptionPane.showMessageDialog(null, "Dados informados não conferem, verifique e tente novamente.", "Erro",
 					JOptionPane.INFORMATION_MESSAGE);
 			// deixa a tela de login aberta para tentar de novo
+
 		}
 
 	}

@@ -84,7 +84,7 @@ public class PendingTasks extends JPanel implements ActionListener{
 		gbc_btnCreateTask.gridy = 10;
 		add(btnCreateTask, gbc_btnCreateTask);
 		
-		popula();
+		//popula();
 	}
 
 
@@ -108,7 +108,9 @@ public class PendingTasks extends JPanel implements ActionListener{
 	}
 	
 	void actionCreateTask() {
-		InitialPage.getInstance().createInternalFrame(new CreateTask(user,null), "Criar nova tarefa", 800, 600);
+		Task newTask = null;
+		InitialPage.getInstance().createInternalFrame(new CreateTask(user,newTask), "Criar nova tarefa", 800, 600);
+		//model.addTask(newTask);
 	}
 
 }

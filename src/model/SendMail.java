@@ -12,7 +12,7 @@ import javax.mail.internet.MimeMessage;
 
 public class SendMail {
 	
-	private String[] recipients = new String[10];
+	private String recipients;
 	private String subject;
 	private String text;
 	
@@ -20,8 +20,8 @@ public class SendMail {
 		
 	}
 	
-	public void setRecipients(int index, String recipient) {
-		this.recipients[index] = recipient;
+	public void setRecipients(String recipient) {
+		this.recipients = recipient;
 	}
 	
 	public void setSubject(String subject) {
@@ -63,8 +63,11 @@ public class SendMail {
 	        //Remetente
 
 	        Address[] toUser = InternetAddress.parse("hometaskcenter@gmail.com");
-	        for (int i = 0; i < this.recipients.length; i++) {
-	        	toUser = InternetAddress.parse(this.recipients[i]);	
+
+	        
+	        String[] a = recipients.split(";");
+	        for (int i = 0; i < a.length; i++) {
+        		toUser = InternetAddress.parse(a[i]);	
 			}
 
 	        message.setRecipients(Message.RecipientType.TO, toUser);

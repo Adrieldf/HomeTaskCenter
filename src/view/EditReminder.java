@@ -14,12 +14,14 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import dao.FamilyDAO;
 import dao.MessageDAO;
 import dao.OccurrenceDAO;
 import dao.ReminderDAO;
 import model.Message;
 import model.Occurrence;
 import model.Reminder;
+import model.SendMail;
 import model.Task;
 import model.User;
 
@@ -37,9 +39,11 @@ public class EditReminder extends JPanel implements ActionListener {
 	private MessageDAO mesDAO = InitialPage.getInstance().getDaoFactory().getMessageDAO();
 	private OccurrenceDAO occuDAO = InitialPage.getInstance().getDaoFactory().getOcurrenceDAO();
 	
-	public EditReminder(User user, Task t) {
+	public EditReminder(User user, Task t, Message m, Reminder r) {
 		this.task = t;
 		this.user = user;
+		this.message = m;
+		this.reminder = r;
 
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths  = new int[]{30, 0, 30, 100, 100, 100, 30, 0};
@@ -181,14 +185,20 @@ public class EditReminder extends JPanel implements ActionListener {
 		newMassage.setIdReminder(idReminder);
 		newMassage.setIdTask(idTask);
 		//newMassage.setSender(sender);
-		//newMassage.setReceiver(receiver);
-		//newMassage.setMessage(message);
+		String s = null;
+		List<User> resp = task.getResponsible();
+		for(User responsable : resp) {
+			s = s + responsable.getEmail() + ";";
+		}
+		newMassage.setReceiver(s);
+		task.getResponsible();
+		newMassage.setMessage(reminder.getDescription());
 		
 		mesDAO.insert(newMassage);
 		int idmes = mesDAO.getMaxId();
 		newMassage.setId(idmes);
 		message = newMassage;
-		
+		actionSendMail();
 	}
 
 	private void actionUpdateReminder() {
@@ -198,15 +208,25 @@ public class EditReminder extends JPanel implements ActionListener {
 		reminder.setIdFamily(user.getIdFamily());
 		remDAO.edit(reminder);
 
-		//message.setSender(sender);
-		//message.setReceiver(receiver);
-		//message.setMessage(message);
+
+		message.setMessage(reminder.getDescription());
 		mesDAO.edit(message);
+		actionSendMail();
 	}
 
 	private void actionDeleteReminder() {
 		remDAO.remove(reminder);
 		mesDAO.remove(message);
+		reminder = null;
+		message = null;
+	}
+	
+	private void actionSendMail() {
+		SendMail sendM = new SendMail();
+		sendM.setSubject(reminder.getTitle());
+		sendM.setText(message.getMessage());
+		sendM.setRecipients(message.getReceiver());
+		sendM.sendMailReminder();
 	}
 	
 }
