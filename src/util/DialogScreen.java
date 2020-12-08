@@ -3,7 +3,7 @@ package util;
 import view.InitialPage;
 import view.LoginPage;
 
-public class LoginDialog {
+public class DialogScreen {
 	
 	private static boolean CHECK;
 	

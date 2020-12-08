@@ -130,12 +130,9 @@ public class LoginPage extends JPanel implements ActionListener {
 	}
 
 	void actionLogin() {
-
-
 		User user = userDAO.getByName(tfName.getText());
 		if (user != null && user.getPassword().equals(tfPassword.getText())) {
-			JOptionPane.showMessageDialog(null, "Login realizado com sucesso!", "Sucesso",
-					JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Login realizado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
 			// definir a variavel do usuario que vai ser usada nas demais telas
 //			InitialPage.getInstance().enableMenu(true);
 			//InitialPage.getInstance().
@@ -154,21 +151,55 @@ public class LoginPage extends JPanel implements ActionListener {
 	void actionCancel() {
 		callback.callback(false);
 	}
+	
+	void actionUserEdit() {
+		new LookupCallback<Boolean>(InitialPage.getInstance(), "Home Task Center", 500, 380) {
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void addPanel() {
+				add(new UserEdit(null, this));
+			}
+
+			@Override
+			public void callback(Boolean e) {
+//				if (e) {
+//					CHECK = true;
+//				}
+				dispose();
+			}
+		};
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
 		if (arg0.getSource() == btnLogin) {
 			actionLogin();
-		} else {
-			if (arg0.getSource() == btnCancel) {
-				actionCancel();
-			} else {
-				if (arg0.getSource() == btnUserEdit) {
-					InitialPage.getInstance().createInternalFrame(new UserEdit(user), "Home Task Center", 500, 380);
-				}
-			}
+		} else if (arg0.getSource() == btnCancel) {
+			actionCancel();
+		} else if (arg0.getSource() == btnUserEdit) {
+			actionUserEdit();
+			
+//			callback.callback(true);
+//			InitialPage.getInstance().enableMenu(false);
+//			InitialPage.getInstance().createInternalFrame(new UserEdit(user), "Home Task Center", 500, 380);
 		}
 	}
+	
+//	public void actionPerformed(ActionEvent arg0) {
+//		// TODO Auto-generated method stub
+//		if (arg0.getSource() == btnLogin) {
+//			actionLogin();
+//		} else {
+//			if (arg0.getSource() == btnCancel) {
+//				actionCancel();
+//			} else {
+//				if (arg0.getSource() == btnUserEdit) {
+//					InitialPage.getInstance().createInternalFrame(new UserEdit(user), "Home Task Center", 500, 380);
+//				}
+//			}
+//		}
+//	}
 
 }

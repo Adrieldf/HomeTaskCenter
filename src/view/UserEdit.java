@@ -18,6 +18,7 @@ import dao.FamilyDAO;
 import dao.UserDAO;
 import model.Family;
 import model.User;
+import util.LookupCallback;
 
 public class UserEdit extends JPanel implements ActionListener {
 	
@@ -38,7 +39,9 @@ public class UserEdit extends JPanel implements ActionListener {
 	private UserDAO userDB   = InitialPage.getInstance().getDaoFactory().getUserDAO();
 	private FamilyDAO famDAO = InitialPage.getInstance().getDaoFactory().getFamilyDAO();
 	
-	public UserEdit(User user) {
+	private final LookupCallback<Boolean> callback;
+	
+	public UserEdit(User user, LookupCallback<Boolean> callback) {
 
 		if(user==null || user.getIdFamily()==-1) {
 			this.user = new User();
@@ -46,10 +49,10 @@ public class UserEdit extends JPanel implements ActionListener {
 			flagNew = true;
 		}else {
 			this.user = user;
-			fam = famDAO.getById(user.getIdFamily());
-			
+			fam = famDAO.getById(user.getIdFamily());		
 		}
 		
+		this.callback = callback;
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths  = new int[]{40, 30, 30, 100, 100, 100, 30, 0};
@@ -128,14 +131,16 @@ public class UserEdit extends JPanel implements ActionListener {
 		btnCreateUser.setForeground(Color.BLACK);
 		btnCreateUser.addActionListener(this);
 		
-		lblFamily = new JLabel("Nome da família");
-		lblFamily.setFont(new Font("Tahoma", Font.BOLD, 11));
-		GridBagConstraints gbc_lblFamily = new GridBagConstraints();
-		gbc_lblFamily.anchor = GridBagConstraints.WEST;
-		gbc_lblFamily.insets = new Insets(0, 0, 5, 5);
-		gbc_lblFamily.gridx = 1;
-		gbc_lblFamily.gridy = 9;
-		add(lblFamily, gbc_lblFamily);
+		if (this.callback != null) { 			
+			lblFamily = new JLabel("Nome da família");
+			lblFamily.setFont(new Font("Tahoma", Font.BOLD, 11));
+			GridBagConstraints gbc_lblFamily = new GridBagConstraints();
+			gbc_lblFamily.anchor = GridBagConstraints.WEST;
+			gbc_lblFamily.insets = new Insets(0, 0, 5, 5);
+			gbc_lblFamily.gridx = 1;
+			gbc_lblFamily.gridy = 9;
+			add(lblFamily, gbc_lblFamily);
+		}
 		
 		tfFamily = new JTextField();
 		GridBagConstraints gbc_tfFamily = new GridBagConstraints();
@@ -178,17 +183,20 @@ public class UserEdit extends JPanel implements ActionListener {
 		newUser.setPassword(tfPassword.getText());
 		newUser.setEmail(tfMail.getText());
 		fam.addMember(newUser);
-		if(flagNew) {
+		if (flagNew) {
 			fam.setName(tfFamily.getText());
 			famDAO.insert(fam);
 			newUser.setIdFamily(famDAO.getMaxId());
-		}else {
+			
+		} else {
 			newUser.setIdFamily(fam.getId());
 		}
 		userDB.insert(newUser);
 		newUser.setId(userDB.getMaxId());
-		JOptionPane.showMessageDialog(null, "Usuário criado com sucesso!", "Sucesso",
-				JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(null, "Usuário criado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+		if (this.callback != null) {
+			callback.callback(true);			
+		}
 	}
 	
 	void actionSearch() {

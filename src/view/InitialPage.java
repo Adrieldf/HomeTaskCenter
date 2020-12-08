@@ -25,7 +25,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import dao.DAOFactory;
 import database.PostgresqlDBFactory;
 import model.User;
-import util.LoginDialog;
+import util.DialogScreen;
 
 //import view.InitialPage;
 //import test.TestePanel;
@@ -46,7 +46,7 @@ public class InitialPage extends JFrame {
 
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				if (LoginDialog.check()) {
+				if (DialogScreen.check()) {
 					InitialPage f = InitialPage.getInstance();
 					f.setVisible(true);					
 				}
@@ -156,7 +156,7 @@ public class InitialPage extends JFrame {
 		JMenuItem mntmUserEdit = new JMenuItem("Cadastro de Usuários");
 		mntmUserEdit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg1) {
-				createInternalFrame(new UserEdit(user), "Home Task Center", 500, 380);
+				createInternalFrame(new UserEdit(user, null), "Home Task Center", 500, 380);
 			}
 		});
 		mnUsers.add(mntmUserEdit);
@@ -256,10 +256,10 @@ public class InitialPage extends JFrame {
 
 	}
 
-//	public void enableMenu(boolean habilita) {
-//		int quantos = menuBar_1.getMenuCount();
-//		for (int i = 0; i < quantos; i++) {
-//			menuBar_1.getMenu(i).setEnabled(habilita);
+//	public void enableMenu(boolean enable) {
+//		int count = menuBar_1.getMenuCount();
+//		for (int i = 0; i < count; i++) {
+//			menuBar_1.getMenu(i).setEnabled(enable);
 //		}
 //	}
 	
