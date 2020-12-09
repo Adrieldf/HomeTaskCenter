@@ -174,15 +174,13 @@ public class FamilyRegistration extends JPanel implements ActionListener {
 	}
 	
 	void actionInsert() {
-		User newUser = (User) model.getValueAt(selected, 0);
+		User newUser = (User) model.getMember(selected);
 		newUser.setAdmin(isTrue);
 		userDAO.edit(newUser);
-		model.addMember(newUser);
-		model.fireTableDataChanged();
 	}
 	
 	void actionDelete() {
-		User killUser = (User) model.getValueAt(selected, 0);
+		User killUser = (User) model.getMember(selected);
 		killUser.setIdFamily(-1);
 		model.removeMember(selected);
 		model.fireTableDataChanged();

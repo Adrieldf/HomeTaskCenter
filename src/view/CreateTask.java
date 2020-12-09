@@ -14,6 +14,7 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
@@ -22,8 +23,10 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import dao.FamilyDAO;
 import dao.MessageDAO;
 import dao.OccurrenceDAO;
+import dao.ProductDAO;
 import dao.ReminderDAO;
 import dao.TaskDAO;
 import model.Occurrence;
@@ -58,7 +61,7 @@ public class CreateTask extends JPanel implements ActionListener {
 	private Occurrence occurrence;
 	private Message message;
 	private Reminder reminder;
-	
+	private boolean flagNew = false;
 	
 	private TaskDAO taskDAO = InitialPage.getInstance().getDaoFactory().getTaskDAO();
 	private OccurrenceDAO occuDAO = InitialPage.getInstance().getDaoFactory().getOcurrenceDAO();
@@ -75,8 +78,10 @@ public class CreateTask extends JPanel implements ActionListener {
 			occurrence= new Occurrence();
 			message = new Message();
 			reminder = new Reminder();
+			flagNew = true;
 		} else {
 			task = taskR;
+			occurrence = task.getOccurrences().get(0);
 		}
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -301,19 +306,31 @@ public class CreateTask extends JPanel implements ActionListener {
 		tfTitleTask.setText(task.getName());
 		taDescription.setText(task.getDescription());
 		//ta dando nullpointer ainda
-//		populaItems(task.getProducts());
-//		populaUsers(task.getResponsible());
-//		tfDate.setText(Integer.toString(occurrence.getDate()));
-//		tfHour.setText(Integer.toString(occurrence.getHour()));
+		ProductDAO podDAO = InitialPage.getInstance().getDaoFactory().getProductDAO();
+		FamilyDAO famDAO = InitialPage.getInstance().getDaoFactory().getFamilyDAO();
+		System.out.println(podDAO.getAll(user.getIdFamily()));
+		populaItems(podDAO.getAll(user.getId()));
+		//populaUsers(famDAO.getById(user.getIdFamily()).getMermber());
+		if(!flagNew) {
+			String a = Integer.toString(occurrence.getDate());
+			tfDate.setText(a);
+			//tfDate.setText(Integer.toString(occurrence.getDate()));
+			tfHour.setText(Integer.toString(occurrence.getHour()));
+		}
+
 	}
 	
 	void populaItems() {
+		//List<Product> l = new ArrayList<Product>();
 		for(Product p : task.getProducts()) {
 			modelProduct1.addList1(p);
+			//l.add(p);
 		}
+		//switchListItems.setlist1(l);
 	}
 	
 	void populaItems(List<Product> products) {
+		System.out.println("aqui os produtos : " + products);
 		for(Product p : products) {
 			modelProduct1.addList1(p);
 		}
@@ -362,6 +379,8 @@ public class CreateTask extends JPanel implements ActionListener {
 		newOccurrence.setId(idOccurrence);
 		occurrence = newOccurrence;
 		
+		JOptionPane.showMessageDialog(null, "Tarefa Criada.", "Status da tarefa",
+				JOptionPane.INFORMATION_MESSAGE);
 		
 		
 	}
@@ -374,6 +393,9 @@ public class CreateTask extends JPanel implements ActionListener {
 		
 		
 		//ta faltando os lists
+		populaItems(task.getProducts());
+		populaUsers(task.getResponsible());
+		
 		List<Occurrence> l  = occuDAO.getAll(task.getId(), user.getId());
 		int data = l.get(0).getDate();
 		tfDate.setText(Integer.toString(data));
