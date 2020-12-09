@@ -81,7 +81,7 @@ public class CreateTask extends JPanel implements ActionListener {
 			flagNew = true;
 		} else {
 			task = taskR;
-			occurrence = task.getOccurrences().get(0);
+			//occurrence = task.getOccurrences().get(0);
 		}
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -312,10 +312,10 @@ public class CreateTask extends JPanel implements ActionListener {
 		populaItems(podDAO.getAll(user.getId()));
 		//populaUsers(famDAO.getById(user.getIdFamily()).getMermber());
 		if(!flagNew) {
-			String a = Integer.toString(occurrence.getDate());
-			tfDate.setText(a);
+			//String a = Integer.toString(occurrence.getDate());
+			//tfDate.setText(a);
 			//tfDate.setText(Integer.toString(occurrence.getDate()));
-			tfHour.setText(Integer.toString(occurrence.getHour()));
+			//tfHour.setText(Integer.toString(occurrence.getHour()));
 		}
 
 	}
