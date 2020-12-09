@@ -137,8 +137,10 @@ public class LoginPage extends JPanel implements ActionListener {
 //			InitialPage.getInstance().enableMenu(true);
 			//InitialPage.getInstance().
 			this.user = user;
+			InitialPage.getInstance().setUser(user);
 			// fecha a tela de login
 			callback.callback(true);
+			System.out.println(this.user);
 		} else {
 			JOptionPane.showMessageDialog(null, "Dados informados não conferem, verifique e tente novamente.", "Erro",
 					JOptionPane.INFORMATION_MESSAGE);

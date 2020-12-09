@@ -289,6 +289,18 @@ public class CreateTask extends JPanel implements ActionListener {
 		gbc_btnEditReminder.gridy = 22;
 		add(btnEditReminder, gbc_btnEditReminder);
 	}
+	
+	void populaItems() {
+		for(Product p : task.getProducts()) {
+			modelProduct1.addList1(p);
+		}
+	}
+	
+	void populaUsers() {
+		for(User s : task.getResponsible()) {
+			modelResponsable1.addList1(s);
+		}
+	}
 
 //	void actionKeepSelected() {
 //		selected = tbResponsible.getSelectedRow();
@@ -354,22 +366,17 @@ public class CreateTask extends JPanel implements ActionListener {
 	}
 	
 	void actionDelete() {
-		Task newTask = new Task();
-		newTask.setName(tfTitleTask.getText());
-		newTask.setDescription(taDescription.getText());
-		newTask.setCompleted(isTrue);
-		//sobrou listas para ligacoes
-		
-		
-		
-		
-		taskDAO.remove(newTask);
-		for(Occurrence oc : newTask.getOccurrences()) {
+		taskDAO.remove(task);
+		for(Occurrence oc : task.getOccurrences()) {
 			occuDAO.remove(oc);
 		}
 		
-		
-		
+		for(Reminder re : remDAO.getAll(task.getId(), occurrence.getId(), user.getIdFamily())) {
+			remDAO.remove(re);
+			for(Message me : mesDAO.getAll(task.getId(), occurrence.getId(), re.getId(), user.getIdFamily())) {
+				mesDAO.remove(me);;
+			}
+		}
 	}
 	
 	void actionEditReminder() {

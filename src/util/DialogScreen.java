@@ -14,7 +14,8 @@ public class DialogScreen {
 
 			@Override
 			public void addPanel() {
-				add(new LoginPage(null, this));
+				add(new LoginPage(InitialPage.getInstance().getUser(), this));
+				
 			}
 
 			@Override
