@@ -72,6 +72,9 @@ public class CreateTask extends JPanel implements ActionListener {
 		this.user = user;
 		if(taskR==null) {
 			task = new Task();
+			occurrence= new Occurrence();
+			message = new Message();
+			reminder = new Reminder();
 		} else {
 			task = taskR;
 		}
@@ -333,8 +336,7 @@ public class CreateTask extends JPanel implements ActionListener {
 		newOccurrence.setId(idOccurrence);
 		occurrence = newOccurrence;
 		
-		message = new Message();
-		reminder = new Reminder();
+		
 		
 	}
 	

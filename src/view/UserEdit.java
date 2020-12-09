@@ -130,19 +130,24 @@ public class UserEdit extends JPanel implements ActionListener {
 		btnCreateUser = new JButton("Criar usu\u00E1rio");
 		btnCreateUser.setForeground(Color.BLACK);
 		btnCreateUser.addActionListener(this);
-		
-		if (this.callback != null) { 			
-			lblFamily = new JLabel("Nome da família");
-			lblFamily.setFont(new Font("Tahoma", Font.BOLD, 11));
-			GridBagConstraints gbc_lblFamily = new GridBagConstraints();
-			gbc_lblFamily.anchor = GridBagConstraints.WEST;
-			gbc_lblFamily.insets = new Insets(0, 0, 5, 5);
-			gbc_lblFamily.gridx = 1;
-			gbc_lblFamily.gridy = 9;
-			add(lblFamily, gbc_lblFamily);
-		}
+					
+		lblFamily = new JLabel("Nome da família");
+		lblFamily.setFont(new Font("Tahoma", Font.BOLD, 11));
+		GridBagConstraints gbc_lblFamily = new GridBagConstraints();
+		gbc_lblFamily.anchor = GridBagConstraints.WEST;
+		gbc_lblFamily.insets = new Insets(0, 0, 5, 5);
+		gbc_lblFamily.gridx = 1;
+		gbc_lblFamily.gridy = 9;
+		add(lblFamily, gbc_lblFamily);
 		
 		tfFamily = new JTextField();
+		if(!flagNew) {
+			tfFamily.setEditable(false);
+		}
+		else {
+			tfFamily.setText(fam.getName());
+			//tfFamily.setText(famDAO.getById(user.getIdFamily()).getName());
+		}
 		GridBagConstraints gbc_tfFamily = new GridBagConstraints();
 		gbc_tfFamily.gridwidth = 3;
 		gbc_tfFamily.insets = new Insets(0, 0, 5, 5);
@@ -189,7 +194,7 @@ public class UserEdit extends JPanel implements ActionListener {
 			newUser.setIdFamily(famDAO.getMaxId());
 			
 		} else {
-			newUser.setIdFamily(fam.getId());
+			newUser.setIdFamily(user.getIdFamily());
 		}
 		userDB.insert(newUser);
 		newUser.setId(userDB.getMaxId());

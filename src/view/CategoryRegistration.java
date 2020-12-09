@@ -19,6 +19,7 @@ import javax.swing.event.ListSelectionListener;
 
 import dao.CategoryDAO;
 import model.Category;
+import model.Product;
 import model.User;
 import view.tableModel.CategoryTableModel;
 
@@ -115,6 +116,15 @@ public class CategoryRegistration extends JPanel implements ActionListener{
 		gbc_btnDelete.gridx = 1;
 		gbc_btnDelete.gridy = 8;
 		add(btnDelete, gbc_btnDelete);
+		
+		popula();
+	}
+	
+	void popula() {
+		for(Category c : catDAO.getAll(user.getIdFamily())) {
+			model.addCategory(c);
+		}
+		model.fireTableDataChanged();
 	}
 	
 	void actionKeepSelected() {

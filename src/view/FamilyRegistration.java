@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -45,6 +46,7 @@ public class FamilyRegistration extends JPanel implements ActionListener {
 	
 	public FamilyRegistration(User user) {
 		this.user = user;
+		System.out.println(this.user);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths  = new int[]{30, 100, 100, 30, 30, 30, 100, 100, 30, 0};
 		gridBagLayout.rowHeights    = new int[]{30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 0};
@@ -154,9 +156,13 @@ public class FamilyRegistration extends JPanel implements ActionListener {
 	}
 	
 	private void popula() {
+		//tfName.setText(famDAO.getById(user.getIdFamily()).getName());
+		tfName.setText(Integer.toString(user.getIdFamily()));
 		// TODO Auto-generated method stub
-		Family fami = famDAO.getById(user.getIdFamily());
-		for(User fam :fami.getMermber()) {
+		System.out.println(this.user);
+		List<User> fami = userDAO.getAll(user.getIdFamily());
+		System.out.println(fami);
+		for(User fam :fami) {
 			model.addMember(fam);
 		}
 		model.fireTableDataChanged();
@@ -168,9 +174,8 @@ public class FamilyRegistration extends JPanel implements ActionListener {
 	}
 	
 	void actionInsert() {
-		User newUser = userDAO.getByName(tfName.getText());
+		User newUser = (User) model.getValueAt(selected, 0);
 		newUser.setAdmin(isTrue);
-		newUser.setIdFamily(user.getIdFamily());
 		userDAO.edit(newUser);
 		model.addMember(newUser);
 		model.fireTableDataChanged();
