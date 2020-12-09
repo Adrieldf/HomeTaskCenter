@@ -100,4 +100,12 @@ public class SwitchListProduct extends JPanel{
 		JList jL = new JList(list.toArray());
 		return jL;
 	}
+	
+	public int selectedList1() {
+		return list1.getSelectedIndex();
+	}
+	
+	public int selectedList2() {
+		return list2.getSelectedIndex();
+	}
 }

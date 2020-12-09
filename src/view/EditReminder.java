@@ -20,6 +20,7 @@ import dao.OccurrenceDAO;
 import dao.ReminderDAO;
 import model.Message;
 import model.Occurrence;
+import model.Product;
 import model.Reminder;
 import model.SendMail;
 import model.Task;
@@ -145,8 +146,16 @@ public class EditReminder extends JPanel implements ActionListener {
 //		gbc_btnDeleteReminder.gridx = 5;
 //		gbc_btnDeleteReminder.gridy = 11;
 //		add(btnDeleteReminder, gbc_btnDeleteReminder);
+		
+		populaReminder();
 	}
 
+	void populaReminder() {
+		tfTask.setText(task.getName());
+		//tfTitleReminder.setText(reminder.getTitle());
+		//taDescription.setText(reminder.getDescription());
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub

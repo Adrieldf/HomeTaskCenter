@@ -291,6 +291,20 @@ public class CreateTask extends JPanel implements ActionListener {
 		gbc_btnEditReminder.gridx = 0;
 		gbc_btnEditReminder.gridy = 22;
 		add(btnEditReminder, gbc_btnEditReminder);
+		
+//		populaItems();
+//		populaUsers();
+		populaTela();
+	}
+	
+	void populaTela() {
+		tfTitleTask.setText(task.getName());
+		taDescription.setText(task.getDescription());
+		//ta dando nullpointer ainda
+//		populaItems(task.getProducts());
+//		populaUsers(task.getResponsible());
+//		tfDate.setText(Integer.toString(occurrence.getDate()));
+//		tfHour.setText(Integer.toString(occurrence.getHour()));
 	}
 	
 	void populaItems() {
@@ -299,8 +313,20 @@ public class CreateTask extends JPanel implements ActionListener {
 		}
 	}
 	
+	void populaItems(List<Product> products) {
+		for(Product p : products) {
+			modelProduct1.addList1(p);
+		}
+	}
+	
 	void populaUsers() {
 		for(User s : task.getResponsible()) {
+			modelResponsable1.addList1(s);
+		}
+	}
+	
+	void populaUsers(List<User> responsables) {
+		for(User s : responsables) {
 			modelResponsable1.addList1(s);
 		}
 	}
@@ -346,6 +372,8 @@ public class CreateTask extends JPanel implements ActionListener {
 		tfTitleTask.setText(task.getName());
 		taDescription.setText(task.getDescription());
 		
+		
+		//ta faltando os lists
 		List<Occurrence> l  = occuDAO.getAll(task.getId(), user.getId());
 		int data = l.get(0).getDate();
 		tfDate.setText(Integer.toString(data));
@@ -386,49 +414,63 @@ public class CreateTask extends JPanel implements ActionListener {
 	}
 
 	void actionSwitchListPullAllItems() {
-		modelProduct1.list1ToList2();
-		//modelProduct1.fire tem q dar fire nas duas
+		modelProduct2.clearList1();
+    	for(int i=0;i<modelProduct1.getSize();i++) {
+    		modelProduct2.addList1((Product) modelProduct1.getElementAt(i));
+    	}
+    	modelProduct1.clearList1();
 	}
 	
 	void actionSwitchListPullOneItems() {
-		int index=0;
+		int index = switchListItems.getlist1().getSelectedIndex();
 		Product p = (Product) modelProduct1.getElementAt(index);
 		modelProduct1.removeList1(p);
-		modelProduct2.addList2(p);
+		modelProduct2.addList1(p);
 	}
 	
 	void actionSwitchListRemoveAllItems() {
-		modelProduct1.list2ToList1();
-		//fire
+		modelProduct1.clearList1();
+    	for(int i=0;i<modelProduct1.getSize();i++) {
+    		modelProduct1.addList1((Product) modelProduct2.getElementAt(i));
+    	}
+    	modelProduct2.clearList1();
 	}
 	
 	void actionSwitchListRemoveOneItems() {
-		int index=0;
+		int index = switchListItems.getlist2().getSelectedIndex();
 		Product p = (Product) modelProduct2.getElementAt(index);
 		modelProduct2.removeList1(p);
-		modelProduct1.addList2(p);
+		modelProduct1.addList1(p);
 	}
 	
 	void actionSwitchListPullAllResponsables() {
-		modelProduct1.list1ToList2();
+		modelResponsable2.clearList1();
+    	for(int i=0;i<modelProduct1.getSize();i++) {
+    		modelResponsable2.addList1((User) modelResponsable1.getElementAt(i));
+    	}
+    	modelResponsable1.clearList1();
 	}
 	
 	void actionSwitchListPullOneResponsables() {
-		int index=0;
-		Product p = (Product) modelProduct1.getElementAt(index);
-		modelProduct1.removeList1(p);
-		modelProduct2.addList2(p);
+		int index = switchListResponsible.getlist1().getSelectedIndex();
+		User p = (User) modelResponsable1.getElementAt(index);
+		modelResponsable1.removeList1(p);
+		modelResponsable2.addList1(p);
 	}
 	
 	void actionSwitchListRemoveAllResponsables() {
-		modelProduct1.list2ToList1();
+		modelResponsable1.clearList1();
+    	for(int i=0;i<modelProduct2.getSize();i++) {
+    		modelResponsable1.addList1((User) modelResponsable2.getElementAt(i));
+    	}
+    	modelResponsable2.clearList1();
 	}
 	
 	void actionSwitchListRemoveOneResponsables() {
-		int index=0;
-		Product p = (Product) modelProduct2.getElementAt(index);
-		modelProduct2.removeList1(p);
-		modelProduct1.addList2(p);
+		int index = switchListResponsible.getlist2().getSelectedIndex();
+		User p = (User) modelResponsable2.getElementAt(index);
+		modelResponsable2.removeList1(p);
+		modelResponsable1.addList1(p);
 	}
 	
 	@Override
