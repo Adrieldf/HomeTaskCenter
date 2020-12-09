@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 //import javax.swing.JCheckBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 //import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -35,7 +36,6 @@ public class CreateItems extends JPanel implements ActionListener{
 	private JLabel lblTitle, lbName, lblCategories;
 	private JButton btnCreateItem;
 	private GridBagLayout gridBagLayout;
-	private JButton btnNewButton;
 	private JTable tableCItems;
 	private Integer selected;
 	private User user;
@@ -136,8 +136,7 @@ public class CreateItems extends JPanel implements ActionListener{
 //		gbc_switchList.gridy = 3;
 //		add(switchList, gbc_switchList);
 		
-		btnCreateItem = new JButton("Criar item");
-		btnCreateItem.addActionListener(this);
+		
 		
 		model = new CategoryTableModel();
 		tableCItems = new JTable(model);
@@ -157,13 +156,14 @@ public class CreateItems extends JPanel implements ActionListener{
 		gbc_table.gridy = 5;
 		add(tableCItems, gbc_table);
 		
-		btnNewButton = new JButton("Criar item");
-		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-		gbc_btnNewButton.gridwidth = 3;
-		gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
-		gbc_btnNewButton.gridx = 3;
-		gbc_btnNewButton.gridy = 12;
-		add(btnNewButton, gbc_btnNewButton);
+		btnCreateItem = new JButton("Criar item");
+		btnCreateItem.addActionListener(this);
+		GridBagConstraints gbc_btnCreateItem = new GridBagConstraints();
+		gbc_btnCreateItem.gridwidth = 3;
+		gbc_btnCreateItem.insets = new Insets(0, 0, 5, 5);
+		gbc_btnCreateItem.gridx = 3;
+		gbc_btnCreateItem.gridy = 12;
+		add(btnCreateItem, gbc_btnCreateItem);
 		
 //		scrollPane = new JScrollPane();	
 //		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
@@ -207,9 +207,11 @@ public class CreateItems extends JPanel implements ActionListener{
 		newProduct.setIdFamily(user.getIdFamily());
 		Category cat = model.getCategory(selected);
 		newProduct.setIdCategory(cat.getId());
-		//newProduct.setId(podDAO.getMaxId());
 		podDAO.insert(newProduct);
-		
+		newProduct.setId(podDAO.getMaxId());
+		//System.out.println(newProduct);
+		JOptionPane.showMessageDialog(null, "Item cadastrado", "Sucesso",
+				JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	@Override
