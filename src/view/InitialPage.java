@@ -26,6 +26,7 @@ import dao.DAOFactory;
 import database.PostgresqlDBFactory;
 import model.User;
 import util.DialogScreen;
+import util.SwingUtil;
 
 //import view.InitialPage;
 //import test.TestePanel;
@@ -95,12 +96,6 @@ public class InitialPage extends JFrame {
 
 	private void initial() {
 		showPanelFullScreen(new PendingTasks(user), "Home Task Center");			
-		// TODO: validar se o login foi realizado com sucesso para mostrar as tasks
-//		if(user == null) {
-//			createInternalFrame(new LoginPage(user), "Home Task Center", 380, 350);
-//		}
-//		createInternalFrame(new LoginPage(user), "Home Task Center", 380, 350);
-//		LoginDialog.check();
 	}
 
 	public DAOFactory getDaoFactory() {
@@ -214,10 +209,6 @@ public class InitialPage extends JFrame {
 		showPanel(panel, intFrame, width, height);
 	}
 
-//	protected void showPanel(JPanel panel, final JInternalFrame intFrame) {
-//		showPanel(panel, intFrame, 800, 600);
-//	}
-
 	protected void showPanel(JPanel panel, final JInternalFrame intFrame, Integer width, Integer height) {
 
 		intFrame.getContentPane().add(panel);
@@ -245,8 +236,9 @@ public class InitialPage extends JFrame {
 		});
 
 		// cascade();
-		int pos = desktopPane.getAllFrames().length * 25;
-		intFrame.setLocation(pos, pos);
+//		int pos = desktopPane.getAllFrames().length * 25;
+//		intFrame.setLocation(pos, pos);
+		SwingUtil.centralize(intFrame);
 
 		try {
 			intFrame.setSelected(true);

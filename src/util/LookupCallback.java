@@ -10,7 +10,6 @@ import javax.swing.JFrame;
 import javax.swing.KeyStroke;
 import javax.swing.WindowConstants;
 
-//import br.com.fgti.pub.util.SwingUtil;
 
 public abstract class LookupCallback<E> extends JDialog {
 
@@ -31,7 +30,7 @@ public abstract class LookupCallback<E> extends JDialog {
 		addPanel();
 		setSize(width,height);
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-//		SwingUtil.centralize(this);
+		SwingUtil.centralize(this);
 		
 		this.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "escape");
 		this.getRootPane().getActionMap().put("escape", new AbstractAction(){
