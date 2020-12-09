@@ -25,13 +25,16 @@ public class PostgresqlUserDB implements UserDAO {
 	}
 
 	@Override
-	public List<User> getAll() {
-		Statement stmt = null;
+	public List<User> getAll(int idFamily) {
+		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		List<User> users = new ArrayList<User>();
 		try {
-			stmt = conn.createStatement();
-			rs = stmt.executeQuery("select id, name, passwordfield, \"idFamily\", email from usertable order by id");
+			pstmt = conn.prepareStatement(
+					"select id, name, passwordfield, \"idFamily\", email from usertable where \"idFamily\" = ? order by id");
+			
+			pstmt.setInt(1, idFamily);
+			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
 				users.add(new User(rs.getInt("id"), rs.getString("name"), rs.getString("passwordfield"),
@@ -44,7 +47,7 @@ public class PostgresqlUserDB implements UserDAO {
 		} finally {
 			try {
 				rs.close();
-				stmt.close();
+				pstmt.close();
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 			}

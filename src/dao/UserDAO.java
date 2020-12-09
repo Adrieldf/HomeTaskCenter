@@ -6,7 +6,7 @@ import model.User;
 
 public interface UserDAO {
 
-	List<User> getAll();
+	List<User> getAll(int idFamily);
 
 	User getById(int id, int idFamily);
 	
